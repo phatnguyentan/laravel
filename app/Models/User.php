@@ -8,6 +8,7 @@ use App\Models\UserMeta;
 use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Grafite\Commerce\Services\Concerns\hasFavorites;
 
 class User extends Authenticatable
 {
