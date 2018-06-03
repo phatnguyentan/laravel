@@ -7,9 +7,9 @@
 <li class="nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/products') || Request::is(config('cms.backend-route-prefix', 'cms').'/products/*')) active @endif">
     <a class="nav-link" href="{{ url(config('cms.backend-route-prefix', 'cms').'/products') }}"><span class="fa fa-fw fa-archive"></span> Products</a>
 </li>
-<li class="nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/plans') || Request::is(config('cms.backend-route-prefix', 'cms').'/plans/*')) active @endif">
+<!-- <li class="nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/plans') || Request::is(config('cms.backend-route-prefix', 'cms').'/plans/*')) active @endif">
     <a class="nav-link" href="{{ url(config('cms.backend-route-prefix', 'cms').'/plans') }}"><span class="fa fa-fw fa-credit-card"></span> Subscription Plans</a>
-</li>
+</li> -->
 <li class="nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/coupons') || Request::is(config('cms.backend-route-prefix', 'cms').'/coupons/*')) active @endif">
     <a class="nav-link" href="{{ url(config('cms.backend-route-prefix', 'cms').'/coupons') }}"><span class="fa fa-fw fa-ticket"></span> Coupons</a>
 </li>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Commerce;
 
 use Redirect;
 use Illuminate\Http\Request;
-use Grafite\Commerce\Helpers\StoreHelper;
+// use Grafite\Commerce\Helpers\StoreHelper;
+use Grafite\Commerce\Services\StoreHelperService;
+
 use App\Http\Controllers\Controller;
 use Grafite\Commerce\Services\CartService;
 use Grafite\Cms\Services\CmsResponseService;
@@ -13,10 +15,11 @@ class CartController extends Controller
 {
     protected $cartService;
 
-    public function __construct(CartService $cartService, CmsResponseService $cmsResponseService)
+    public function __construct(CartService $cartService, CmsResponseService $cmsResponseService, StoreHelperService $storeHelperService)
     {
         $this->cart = $cartService;
         $this->responseService = $cmsResponseService;
+        $this->storeHelperService = $storeHelperService;
     }
 
     /**
@@ -41,11 +44,16 @@ class CartController extends Controller
         return $this->responseService->apiResponse('success', [
             'count' => $this->cart->itemCount(),
             'contents' => $this->cart->contents(),
-            'shipping' => StoreHelper::moneyFormat($this->cart->getCartShipping()),
-            'coupon' => StoreHelper::moneyFormat($this->cart->getCurrentCouponValue()),
-            'tax' => StoreHelper::moneyFormat($this->cart->getCartTax()),
-            'subtotal' => StoreHelper::moneyFormat($this->cart->getCartSubTotal()),
-            'total' => StoreHelper::moneyFormat($this->cart->getCartTotal()),
+            // 'shipping' => StoreHelper::moneyFormat($this->cart->getCartShipping()),
+            // 'coupon' => StoreHelper::moneyFormat($this->cart->getCurrentCouponValue()),
+            // 'tax' => StoreHelper::moneyFormat($this->cart->getCartTax()),
+            // 'subtotal' => StoreHelper::moneyFormat($this->cart->getCartSubTotal()),
+            // 'total' => StoreHelper::moneyFormat($this->cart->getCartTotal()),
+            'shipping' => $this->storeHelperService->moneyFormat($this->cart->getCartShipping()),
+            'coupon' => $this->storeHelperService->moneyFormat($this->cart->getCurrentCouponValue()),
+            'tax' => $this->storeHelperService->moneyFormat($this->cart->getCartTax()),
+            'subtotal' => $this->storeHelperService->moneyFormat($this->cart->getCartSubTotal()),
+            'total' => $this->storeHelperService->moneyFormat($this->cart->getCartTotal()),
         ]);
     }
 

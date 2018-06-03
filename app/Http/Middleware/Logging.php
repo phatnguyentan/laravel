@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Log;
 
-class Admin
+class Logging
 {
     /**
      * The Guard implementation.
@@ -36,10 +36,16 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Gate::allows('admin', $this->auth->user())) {
-            return $next($request);
-        }
+        return $next($request);
+    }
 
-        return response()->view('errors.401', [], 401);
+    public function terminate($request, $response)
+    {
+        Log::debug('###########################################################');
+        Log::debug('REQUEST <=');
+        Log::debug($request->path());
+        Log::debug($request->all());
+        // Log::debug('RESPONSE =>');
+        // Log::debug($response);
     }
 }

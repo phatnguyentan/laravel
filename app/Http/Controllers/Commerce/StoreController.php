@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Commerce;
 use App\Http\Controllers\Controller;
 use Grafite\Commerce\Repositories\ProductRepository;
 use Grafite\Commerce\Services\PlanService;
+use Illuminate\Support\Facades\Log;
 
 class StoreController extends Controller
 {
@@ -31,7 +32,6 @@ class StoreController extends Controller
         if (empty($products)) {
             abort(404);
         }
-
         return view('commerce-frontend::storefront')
             ->with('plans', $plans)
             ->with('products', $products);
