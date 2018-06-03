@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        Log::debug('EXECPTIONS x!x');
+        Log::debug($request->path());
+        Log::debug($request);
+        Log::debug($exception);
         return parent::render($request, $exception);
     }
 }
