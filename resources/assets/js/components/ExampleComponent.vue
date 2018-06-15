@@ -17,7 +17,11 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            console.log(window.axios);
+            window.axios.get('/api/admin/user').then(({ data }) => {
+                console.log(data)
+            });
         }
     }
 </script>

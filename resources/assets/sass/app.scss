@@ -1,12 +1,24 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
 @import "variables";
+// Unstyle
+@import "styles/unstyle";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+
+@import "~font-awesome/scss/font-awesome";
+
+@import "./../edu/css/style.css";
+@import "./../edu/css/pricing.css";
+@import "./../edu/css/owl.theme.default.min.css";
+@import "./../edu/css/owl.theme.default.min.css";
+@import "./../edu/css/magnific-popup.css";
+@import "./../edu/css/icomoon.css";
+@import "./../edu/css/flexslider.css";
+@import "./../edu/css/animate.css";
 
 .navbar-laravel {
   background-color: #fff;

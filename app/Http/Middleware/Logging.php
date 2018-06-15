@@ -36,15 +36,15 @@ class Logging
      */
     public function handle($request, Closure $next)
     {
+        Log::debug('#####################################################################################');
+        Log::debug('REQUEST <=');
+        Log::debug($request->path());
+        Log::debug($request->all());
         return $next($request);
     }
 
     public function terminate($request, $response)
     {
-        Log::debug('###########################################################');
-        Log::debug('REQUEST <=');
-        Log::debug($request->path());
-        Log::debug($request->all());
         // Log::debug('RESPONSE =>');
         // Log::debug($response);
     }
