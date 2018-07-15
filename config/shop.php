@@ -61,6 +61,10 @@ return [
 					// 'baseurl' => 'packages/aimeos/shop/themes/elegance',
 				],
 			],
+			'email' => [
+				'from-email' => 'phatnguyentan0491@gmail.com',
+				'from-name' => 'David Nguyen',
+			],
 		],
 	],
 
