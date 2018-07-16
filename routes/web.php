@@ -14,11 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function () {
+    return view('welcome');
+});
+Route::get('/courses', function () {
+    return view('courses');
+});
+Route::get('/teachers', function () {
+    return view('teachers');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/pricing', function () {
+    return view('pricing');
+});
 
 Route::view('/welcome', 'welcome');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'admin'], function () {
