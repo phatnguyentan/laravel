@@ -97,9 +97,10 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contact</a>
+                            <li><a href="/contact">Contact</a>
                             </li>
-                            <li class="btn-cta"><a href="#"><span>Login</span></a>
+                            <li class="btn-cta"><a href="/login"><span>Login</span></a>
+                            <li class="btn-cta"><a href="/logout"><span>Logout</span></a>
                             </li>
                             <li class="btn-cta"><a href="#"><span>Create a Course</span></a>
                             </li>

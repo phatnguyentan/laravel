@@ -29,11 +29,18 @@ Route::get('/about', function () {
 Route::get('/pricing', function () {
     return view('pricing');
 });
+Route::get('/blog', function () {
+    return view('blog');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 Route::view('/welcome', 'welcome');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'User\LogoutController@logout')->name('user');
 
 
 Route::group(['prefix' => 'admin'], function () {
