@@ -1,0 +1,33 @@
+Access Token
+/home/phat/SourceCode/laravel/app/Http/Controllers/Community/FacebookController.php:72:string 'EAADeI3fgPnQBAN3ZCEI7RpJSYn2pKFVNj2I4wkJuPKaX0PWdASJO2aX0YATaTAz2fhOw20dqjeHclL1pGVVOpbz04xTEJ3O695dQem7rl0R6GZC0QZCwhKrDZBfPR2XlqCW9oGVZCfQe4pfSI2YkrWhn4hwHWygRsDBbnYbYLTQZDZD' (length=176)
+Metadata
+/home/phat/SourceCode/laravel/app/Http/Controllers/Community/FacebookController.php:80:
+object(Facebook\Authentication\AccessTokenMetadata)[216]
+  protected 'metadata' => 
+    array (size=8)
+      'app_id' => string '244243916406388' (length=15)
+      'type' => string 'USER' (length=4)
+      'application' => string 'Community' (length=9)
+      'expires_at' => 
+        object(DateTime)[220]
+          public 'date' => string '2018-09-26 07:56:37.000000' (length=26)
+          public 'timezone_type' => int 3
+          public 'timezone' => string 'UTC' (length=3)
+      'is_valid' => boolean true
+      'issued_at' => 
+        object(DateTime)[221]
+          public 'date' => string '2018-07-28 07:56:37.000000' (length=26)
+          public 'timezone_type' => int 3
+          public 'timezone' => string 'UTC' (length=3)
+      'scopes' => 
+        array (size=5)
+          0 => string 'email' (length=5)
+          1 => string 'manage_pages' (length=12)
+          2 => string 'pages_show_list' (length=15)
+          3 => string 'publish_pages' (length=13)
+          4 => string 'public_profile' (length=14)
+      'user_id' => string '1905724392807538' (length=16)
+/home/phat/SourceCode/laravel/app/Http/Controllers/Community/FacebookController.php:100:string 'EAADeI3fgPnQBAN3ZCEI7RpJSYn2pKFVNj2I4wkJuPKaX0PWdASJO2aX0YATaTAz2fhOw20dqjeHclL1pGVVOpbz04xTEJ3O695dQem7rl0R6GZC0QZCwhKrDZBfPR2XlqCW9oGVZCfQe4pfSI2YkrWhn4hwHWygRsDBbnYbYLTQZDZD' (length=176)
+
+
+https://graph.facebook.com/546349135390552?fields=about,attire,bio,location,parking,hours,emails,website&access_token=EAADeI3fgPnQBAKhID5LHkZCScO69T7ZCCyphqSqWXhP0FUMDABPNxp1WqRUuTIPuVF0UKO3MyhajhXrU5DPkn1f8vA9sGPZAsXWzxfHsxPhqNc0NTGpywuFD7Unp4rv8pKPGTZBDnVM6aP0Yv0IQq2HDxTR08CeU5A9KXr1vogZDZD
