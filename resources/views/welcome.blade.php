@@ -12,6 +12,7 @@
     <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,7 +28,7 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="example"></div>
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
