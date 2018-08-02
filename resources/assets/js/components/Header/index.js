@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 const Header = () => (
@@ -64,9 +65,7 @@ const Header = () => (
     <div className="navbar-nav bg-dark-2">
       <ul className="container list-inline">
         <li className="list-inline-item">
-          <a href="#" className="list-group-item-action">
-            MỚI VỀ
-          </a>
+          <Link to="/products">Mới Về</Link>
         </li>
         <li className="list-inline-item">
           <a href="#" className="list-group-item-action">
@@ -85,8 +84,8 @@ const Header = () => (
           >
             ÁO THUN
           </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a className="dropdown-item" href="#">
               ÁO THUN MABƯ
             </a>
           </div>
