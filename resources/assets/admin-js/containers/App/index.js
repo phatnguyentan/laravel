@@ -1,24 +1,37 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-
-import { NotFound, Home, ProductList } from "../";
 import Header from "../../components/Header/index";
-import Footer from "../../components/Footer";
+import MenuBasic from "../../components/Menu/MenuBasic";
+import { Route, Switch } from "react-router-dom";
+import PostList from "../../components/Post";
+import NotFound from "../NotFound";
+import { Config } from "../../config/config";
 
 class App extends Component {
   render() {
     return (
-      <div className="app bg-dark-1">
+      <div className="app">
         <Header />
-        <div className="container mt-4">
+        <div className="main-body">
+          <div className="row">
+            <div className="col-sm">
+              <MenuBasic />
+            </div>
+            <div className="col-sm">
+              <Switch>
+                {/* <Route exact path="/" component={Home} /> */}
+                <Route exact path="/admin/posts" component={PostList} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+        </div>
+        {/* <div className="container mt-4">
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/products" component={ProductList} />
+            <Route exact path="/admin/posts" component={PostList} />
             <Route component={NotFound} />
           </Switch>
-        </div>
-        {/* footer */}
-        <Footer />
+        </div> */}
+        {/* <Footer /> */}
       </div>
     );
   }
