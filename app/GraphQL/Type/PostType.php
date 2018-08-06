@@ -5,11 +5,11 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class UserType extends GraphQLType
+class PostType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'User',
-        'description' => 'A user'
+        'name' => 'Post',
+        'description' => 'A post'
     ];
 
     /*
@@ -25,17 +25,14 @@ class UserType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The id of the user'
             ],
-            'email' => [
+            'title' => [
                 'type' => Type::string(),
-                'description' => 'The email of user'
+                'description' => 'The title of post'
+            ],
+            'body' => [
+                'type' => Type::string(),
+                'description' => 'The body of post'
             ]
         ];/*  */
-    }
-
-    // If you want to resolve the field yourself, you can declare a method
-    // with the following format resolve[FIELD_NAME]Field()
-    protected function resolveEmailField($root, $args)
-    {
-        return strtolower($root->email);
     }
 }
