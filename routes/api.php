@@ -22,3 +22,8 @@ Route::prefix('community')->group(function () {
     Route::get('facebook/callback', 'Community\FacebookController@callback')->name('community');
     Route::post('facebook/post', 'Community\FacebookController@post')->name('community');
 });
+
+Route::prefix('users')->group(function () {
+    Route::get('/', 'User\UserController@index')->name('user');
+    Route::post('/login', 'User\LoginController@index')->name('user');
+});
