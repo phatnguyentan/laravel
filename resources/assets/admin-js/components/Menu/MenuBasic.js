@@ -26,8 +26,7 @@ class MenuBasic extends React.Component {
       },
       {
         id: 4,
-        name: "Category",
-        parent: 1,
+        name: "Post Category",
         link: `${Config.adminPrefix}/post_categories`
       }
     ];
@@ -46,7 +45,7 @@ class MenuBasic extends React.Component {
         if (node.nodes && node.nodes.length > 0) {
           return (
             <li
-              className={node.data.parent ? "active ml-3" : "active"}
+              className={node.data.parent ? "sub-menu-item" : "menu-item"}
               key={node.data.id}
               id={node.data.id}
             >
@@ -57,7 +56,7 @@ class MenuBasic extends React.Component {
         } else {
           return (
             <li
-              className={node.data.parent ? "active ml-3" : "active"}
+              className={node.data.parent ? "sub-menu-item" : "menu-item"}
               key={node.data.id}
               id={node.data.id}
             >
@@ -68,7 +67,7 @@ class MenuBasic extends React.Component {
       }
     };
     return (
-      <nav id="my-side-menu" className="side-menu">
+      <nav id="side-menu" className="side-menu">
         <div className="sidebar-header">
           <h3>Sidebar</h3>
         </div>

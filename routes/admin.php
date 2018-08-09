@@ -18,5 +18,5 @@ Route::prefix('admin')->group(function () {
     });
     Route::get('/{route?}', function () {
         return view('admin');
-    })->where('route', '[A-Za-z0-9]+');
+    })->where('route', '.+');
 });

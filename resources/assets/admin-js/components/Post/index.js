@@ -1,18 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./styles.css";
-import Api from "../../services/api";
+import "./styles.css";
+import ApiService from "../../services/api-service";
+import Table from "../Base/List/table";
 
 class PostList extends React.Component {
-  // fetch("API_ENDPOINT", OBJECT)
-  //     .then(function(res) {
-  //       return res.json();
-  //     })
-  //     .then(function(resJson) {
-  //       return resJson;
-  //     });
+  constructor(props) {
+    super(props);
+    this.state = { objects: [] };
+  }
+  componentDidMount() {
+    ApiService.get("/posts").then(res => {
+      this.setState({
+        objects: res.data
+      });
+    });
+  }
   render() {
-    return <div>Post List</div>;
+    return (
+      <div>
+        <Table className="table" data={this.state.objects} />
+        {/* {this.state.objects.map(ob => (
+          <div key={ob.id}>
+            <Link to={"/admin/posts/" + ob.id}>{ob.title}</Link>
+          </div>
+        ))} */}
+      </div>
+    );
   }
 }
 
