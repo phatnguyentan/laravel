@@ -48,3 +48,4 @@ Route::resource('posts', 'Post\PostController')->middleware('auth:api');
 //     'categories' => 'id'
 // ])->middleware('auth:api');
 Route::resource('categories', 'Category\CategoryController')->middleware('auth:api');
+Route::resource('users', 'User\UserController')->middleware('auth:api');

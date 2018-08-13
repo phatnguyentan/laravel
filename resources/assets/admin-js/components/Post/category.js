@@ -15,13 +15,13 @@ const customStyles = {
     transform: "translate(-50%, -50%)"
   }
 };
-class PostList extends React.Component {
+class PostCategory extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { objects: [] };
+    this.state = { objects: [], title: "" };
   }
   componentDidMount() {
-    ApiService.get("/posts").then(res => {
+    ApiService.get("/categories").then(res => {
       this.setState({
         objects: res.data,
         modalIsOpen: false
@@ -36,12 +36,10 @@ class PostList extends React.Component {
     });
   }
   delete() {
-    ApiService.delete("/posts/" + this.state.deleteId).then(res => {
+    ApiService.delete("/categories/" + this.state.deleteId).then(res => {
       ToastStore.success("Deleted");
-      ApiService.get("/posts").then(res => {
-        this.setState({
-          objects: res.data
-        });
+      ApiService.get("/categories").then(res => {
+        this.setState({ objects: res.data });
       });
     });
     this.setState({ modalIsOpen: false });
@@ -51,11 +49,50 @@ class PostList extends React.Component {
       modalIsOpen: false
     });
   }
+  handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    ApiService.post("/categories", {
+      name: data.get("name"),
+      parent_id: data.get("category_id")
+    }).then(res => {
+      ToastStore.success("Create");
+      ApiService.get("/categories").then(res => {
+        this.setState({ objects: res.data });
+      });
+    });
+  }
   render() {
-    const template = ["id", "title", "category_id", "updated_at"];
+    const template = ["id", "name", "slug", "parent_id", "updated_at"];
     return (
-      <div>
-        <table className="table">
+      <div className="row">
+        <div className="col-sm-4">
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <div className="form-group">
+              <input
+                name="name"
+                type="text"
+                className="form-control"
+                placeholder="Name"
+              />
+            </div>
+            <div className="form-group">
+              <select name="category_id" className="from-control">
+                {this.state.objects.map(ob => {
+                  return (
+                    <option key={ob.id} value={ob.id}>
+                      {ob.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <button type="submit" className="btn btn-default">
+              Create Category
+            </button>
+          </form>
+        </div>
+        <table className="table col-sm-8">
           <thead>
             <tr>
               {template.map(i => {
@@ -114,7 +151,7 @@ class PostList extends React.Component {
           </form>
         </Modal>
         <ToastContainer
-          position={ToastContainer.POSITION.TOP_RIGHT}
+          position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
         />
       </div>
@@ -122,4 +159,4 @@ class PostList extends React.Component {
   }
 }
 
-export default PostList;
+export default PostCategory;

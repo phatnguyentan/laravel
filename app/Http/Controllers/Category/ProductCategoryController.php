@@ -10,21 +10,21 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Category;
 
-class CategoryController extends ApiController
+class ProductCategoryController extends ApiController
 {
     public function index(Request $request)
     {
-        return Category::with('category')->orderBy('id', 'desc')->paginate(15);
+        return ProductCategory::orderBy('id', 'desc')->paginate(15);
     }
 
     public function show(Request $request)
     {
-        return response()->json(['data' => Category::find($request['category'])]);
+        return response()->json(['data' => ProductCategory::find($request['product_category'])]);
     }
 
     public function store(Request $request)
     {
-        $post = Category::create([
+        $post = ProductCategory::create([
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
             'slug' => $request['name'],
@@ -34,8 +34,8 @@ class CategoryController extends ApiController
 
     public function destroy(Request $request)
     {
-        $item = Category::find($request['category']);
-        $item->destroy($request['category']);
+        $item = ProductCategory::find($request['product_category']);
+        $item->delete();
         return response()->json(['data' => $item]);
     }
 }

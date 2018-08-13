@@ -18,7 +18,7 @@ class FacebookController extends Controller
 
         $helper = $fb->getRedirectLoginHelper();
 
-        $permissions = ['email', 'manage_pages', 'publish_pages']; // Optional permissions
+        $permissions = ['email']; // Optional permissions
         $loginUrl = $helper->getLoginUrl(' http://localhost:5050/api/community/facebook/callback', $permissions);
         echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
         // echo htmlspecialchars($loginUrl);

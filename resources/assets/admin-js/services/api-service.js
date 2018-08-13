@@ -25,6 +25,18 @@ class ApiService {
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: this.token
+      }
+    }).then(res => res.json());
+  }
+
+  static delete(url, body) {
+    return fetch(Config.apiUrl + url, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: this.token
       }
     }).then(res => res.json());

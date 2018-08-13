@@ -12,4 +12,7 @@ require("./bootstrap");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 require("./config/config");
+
+require("font-awesome/css/font-awesome.min.css");
+
 require("./react");

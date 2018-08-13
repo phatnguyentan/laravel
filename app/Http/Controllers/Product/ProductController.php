@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\Category;
+use App\Models\Product;
 
-class CategoryController extends ApiController
+class ProductController extends ApiController
 {
     public function index(Request $request)
     {
-        return Category::with('category')->orderBy('id', 'desc')->paginate(15);
+        return Product::orderBy('id', 'desc')->paginate(15);
     }
 
     public function show(Request $request)
     {
-        return response()->json(['data' => Category::find($request['category'])]);
+        return response()->json(['data' => Product::find($request['category'])]);
     }
 
     public function store(Request $request)
     {
-        $post = Category::create([
+        $post = Product::create([
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
             'slug' => $request['name'],
@@ -34,8 +34,8 @@ class CategoryController extends ApiController
 
     public function destroy(Request $request)
     {
-        $item = Category::find($request['category']);
-        $item->destroy($request['category']);
+        $item = Product::find($request['product']);
+        $item->destroy($request['product']);
         return response()->json(['data' => $item]);
     }
 }

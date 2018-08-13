@@ -46,4 +46,11 @@ class PostController extends ApiController
         ]);
         return response()->json(['data' => $post]);
     }
+
+    public function destroy(Request $request)
+    {
+        $post = Post::find($request['post']);
+        $post->destroy($request['post']);
+        return response()->json(['data' => $post]);
+    }
 }

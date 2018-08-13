@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -13,5 +15,9 @@ class UserController extends Controller
             'name' => 'Abigail',
             'state' => 'CA'
         ]);
+    }
+    public function show(Request $request)
+    {
+        return response()->json(['data' => User::with('clients')->find($request['user'])]);
     }
 }

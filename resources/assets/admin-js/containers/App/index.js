@@ -7,6 +7,7 @@ import PostDetail from "../../components/Post/detail";
 import NotFound from "../NotFound";
 import { Config } from "../../config/config";
 import PostCreate from "../../components/Post/create";
+import PostCategory from "../../components/Post/category";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             </div>
             <div className="col-sm-10 right p-3">
               <Switch>
+                <Route exact path={Config.adminPrefix} component={PostList} />
                 <Route
                   exact
                   path={Config.adminPrefix + "/posts"}
@@ -38,7 +40,7 @@ class App extends Component {
                 <Route
                   exact
                   path={Config.adminPrefix + "/post_categories"}
-                  component={PostDetail}
+                  component={PostCategory}
                 />
                 <Route component={NotFound} />
               </Switch>
