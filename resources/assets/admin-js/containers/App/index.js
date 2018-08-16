@@ -8,8 +8,20 @@ import NotFound from "../NotFound";
 import { Config } from "../../config/config";
 import PostCreate from "../../components/Post/create";
 import PostCategory from "../../components/Post/category";
+import Login from "../../components/Login/Login";
+import { instanceOf } from "prop-types";
+import { withCookies, Cookies } from "react-cookie";
+import ProductList from "../../components/Product";
 
 class App extends Component {
+  // static propTypes = {
+  //   cookies: instanceOf(Cookies).isRequired
+  // };
+  constructor(props) {
+    super(props);
+    const { cookies } = props;
+    Config.adminToken = cookies.get("jwt_admin");
+  }
   render() {
     return (
       <div className="app w-100">
@@ -22,6 +34,11 @@ class App extends Component {
             <div className="col-sm-10 right p-3">
               <Switch>
                 <Route exact path={Config.adminPrefix} component={PostList} />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/login"}
+                  component={Login}
+                />
                 <Route
                   exact
                   path={Config.adminPrefix + "/posts"}
@@ -42,6 +59,11 @@ class App extends Component {
                   path={Config.adminPrefix + "/post_categories"}
                   component={PostCategory}
                 />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/products"}
+                  component={ProductList}
+                />
                 <Route component={NotFound} />
               </Switch>
             </div>
@@ -51,5 +73,7 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+App.propTypes = {
+  cookies: instanceOf(Cookies).isRequired
+};
+export default withCookies(App);

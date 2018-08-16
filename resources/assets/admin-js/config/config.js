@@ -1,4 +1,6 @@
 export class Config {
+  static adminToken;
+
   static get adminPrefix() {
     return "/admin";
   }

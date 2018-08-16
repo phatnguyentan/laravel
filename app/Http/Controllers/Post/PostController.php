@@ -8,48 +8,49 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\Post;
+use Webpatser\Uuid\Uuid;
 
 class PostController extends ApiController
 {
     public function index(Request $request)
     {
-        return Post::orderBy('id', 'desc')->paginate(15);
+        return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
     }
 
     public function show(Request $request)
     {
-        return response()->json(['data' => Post::find($request['post'])]);
+        return response()->json(['data' => $request->user()->posts()->find($request['post'])]);
     }
 
     public function store(Request $request)
     {
-        $post = Post::create([
+        $post = $request->user()->posts()->create([
+            'uuid' => Uuid::generate()->string,
             'title' => $request['title'],
             'body' => $request['body'],
-            'author_id' => $request->user()->id,
-            'slug' => $request['title'],
-            'category_id' => $request['category_id']
+            'category_id' => $request['category_id'],
+            'user_id' => $request->user()->id,
+            'slug' => $request['title']
         ]);
-        return response()->json(['data' => $post]);
+        return response()->json(array('data' => $post));
     }
 
     public function update(Request $request)
     {
-        $post = Post::find($request['post']);
+        $post = $request->user()->posts()->find($request['post']);
         $post->update([
             'title' => $request['title'],
             'body' => $request['body'],
-            'author_id' => $request->user()->id,
-            'slug' => $request['title'],
-            'category_id' => $request['category_id']
+            'category_id' => $request['category_id'],
+            'user_id' => $request->user()->id,
+            'slug' => $request['title']
         ]);
         return response()->json(['data' => $post]);
     }
 
     public function destroy(Request $request)
     {
-        $post = Post::find($request['post']);
+        $post = $request->user()->posts()->find($request['post']);
         $post->destroy($request['post']);
         return response()->json(['data' => $post]);
     }

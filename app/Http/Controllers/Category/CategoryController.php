@@ -9,22 +9,24 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Category;
+use Webpatser\Uuid\Uuid;
 
 class CategoryController extends ApiController
 {
     public function index(Request $request)
     {
-        return Category::with('category')->orderBy('id', 'desc')->paginate(15);
+        return $request->user()->categories()->with('category')->orderBy('id', 'desc')->paginate(15);
     }
 
     public function show(Request $request)
     {
-        return response()->json(['data' => Category::find($request['category'])]);
+        return response()->json(['data' => $request->user()->categories()->find($request['category'])]);
     }
 
     public function store(Request $request)
     {
-        $post = Category::create([
+        $post = $request->user()->categories()->create([
+            'uuid' => Uuid::generate()->string,
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
             'slug' => $request['name'],

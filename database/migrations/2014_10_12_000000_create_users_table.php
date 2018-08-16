@@ -15,11 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('uuid');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('active')->default(true);
+            $table->integer('core_app_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('core_app_id')->references('id')->on('core_apps');
         });
     }
 

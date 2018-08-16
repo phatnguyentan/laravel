@@ -7,11 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = [
-        'title', 'body', 'author_id', 'slug', 'category_id'
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $fillable = [
+    //     'uuid', 'title', 'body', 'user_id', 'slug', 'core_app_id'
+    // ];
+    protected $guarded = ['id'];
 }

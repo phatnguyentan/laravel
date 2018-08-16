@@ -1,0 +1,6 @@
+# ini
+service php7.1-fpm restart
+# Seed
+composer.phar dump-autoload
+php artisan migrate:fresh --seed
+

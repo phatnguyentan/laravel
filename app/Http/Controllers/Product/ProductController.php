@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Product;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\ApiController;

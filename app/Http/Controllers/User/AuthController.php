@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\OauthAppToken;
 
 class AuthController extends ApiController
 {
@@ -57,18 +58,37 @@ class AuthController extends ApiController
             'message' => 'Unauthorized'
         ], 401);
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        $token->save();
-        return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
-        ]);
+        $tokens = $user->appTokens;
+        // TODO compare token apps with user apps
+        if ($tokens && $tokens->count() > 0) {
+            $token = $tokens[0];
+            return response()->json([
+                'access_token' => $token->accessToken(),
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $token->expires_at
+                )->toDateTimeString()
+            ]);
+        } else {
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            if ($request->remember_me)
+                $token->expires_at = Carbon::now()->addWeeks(1);
+            $token->save();
+            OauthAppToken::create(array(
+                'core_app_id' => $user->app->id,
+                'access_token' => $tokenResult->accessToken,
+                'user_id' => $user->id,
+                'expires_at' => $tokenResult->token->expires_at
+            ));
+            return response()->json([
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $tokenResult->token->expires_at
+                )->toDateTimeString()
+            ]);
+        }
     }
     /**
      * Logout user (Revoke the token)

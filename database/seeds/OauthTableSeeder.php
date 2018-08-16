@@ -31,7 +31,9 @@ class OauthTableSeeder extends Seeder
         ));
         DB::table('oauth_personal_access_clients')
             ->insert([
-                'client_id' => 1
+                'client_id' => 1,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
             ]);
     }
 }

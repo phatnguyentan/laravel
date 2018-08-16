@@ -4,7 +4,7 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
-use App\User;
+use App\Models\User;
 use Auth;
 
 class UsersQuery extends Query

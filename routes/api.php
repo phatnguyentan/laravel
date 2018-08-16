@@ -44,6 +44,7 @@ Route::prefix('users')->group(function () {
 //     'posts' => 'id'
 // ])->middleware('auth:api');
 Route::resource('posts', 'Post\PostController')->middleware('auth:api');
+Route::resource('products', 'Product\ProductController')->middleware('auth:api');
 // Route::resource('categories', 'Category\CategoryController')->parameters([
 //     'categories' => 'id'
 // ])->middleware('auth:api');

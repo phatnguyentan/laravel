@@ -4,7 +4,7 @@ namespace App\GraphQL\Mutation;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
-use App\User;
+use App\Models\User;
 
 class UpdateUserEmailMutation extends Mutation
 {
