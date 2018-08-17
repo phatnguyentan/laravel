@@ -15,17 +15,16 @@ const customStyles = {
     transform: "translate(-50%, -50%)"
   }
 };
+// "/categories?filter[where][type]=product&filter[where][parent_id]=1"
+
 class PostCategory extends React.Component {
   constructor(props) {
     super(props);
     this.state = { objects: [], title: "" };
   }
   componentDidMount() {
-    ApiService.get("/categories").then(res => {
-      this.setState({
-        objects: res.data,
-        modalIsOpen: false
-      });
+    ApiService.get("/categories?filter[where][type]=post").then(res => {
+      this.setState({ objects: res.data, modalIsOpen: false });
     });
     Modal.setAppElement("#root");
   }
@@ -38,7 +37,7 @@ class PostCategory extends React.Component {
   delete() {
     ApiService.delete("/categories/" + this.state.deleteId).then(res => {
       ToastStore.success("Deleted");
-      ApiService.get("/categories").then(res => {
+      ApiService.get("/categories?filter[where][type]=post").then(res => {
         this.setState({ objects: res.data });
       });
     });
@@ -54,10 +53,12 @@ class PostCategory extends React.Component {
     const data = new FormData(event.target);
     ApiService.post("/categories", {
       name: data.get("name"),
+      description: data.get("description"),
+      type: "post",
       parent_id: data.get("category_id")
     }).then(res => {
       ToastStore.success("Create");
-      ApiService.get("/categories").then(res => {
+      ApiService.get("/categories?filter[where][type]=post").then(res => {
         this.setState({ objects: res.data });
       });
     });
@@ -69,27 +70,42 @@ class PostCategory extends React.Component {
         <div className="col-sm-4">
           <form onSubmit={this.handleSubmit.bind(this)}>
             <div className="form-group">
-              <input
-                name="name"
-                type="text"
-                className="form-control"
-                placeholder="Name"
-              />
+              <label className="col-sm-4 control-label">Category</label>
+              <div className="col-sm-8">
+                <input
+                  name="name"
+                  type="text"
+                  className="form-control"
+                  placeholder="Category"
+                />
+              </div>
             </div>
             <div className="form-group">
-              <select name="category_id" className="from-control">
-                {this.state.objects.map(ob => {
-                  return (
-                    <option key={ob.id} value={ob.id}>
-                      {ob.name}
-                    </option>
-                  );
-                })}
-              </select>
+              <label className="col-sm-4 control-label">Parent Category</label>
+              <div className="col-sm-8">
+                <select name="category_id" className="form-control">
+                  {this.state.objects.map(ob => {
+                    return (
+                      <option key={ob.id} value={ob.id}>
+                        {ob.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
-            <button type="submit" className="btn btn-default">
-              Create Category
-            </button>
+            <div className="form-group">
+              <label className="col-sm-4 control-label">Description</label>
+              <div className="col-sm-8">
+                <textarea name="description" className="form-control" />
+              </div>
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn btn-default">
+                <i className="fa fa-plus m-1" />
+                Create Category
+              </button>
+            </div>
           </form>
         </div>
         <table className="table col-sm-8">

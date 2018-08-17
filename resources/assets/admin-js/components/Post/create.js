@@ -10,10 +10,11 @@ class PostCreate extends PostDetail {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     ApiService.post(`/posts`, this.state).then(res => {
+      ToastStore.success("You just created");
       this.setState({ created: true, object: res.data });
     });
-    event.preventDefault();
   }
 }
 

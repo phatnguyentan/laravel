@@ -12,6 +12,7 @@ import Login from "../../components/Login/Login";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import ProductList from "../../components/Product";
+import ProductTypes from "../../components/ProductTypes";
 
 class App extends Component {
   // static propTypes = {
@@ -63,6 +64,11 @@ class App extends Component {
                   exact
                   path={Config.adminPrefix + "/products"}
                   component={ProductList}
+                />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/product_types"}
+                  component={ProductTypes}
                 />
                 <Route component={NotFound} />
               </Switch>

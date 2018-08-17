@@ -1,6 +1,20 @@
 # ini
 service php7.1-fpm restart
+
 # Seed
 composer.phar dump-autoload
+php artisan db:seed
 php artisan migrate:fresh --seed
+
+# Migrate
+php artisan migrate
+php artisan migrate:refresh --step=2 #back 2 steps
+
+# XDebug not working
+php artisan clear-compiled
+php artisan cache:clear
+
+# Make Model
+php artisan make:model ProductType -m
+php artisan make:model ProductTypeAttr -m
 

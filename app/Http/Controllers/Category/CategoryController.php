@@ -13,31 +13,36 @@ use Webpatser\Uuid\Uuid;
 
 class CategoryController extends ApiController
 {
+    protected $table = 'categories';
+    protected $entity = 'category';
+
     public function index(Request $request)
     {
-        return $request->user()->categories()->with('category')->orderBy('id', 'desc')->paginate(15);
-    }
-
-    public function show(Request $request)
-    {
-        return response()->json(['data' => $request->user()->categories()->find($request['category'])]);
+        $this->filter['where'] = array_merge(['core_app_id' => $request->user()->core_app_id], $this->filter['where']);
+        return parent::index($request);
     }
 
     public function store(Request $request)
     {
-        $post = $request->user()->categories()->create([
+        $category = $request->user()->categories()->create([
             'uuid' => Uuid::generate()->string,
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
+            'type' => $request['type'],
             'slug' => $request['name'],
         ]);
-        return response()->json(['data' => $post]);
+        return response()->json(['data' => $category]);
     }
 
-    public function destroy(Request $request)
+    public function update(Request $request)
     {
-        $item = Category::find($request['category']);
-        $item->destroy($request['category']);
-        return response()->json(['data' => $item]);
+        $category = $request->user()->category()->find($request['post']);
+        $category->update([
+            'name' => $request['name'],
+            'parent_id' => $request['parent_id'],
+            'type' => $request['type'],
+            'slug' => $request['title']
+        ]);
+        return response()->json(['data' => $category]);
     }
 }

@@ -32,21 +32,9 @@ Route::prefix('users')->group(function () {
     });
 });
 
-// Route::prefix('posts')->group(function () {
-    
-// });
-// Route::group(['middleware' => 'auth:api'], function () {
-//     Route::resource('posts', 'PostController');
-//         // Route::get('/', 'Post\PostController@index');
-//         // Route::get('/{id}', 'Post\PostController@show');
-// });
-// Route::resource('posts', 'Post\PostController')->parameters([
-//     'posts' => 'id'
-// ])->middleware('auth:api');
+
 Route::resource('posts', 'Post\PostController')->middleware('auth:api');
 Route::resource('products', 'Product\ProductController')->middleware('auth:api');
-// Route::resource('categories', 'Category\CategoryController')->parameters([
-//     'categories' => 'id'
-// ])->middleware('auth:api');
+Route::resource('product_types', 'Product\ProductTypeController')->middleware('auth:api');
 Route::resource('categories', 'Category\CategoryController')->middleware('auth:api');
 Route::resource('users', 'User\UserController')->middleware('auth:api');

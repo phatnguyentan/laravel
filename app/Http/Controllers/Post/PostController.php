@@ -14,6 +14,7 @@ class PostController extends ApiController
 {
     public function index(Request $request)
     {
+        // return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
         return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
     }
 

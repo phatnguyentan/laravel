@@ -18,8 +18,8 @@ class PostDetail extends React.Component {
       category_id: 0
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
@@ -68,38 +68,46 @@ class PostDetail extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     ApiService.put(`/posts/` + this.state.object.id, this.state).then(res => {
       this.setState({ object: res.data });
-      ToastStore.success("OK");
+      ToastStore.success("You just update");
     });
-    event.preventDefault();
   }
 
   render() {
     return !this.state.created ? (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Title:
+        <label className="col-sm-2 control-label">Title</label>
+        <div className="col-sm-10">
           <input
+            name="title"
             type="text"
             value={this.state.title}
             onChange={this.handleTitleChange}
-          />
-        </label>
-        <div className="mt-5 mb-5">
-          <ReactQuill
-            theme="snow"
-            value={this.state.body}
-            onChange={this.handleChange}
+            className="form-control"
+            placeholder="Title"
           />
         </div>
-        <label>
-          Category:
+        <div className="mt-3 mb-3">
+          <label className="col-sm-2 control-label">Content</label>
+          <div className="col-sm-10">
+            <ReactQuill
+              theme="snow"
+              value={this.state.body}
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+        <label className="col-sm-2 control-label">Category</label>
+        <div className="col-sm-2">
           <select
+            className="form-control"
+            name="category_id"
             value={this.state.category_id}
             onChange={this.handleSelectChange}
           >
-            <option>no category</option>
+            <option>Select Category</option>
             {this.state.categories.map(c => {
               return (
                 <option key={c.id} value={c.id}>
@@ -108,10 +116,12 @@ class PostDetail extends React.Component {
               );
             })}
           </select>
-        </label>
-        <input type="submit" value="Save" />
+        </div>
+        <button type="submit" className="btn btn-default m-3">
+          Save
+        </button>
         <ToastContainer
-          position={ToastContainer.POSITION.TOP_RIGHT}
+          position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
         />
       </form>

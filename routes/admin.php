@@ -20,3 +20,10 @@ Route::prefix('admin')->group(function () {
         return view('admin');
     })->where('route', '.+');
 });
+
+// public resources
+Route::prefix('admin-js')->group(function () {
+    Route::get('/{route?}', function () {
+        return view('admin');
+    })->where('route', '.+');
+});

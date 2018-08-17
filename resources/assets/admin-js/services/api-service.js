@@ -2,9 +2,9 @@ import { Config } from "../config/config";
 
 class ApiService {
   static init() {
-    if (!Config.adminToken) {
-      window.location.replace("/admin/login");
-    }
+    // if (!Config.adminToken) {
+    //   window.location.replace("/admin/login");
+    // }
   }
   static auth(res) {
     if (!res.ok && res.status == 401) {
@@ -12,7 +12,6 @@ class ApiService {
     }
   }
   static get(url) {
-    this.init();
     return fetch(Config.apiUrl + url, {
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +30,6 @@ class ApiService {
   }
 
   static post(url, body) {
-    this.init();
     return fetch(Config.apiUrl + url, {
       method: "post",
       body: JSON.stringify(body),
@@ -52,7 +50,6 @@ class ApiService {
   }
 
   static put(url, body) {
-    this.init();
     return fetch(Config.apiUrl + url, {
       method: "put",
       body: JSON.stringify(body),
@@ -73,7 +70,6 @@ class ApiService {
   }
 
   static delete(url, body) {
-    this.init();
     return fetch(Config.apiUrl + url, {
       method: "delete",
       headers: {

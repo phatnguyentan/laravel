@@ -58,6 +58,18 @@ class MenuBasic extends React.Component {
         name: "Category",
         parent_id: 10,
         link: `${Config.adminPrefix}/product_categories`
+      },
+      {
+        id: 20,
+        name: "Product Type",
+        link: `${Config.adminPrefix}/products`,
+        icon: "fa fa-shopping-bag m-1"
+      },
+      {
+        id: 21,
+        name: "All Product Types",
+        parent_id: 20,
+        link: `${Config.adminPrefix}/product_types`
       }
     ];
     const treeMenu = new TreeMenu(array);
