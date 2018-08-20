@@ -51,25 +51,63 @@ body a {
   overflow-y: auto;
 }
 
-.app .side-menu {
-  padding: 10px;
-  font-size: 14px;
+.app .clickable {
+  cursor: pointer;
 }
 
-.app .side-menu a {
-  font-size: 14px;
+.media-display .media-display-item {
+  position: relative;
 }
 
-.app .side-menu .menu-item {
-  margin-top: 5px;
+.media-display .media-display-item .fa-check {
+  display: none;
 }
 
-.app .side-menu .sub-menu-item {
-  margin-left: 35px;
+.media-display .media-display-item.selected {
+  border: #509ae3 1px solid;
 }
 
-.app .side-menu .sub-menu-item a {
-  font-size: 13px;
+.media-display .media-display-item.selected .fa-check {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: block;
+  background-color: #509ae3;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+}
+
+.media-display .media-selected {
+  border: #509ae3 1px solid;
+}
+
+.media-display .media-selected .fa-check {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  display: block;
+  background-color: #509ae3;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+}
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
 }
 
 /*!

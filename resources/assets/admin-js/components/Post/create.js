@@ -4,7 +4,7 @@ import PostDetail from "./detail";
 
 class PostCreate extends PostDetail {
   componentDidMount() {
-    ApiService.get(`/categories`).then(res => {
+    ApiService.get(`/categories?filter[where][type]=post`).then(res => {
       this.setState({ categories: res.data, category_id: 0 });
     });
   }

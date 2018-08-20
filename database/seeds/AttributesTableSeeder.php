@@ -34,6 +34,11 @@ class AttributesTableSeeder extends Seeder
                 'updated_at' => new DateTime
             ],
             [
+                'name' => 'boolean',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
+            ],
+            [
                 'name' => 'datetime',
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime

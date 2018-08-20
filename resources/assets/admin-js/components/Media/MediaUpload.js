@@ -1,82 +1,34 @@
 // import React from "react";
 import React from "react";
+import Modal from "react-modal";
 import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
 import { Config } from "../../config/config";
 import "./styles.css";
 
-class MenuBasic extends React.Component {
+class MediaUpload extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { mediaIsOpen: props.mediaIsOpen };
+    Modal.setAppElement("#root");
   }
+
+  afterOpenModal() {}
+  closeModal() {
+    this.setState({ mediaIsOpen: false });
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ mediaIsOpen: props.mediaIsOpen });
+  }
+
   render() {
-    Config;
     const array = [
       {
         id: 1,
-        name: "Post",
+        name: "Thêm mới media",
         link: `${Config.adminPrefix}/posts`,
         icon: "fa fa-newspaper-o m-2"
-      },
-      {
-        id: 2,
-        name: "All Posts",
-        parent_id: 1,
-        link: `${Config.adminPrefix}/posts`
-      },
-      {
-        id: 3,
-        name: "Create Post",
-        parent_id: 1,
-        link: `${Config.adminPrefix}/posts/create`
-      },
-      {
-        id: 4,
-        name: "Category",
-        parent_id: 1,
-        link: `${Config.adminPrefix}/post_categories`
-      },
-      {
-        id: 10,
-        name: "Product",
-        link: `${Config.adminPrefix}/products`,
-        icon: "fa fa-shopping-bag m-2"
-      },
-      {
-        id: 11,
-        name: "All Products",
-        parent_id: 10,
-        link: `${Config.adminPrefix}/products`
-      },
-      {
-        id: 12,
-        name: "Create Product",
-        parent_id: 10,
-        link: `${Config.adminPrefix}/products/create`
-      },
-      {
-        id: 13,
-        name: "Category",
-        parent_id: 10,
-        link: `${Config.adminPrefix}/product_categories`
-      },
-      {
-        id: 20,
-        name: "Product Type",
-        link: `${Config.adminPrefix}/product_types`,
-        icon: "fa fa-sitemap m-2"
-      },
-      {
-        id: 21,
-        name: "All Product Types",
-        parent_id: 20,
-        link: `${Config.adminPrefix}/product_types`
-      },
-      {
-        id: 30,
-        name: "Media",
-        link: `${Config.adminPrefix}/media`,
-        icon: "fa fa-photo m-2"
       }
     ];
     const treeMenu = new TreeMenu(array);
@@ -118,14 +70,41 @@ class MenuBasic extends React.Component {
       }
     };
     return (
-      <nav id="sidebar">
-        <div className="sidebar-header">
-          <h3>Admin DashBoard</h3>
-        </div>
+      <Modal
+        isOpen={this.state.mediaIsOpen}
+        onAfterOpen={this.afterOpenModal.bind(this)}
+        onRequestClose={this.closeModal.bind(this)} // style={customStyles}
+        contentLabel="Modal"
+      >
+        <h2 ref={subtitle => (this.subtitle = subtitle)}>Media</h2>
         <ul className="list-unstyled components">{render(treeMenu.arrRoot)}</ul>
-      </nav>
+        <form className="text-right">
+          <div className="media-frame-title">
+            <h1>
+              Thêm Media
+              <span className="dashicons dashicons-arrow-down" />
+            </h1>
+          </div>
+          <div className="media-frame-router">
+            <div className="media-router">
+              <a href="#" className="media-menu-item">
+                Tải tập tin lên
+              </a>
+              <a href="#" className="media-menu-item active">
+                Thư viện
+              </a>
+            </div>
+          </div>
+          <button className="btn m-2" onClick={this.closeModal.bind(this)}>
+            close
+          </button>
+          {/* <button className="btn btn-primary" onClick={this.delete.bind(this)}>
+            Yes
+          </button> */}
+        </form>
+      </Modal>
     );
   }
 }
 
-export default MenuBasic;
+export default MediaUpload;

@@ -13,11 +13,12 @@ import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import ProductList from "../../components/Product";
 import ProductTypes from "../../components/ProductTypes";
+import ProductDetail from "../../components/Product/detail";
+import ProductCreate from "../../components/Product/create";
+import ProductCategory from "../../components/Product/category";
+import Media from "../Media";
 
 class App extends Component {
-  // static propTypes = {
-  //   cookies: instanceOf(Cookies).isRequired
-  // };
   constructor(props) {
     super(props);
     const { cookies } = props;
@@ -29,7 +30,10 @@ class App extends Component {
         <Header />
         <div className="main-body main-container">
           <div className="row w-100">
-            <div className="col-sm-2 bg-dark text-light lelf">
+            <div
+              className="col-sm-2 bg-dark text-light lelf"
+              style={{ paddingLeft: "25px" }}
+            >
               <MenuBasic />
             </div>
             <div className="col-sm-10 right p-3">
@@ -67,8 +71,28 @@ class App extends Component {
                 />
                 <Route
                   exact
+                  path={Config.adminPrefix + "/products/create"}
+                  component={ProductCreate}
+                />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/products/:id"}
+                  component={ProductDetail}
+                />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/product_categories"}
+                  component={ProductCategory}
+                />
+                <Route
+                  exact
                   path={Config.adminPrefix + "/product_types"}
                   component={ProductTypes}
+                />
+                <Route
+                  exact
+                  path={Config.adminPrefix + "/media"}
+                  component={Media}
                 />
                 <Route component={NotFound} />
               </Switch>

@@ -66,7 +66,9 @@ class BaseList extends React.Component {
                   {this.template.map(k => {
                     return (
                       <td key={d.id + k}>
-                        <Link to={"/admin/posts/" + d.id}>{d[k]}</Link>
+                        <Link to={`/admin/posts/${this.entity}/` + d.id}>
+                          {d[k]}
+                        </Link>
                       </td>
                     );
                   })}

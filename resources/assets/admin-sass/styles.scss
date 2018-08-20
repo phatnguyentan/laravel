@@ -45,20 +45,7 @@ body {
     overflow-y: auto;
   }
 
-  .side-menu {
-    padding: 10px;
-    font-size: 14px;
-    a {
-      font-size: 14px;
-    }
-    .menu-item {
-      margin-top: 5px;
-    }
-    .sub-menu-item {
-      margin-left: 35px;
-      a {
-        font-size: 13px;
-      }
-    }
+  .clickable {
+    cursor: pointer;
   }
 }

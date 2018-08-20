@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
             ApplicationsTableSeeder::class,
             UsersTableSeeder::class,
             AttributesTableSeeder::class,
+            ProductTypesTableSeeder::class,
+            CategoryTableSeeder::class,
+            PostTableSeeder::class,
+            ProductTableSeeder::class,
             OauthTableSeeder::class
         ]);
     }

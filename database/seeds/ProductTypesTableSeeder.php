@@ -14,49 +14,58 @@ class ProductTypesTableSeeder extends Seeder
     {
         DB::table('product_types')->insert(array(
             [
-                'name' => 'clothing',
+                'name' => 'Sigle Product',
+                'default' => true,
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime
             ],
             [
-                'name' => 'clothing_freesize',
+                'name' => 'Set Products',
+                'default' => true,
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime
             ],
         ));
-        DB::table('product_type_attrs')->insert(array(
-            [
-                'product_type_id' => 1,
-                'name' => 'set',
-                'type' => 'set',
-                'parent_id' => 0,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime
-            ],
-            [
-                'product_type_id' => 1,
-                'name' => 'color',
-                'type' => 'string',
-                'parent_id' => 1,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime
-            ],
-            [
-                'product_type_id' => 1,
-                'name' => 'price',
-                'type' => 'integer',
-                'parent_id' => 1,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime
-            ],
-            [
-                'product_type_id' => 1,
-                'name' => 'quality',
-                'type' => 'interger',
-                'parent_id' => 1,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime
-            ],
-        ));
+        // DB::table('product_type_attrs')->insert(array(
+        //     [
+        //         'product_type_id' => 1,
+        //         'name' => 'color',
+        //         'type' => 'string',
+        //         'created_at' => new DateTime,
+        //         'updated_at' => new DateTime
+        //     ],
+        //     [
+        //         'product_type_id' => 1,
+        //         'name' => 'price',
+        //         'type' => 'integer',
+        //         'parent_id' => 1,
+        //         'created_at' => new DateTime,
+        //         'updated_at' => new DateTime
+        //     ],
+        //     //================================
+        //     [
+        //         'product_type_id' => 2,
+        //         'name' => 'color',
+        //         'type' => 'string',
+        //         'created_at' => new DateTime,
+        //         'updated_at' => new DateTime
+        //     ],
+        //     [
+        //         'product_type_id' => 2,
+        //         'name' => 'price',
+        //         'type' => 'integer',
+        //         'parent_id' => 1,
+        //         'created_at' => new DateTime,
+        //         'updated_at' => new DateTime
+        //     ],
+        //     [
+        //         'product_type_id' => 2,
+        //         'name' => 'quality',
+        //         'type' => 'interger',
+        //         'parent_id' => 1,
+        //         'created_at' => new DateTime,
+        //         'updated_at' => new DateTime
+        //     ],
+        // ));
     }
 }
