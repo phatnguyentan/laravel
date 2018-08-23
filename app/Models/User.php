@@ -33,6 +33,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\CoreApp', 'id', 'core_app_id');
     }
+
+    public function media()
+    {
+        return $this->hasOne('App\Models\Media', 'core_app_id', 'core_app_id');
+    }
+
     public function posts()
     {
         return $this->hasMany('App\Models\Post', 'core_app_id', 'core_app_id');

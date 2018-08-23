@@ -17,89 +17,25 @@ import ProductDetail from "../../components/Product/detail";
 import ProductCreate from "../../components/Product/create";
 import ProductCategory from "../../components/Product/category";
 import Media from "../Media";
+import RoutersComponent from "./routers";
+import Layout from "./layout";
+import { ConfigContext, ApiContext } from "./contexts";
+import ApiService from "../../services/v1/api-service";
 
 class App extends Component {
   constructor(props) {
     super(props);
     const { cookies } = props;
     Config.adminToken = cookies.get("jwt_admin");
+    this.api = new ApiService(cookies.get("jwt_admin"));
   }
   render() {
     return (
-      <div className="app w-100">
-        <Header />
-        <div className="main-body main-container">
-          <div className="row w-100">
-            <div
-              className="col-sm-2 bg-dark text-light lelf"
-              style={{ paddingLeft: "25px" }}
-            >
-              <MenuBasic />
-            </div>
-            <div className="col-sm-10 right p-3">
-              <Switch>
-                <Route exact path={Config.adminPrefix} component={PostList} />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/login"}
-                  component={Login}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/posts"}
-                  component={PostList}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/posts/create"}
-                  component={PostCreate}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/posts/:id"}
-                  component={PostDetail}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/post_categories"}
-                  component={PostCategory}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/products"}
-                  component={ProductList}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/products/create"}
-                  component={ProductCreate}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/products/:id"}
-                  component={ProductDetail}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/product_categories"}
-                  component={ProductCategory}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/product_types"}
-                  component={ProductTypes}
-                />
-                <Route
-                  exact
-                  path={Config.adminPrefix + "/media"}
-                  component={Media}
-                />
-                <Route component={NotFound} />
-              </Switch>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ConfigContext.Provider value={this.props.cookies.get("jwt_admin")}>
+        <ApiContext.Provider value={this.api}>
+          <Layout />
+        </ApiContext.Provider>
+      </ConfigContext.Provider>
     );
   }
 }

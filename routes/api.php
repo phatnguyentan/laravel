@@ -38,3 +38,4 @@ Route::resource('products', 'Product\ProductController')->middleware('auth:api')
 Route::resource('product_types', 'Product\ProductTypeController')->middleware('auth:api');
 Route::resource('categories', 'Category\CategoryController')->middleware('auth:api');
 Route::resource('users', 'User\UserController')->middleware('auth:api');
+Route::resource('media', 'Media\MediaController')->middleware('auth:api');

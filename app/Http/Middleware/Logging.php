@@ -43,6 +43,7 @@ class Logging
     {
         Log::debug('###########################################################');
         Log::debug('REQUEST <=');
+        Log::debug($request->method());
         Log::debug($request->path());
         Log::debug($request->all());
         // Log::debug('RESPONSE =>');

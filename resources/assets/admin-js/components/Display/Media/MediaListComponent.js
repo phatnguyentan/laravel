@@ -5,11 +5,11 @@ import "./styles.css";
 class MediaListComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { objects: [{ id: 1 }, { id: 2 }] };
+    this.state = { objects: props.objects || [] };
   }
 
   componentWillReceiveProps(props) {
-    // this.setState({ mediaIsOpen: props.mediaIsOpen });
+    this.setState({ objects: props.objects });
   }
 
   click(item) {
@@ -20,29 +20,26 @@ class MediaListComponent extends React.Component {
   render() {
     return (
       <ul className="media-display list-unstyled">
-        {this.state.objects.map(i => {
+        {this.state.objects.map(object => {
           return (
             <li
-              key={i.id}
+              key={object.id}
               className={
                 "m-2 clickable media media-display-item " +
-                (i.selected ? "selected" : "")
+                (object.selected ? "selected" : "")
               }
-              onClick={this.click.bind(this, i)}
+              onClick={this.click.bind(this, object)}
             >
               <i className="fa fa-check" />
               <img
                 className="mr-3"
-                src="https://via.placeholder.com/100x80"
+                style={{ maxHeight: "100px" }}
+                src={object.url}
                 alt="Generic placeholder image"
               />
               <div className="media-body">
-                <h5 className="mt-0 mb-1">List-based media object</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                nisi vulputate fringilla. Donec lacinia congue felis in
-                faucibus.
+                <h5 className="mt-0 mb-1">{object.name}</h5>
+                {object.size}
               </div>
             </li>
           );

@@ -15,6 +15,7 @@ class ApplicationsTableSeeder extends Seeder
         DB::table('core_apps')->insert(array(
             [
                 'name' => 'moriko',
+                'uuid' => '40837a70-a5f0-11e8-b762-513c5b8cd70c',
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime
             ]

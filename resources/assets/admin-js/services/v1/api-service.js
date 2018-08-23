@@ -1,12 +1,17 @@
-import { Config } from "../config/config";
+import { Config } from "../../config/config";
 
 class ApiService {
-  static auth(res) {
+  constructor(token = "") {
+    this.token = token;
+  }
+
+  auth(res) {
     if (!res.ok && res.status == 401) {
       throw new Error("Unauthorized");
     }
   }
-  static get(url) {
+
+  get(url) {
     return fetch(Config.apiUrl + url, {
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +29,7 @@ class ApiService {
       });
   }
 
-  static post(url, body) {
+  post(url, body) {
     return fetch(Config.apiUrl + url, {
       method: "post",
       body: JSON.stringify(body),
@@ -44,7 +49,7 @@ class ApiService {
       });
   }
 
-  static put(url, body) {
+  put(url, body) {
     return fetch(Config.apiUrl + url, {
       method: "put",
       body: JSON.stringify(body),
@@ -64,7 +69,7 @@ class ApiService {
       });
   }
 
-  static delete(url, body) {
+  delete(url, body) {
     return fetch(Config.apiUrl + url, {
       method: "delete",
       headers: {
@@ -81,10 +86,6 @@ class ApiService {
         if (err.message == "Unauthorized")
           window.location.replace("/admin/login");
       });
-  }
-
-  static get token() {
-    return "Bearer " + Config.adminToken;
   }
 }
 

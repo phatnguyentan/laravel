@@ -20,6 +20,7 @@ class ApiController extends BaseController
     protected $filter = array(
         'limit' => 20,
         'where' => array(),
+        'order' => array('id' => 'decs')
     );
 
     public function index(Request $request)
@@ -50,8 +51,12 @@ class ApiController extends BaseController
         $query = DB::table($this->table);
         $where = $request->query('filter')['where'] ? $request->query('filter')['where'] : [];
         $where = array_merge($where, $this->filter['where']);
+        $order = $this->filter['order'];
         if ($where) {
             $query = $query->where($where);
+        }
+        if ($order) {
+            $query = $query->orderBy(array_keys($order)[0], $order[array_keys($order)[0]]);
         }
         return $query->paginate($this->filter['limit']);
     }
