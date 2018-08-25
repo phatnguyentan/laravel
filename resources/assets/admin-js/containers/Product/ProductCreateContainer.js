@@ -1,10 +1,14 @@
 import "react-quill/dist/quill.snow.css";
 import React from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import { ToastContainer, ToastStore } from "react-toasts";
-import MediaUploadModalComponent from "../Media/MediaUploadModalComponent";
-
-class ProductCreate extends React.Component {
+import MediaUploadModalContainer from "../Media/MediaUploadModalContainer";
+import ImageResize from "quill-image-resize-module";
+Quill.register("modules/imageResize", ImageResize);
+const quillModules = {
+  imageResize: {}
+};
+class ProductCreateContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,12 +52,17 @@ class ProductCreate extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.context.api
-      .put(`/posts/` + this.state.object.id, this.state)
-      .then(res => {
-        this.setState({ object: res.data });
-        ToastStore.success("You just update");
-      });
+    this.props.context.api.post(`/products`, this.state).then(res => {
+      this.setState({ object: res.data });
+    });
+  }
+
+  onInsert(objects) {
+    let strImage = "";
+    objects.forEach(ob => {
+      strImage += '<img src="' + ob.url + '">';
+    });
+    this.setState({ body: this.state.body + strImage, mediaIsOpen: false });
   }
 
   render() {
@@ -71,16 +80,18 @@ class ProductCreate extends React.Component {
           />
         </div>
         <div className="mt-3 mb-3">
-          <label className="col-sm-2 control-label">Description</label>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary m-1"
             onClick={this.openMedia.bind(this)}
           >
+            <i className="fa fa-plus-circle m-1" />
             Media
           </button>
+          <label className="col-sm-2 control-label">Description</label>
           <div className="col-sm-10">
             <ReactQuill
+              modules={quillModules}
               theme="snow"
               value={this.state.body}
               onChange={this.handleChange}
@@ -112,13 +123,14 @@ class ProductCreate extends React.Component {
           position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
         />
-        <MediaUploadModalComponent
+        <MediaUploadModalContainer
           {...this.props}
           mediaIsOpen={this.state.mediaIsOpen}
+          onInsert={this.onInsert.bind(this)}
         />
       </form>
     );
   }
 }
 
-export default ProductCreate;
+export default ProductCreateContainer;

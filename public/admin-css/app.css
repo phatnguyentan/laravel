@@ -2,6 +2,7 @@
 body {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 body {
@@ -30,15 +31,17 @@ body a {
       align-content: stretch;
 }
 
-.app .left {
+.app .main-container .left {
   width: 100%;
 }
 
-.app .right {
+.app .main-container .right {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   position: relative;
+  overflow-y: scroll;
+  top: 50px;
 }
 
 .app .child {

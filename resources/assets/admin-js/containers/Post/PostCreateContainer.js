@@ -1,7 +1,8 @@
 import "react-quill/dist/quill.snow.css";
 import PostDetail from "./detail";
+import PostDetailContainer from "./PostDetailContainer";
 
-class PostCreate extends PostDetail {
+class PostCreateContainer extends PostDetailContainer {
   componentDidMount() {
     this.props.context.api
       .get(`/categories?filter[where][type]=post`)
@@ -20,4 +21,4 @@ class PostCreate extends PostDetail {
   }
 }
 
-export default PostCreate;
+export default PostCreateContainer;

@@ -1,37 +1,58 @@
-import "react-quill/dist/quill.snow.css";
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
+import "react-quill/dist/quill.snow.css";
+import ApiService from "../../services/api-service";
 import ReactQuill from "react-quill";
+import debounce from "debounce";
 import { ToastContainer, ToastStore } from "react-toasts";
-import MediaUploadModalComponent from "../Media/MediaUploadModalComponent";
 
-class ProductCreate extends React.Component {
+class ProductDetailContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       object: {},
       title: "",
       body: "",
+      created: false,
       categories: [],
-      category_id: 0,
-      mediaIsOpen: false
+      category_id: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  openMedia() {
-    this.setState({ mediaIsOpen: true });
-  }
   componentDidMount() {
-    this.props.context.api
-      .get(`/categories?filter[where][type]=product`)
-      .then(res => {
+    if (this.props.location.state) {
+      const { object } = this.props.location.state;
+      this.setState({
+        object: object
+      });
+      this.setState({
+        body: object.body
+      });
+      this.setState({
+        title: object.title
+      });
+    } else {
+      ApiService.get(`/posts/${this.props.match.params.id}`).then(res => {
         this.setState({
-          categories: res.data,
-          category_id: this.state.object.category_id || 0
+          object: res.data
+        });
+        this.setState({
+          body: res.data.body
+        });
+        this.setState({
+          title: res.data.title
         });
       });
+    }
+    ApiService.get(`/categories`).then(res => {
+      this.setState({
+        categories: res.data,
+        category_id: this.state.object.category_id || 0
+      });
+    });
   }
 
   handleChange(value) {
@@ -48,21 +69,19 @@ class ProductCreate extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.context.api
-      .put(`/posts/` + this.state.object.id, this.state)
-      .then(res => {
-        this.setState({ object: res.data });
-        ToastStore.success("You just update");
-      });
+    ApiService.put(`/posts/` + this.state.object.id, this.state).then(res => {
+      this.setState({ object: res.data });
+      ToastStore.success("You just update");
+    });
   }
 
   render() {
-    return (
+    return !this.state.created ? (
       <form onSubmit={this.handleSubmit}>
-        <label className="col-sm-2 control-label">Name</label>
+        <label className="col-sm-2 control-label">Title</label>
         <div className="col-sm-10">
           <input
-            name="name"
+            name="title"
             type="text"
             value={this.state.title}
             onChange={this.handleTitleChange}
@@ -71,14 +90,7 @@ class ProductCreate extends React.Component {
           />
         </div>
         <div className="mt-3 mb-3">
-          <label className="col-sm-2 control-label">Description</label>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={this.openMedia.bind(this)}
-          >
-            Media
-          </button>
+          <label className="col-sm-2 control-label">Content</label>
           <div className="col-sm-10">
             <ReactQuill
               theme="snow"
@@ -112,13 +124,16 @@ class ProductCreate extends React.Component {
           position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
         />
-        <MediaUploadModalComponent
-          {...this.props}
-          mediaIsOpen={this.state.mediaIsOpen}
-        />
       </form>
+    ) : (
+      <Redirect
+        to={{
+          pathname: "/admin/posts/" + this.state.object.id,
+          state: { object: this.state.object }
+        }}
+      />
     );
   }
 }
 
-export default ProductCreate;
+export default ProductDetailContainer;

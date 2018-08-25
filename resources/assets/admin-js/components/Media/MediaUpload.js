@@ -3,7 +3,7 @@ import React from "react";
 import Modal from "react-modal";
 import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
-import { Config } from "../../config/config";
+// import { Config } from "../../config/config";
 import "./styles.css";
 
 class MediaUpload extends React.Component {
@@ -27,7 +27,7 @@ class MediaUpload extends React.Component {
       {
         id: 1,
         name: "Thêm mới media",
-        link: `${Config.adminPrefix}/posts`,
+        link: `${this.props.context.adminPrefix}/posts`,
         icon: "fa fa-newspaper-o m-2"
       }
     ];
@@ -79,22 +79,6 @@ class MediaUpload extends React.Component {
         <h2 ref={subtitle => (this.subtitle = subtitle)}>Media</h2>
         <ul className="list-unstyled components">{render(treeMenu.arrRoot)}</ul>
         <form className="text-right">
-          <div className="media-frame-title">
-            <h1>
-              Thêm Media
-              <span className="dashicons dashicons-arrow-down" />
-            </h1>
-          </div>
-          <div className="media-frame-router">
-            <div className="media-router">
-              <a href="#" className="media-menu-item">
-                Tải tập tin lên
-              </a>
-              <a href="#" className="media-menu-item active">
-                Thư viện
-              </a>
-            </div>
-          </div>
           <button className="btn m-2" onClick={this.closeModal.bind(this)}>
             close
           </button>

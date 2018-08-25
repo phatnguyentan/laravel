@@ -2,7 +2,7 @@
 import React from "react";
 import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
-import { Config } from "../../config/config";
+// import { Config } from "../../config/config";
 import "./styles.css";
 
 class MenuBasic extends React.Component {
@@ -10,72 +10,71 @@ class MenuBasic extends React.Component {
     super(props);
   }
   render() {
-    Config;
     const array = [
       {
         id: 1,
         name: "Post",
-        link: `${Config.adminPrefix}/posts`,
+        link: `${this.props.context.config.adminPrefix}/posts`,
         icon: "fa fa-newspaper-o m-2"
       },
       {
         id: 2,
         name: "All Posts",
         parent_id: 1,
-        link: `${Config.adminPrefix}/posts`
+        link: `${this.props.context.config.adminPrefix}/posts`
       },
       {
         id: 3,
         name: "Create Post",
         parent_id: 1,
-        link: `${Config.adminPrefix}/posts/create`
+        link: `${this.props.context.config.adminPrefix}/posts/create`
       },
       {
         id: 4,
         name: "Category",
         parent_id: 1,
-        link: `${Config.adminPrefix}/post_categories`
+        link: `${this.props.context.config.adminPrefix}/post_categories`
       },
       {
         id: 10,
         name: "Product",
-        link: `${Config.adminPrefix}/products`,
+        link: `${this.props.context.config.adminPrefix}/products`,
         icon: "fa fa-shopping-bag m-2"
       },
       {
         id: 11,
         name: "All Products",
         parent_id: 10,
-        link: `${Config.adminPrefix}/products`
+        link: `${this.props.context.config.adminPrefix}/products`
       },
       {
         id: 12,
         name: "Create Product",
         parent_id: 10,
-        link: `${Config.adminPrefix}/products/create`
+        link: `${this.props.context.config.adminPrefix}/products/create`
       },
       {
         id: 13,
         name: "Category",
         parent_id: 10,
-        link: `${Config.adminPrefix}/product_categories`
+        link: `${this.props.context.config.adminPrefix}/product_categories`
       },
       {
         id: 20,
         name: "Product Type",
-        link: `${Config.adminPrefix}/product_types`,
+        link: `${this.props.context.config.adminPrefix}/product_types`,
         icon: "fa fa-sitemap m-2"
       },
       {
         id: 21,
         name: "All Product Types",
         parent_id: 20,
-        link: `${Config.adminPrefix}/product_types`
+        link: `${this.props.context.config.adminPrefix}/product_types`
       },
       {
         id: 30,
         name: "Media",
-        link: `${Config.adminPrefix}/media`,
+        link: `${this.props.context.config.adminPrefix}/media`,
         icon: "fa fa-photo m-2"
       }
     ];

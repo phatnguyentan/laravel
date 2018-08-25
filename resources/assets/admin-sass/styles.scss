@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 body {
   font-size: 13px;
@@ -23,16 +24,16 @@ body {
     -webkit-flex-direction: row;
     -webkit-align-content: stretch;
     align-content: stretch;
-  }
-
-  .left {
-    width: 100%;
-  }
-
-  .right {
-    -webkit-flex: 1;
-    flex: 1;
-    position: relative;
+    .left {
+      width: 100%;
+    }
+    .right {
+      -webkit-flex: 1;
+      flex: 1;
+      position: relative;
+      overflow-y: scroll;
+      top: 50px;
+    }
   }
 
   .child {

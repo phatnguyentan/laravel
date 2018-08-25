@@ -13,7 +13,6 @@ class PostDetail extends React.Component {
       object: {},
       title: "",
       body: "",
-      created: false,
       categories: [],
       category_id: 0
     };
@@ -24,6 +23,7 @@ class PostDetail extends React.Component {
   }
   componentDidMount() {
     if (this.props.location.state) {
+      ToastStore.success("You just created");
       const { object } = this.props.location.state;
       this.setState({
         object: object
@@ -76,7 +76,7 @@ class PostDetail extends React.Component {
   }
 
   render() {
-    return !this.state.created ? (
+    return (
       <form onSubmit={this.handleSubmit}>
         <label className="col-sm-2 control-label">Title</label>
         <div className="col-sm-10">
@@ -125,13 +125,6 @@ class PostDetail extends React.Component {
           store={ToastStore}
         />
       </form>
-    ) : (
-      <Redirect
-        to={{
-          pathname: "/admin/posts/" + this.state.object.id,
-          state: { object: this.state.object }
-        }}
-      />
     );
   }
 }

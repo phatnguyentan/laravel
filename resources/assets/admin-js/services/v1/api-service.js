@@ -1,8 +1,18 @@
-import { Config } from "../../config/config";
-
 class ApiService {
-  constructor(token = "") {
+  constructor() {
+    this.hooks = [];
+  }
+
+  setToken(token) {
     this.token = token;
+  }
+
+  setConfig(config) {
+    this.config = config;
+  }
+
+  addHooks(hook) {
+    this.hooks.push(hook);
   }
 
   auth(res) {
@@ -11,15 +21,33 @@ class ApiService {
     }
   }
 
+  getBearer() {
+    return "Bearer " + this.token;
+  }
+
+  runHooksBefore() {
+    this.hooks.forEach(h => {
+      h.before();
+    });
+  }
+
+  runHooksAfter() {
+    this.hooks.forEach(h => {
+      h.after();
+    });
+  }
+
   get(url) {
-    return fetch(Config.apiUrl + url, {
+    this.runHooksBefore();
+    return fetch(this.config.apiUrl + url, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -30,16 +58,18 @@ class ApiService {
   }
 
   post(url, body) {
-    return fetch(Config.apiUrl + url, {
+    this.runHooksBefore();
+    return fetch(this.config.apiUrl + url, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -50,16 +80,18 @@ class ApiService {
   }
 
   put(url, body) {
-    return fetch(Config.apiUrl + url, {
+    this.runHooksBefore();
+    return fetch(this.config.apiUrl + url, {
       method: "put",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -70,15 +102,17 @@ class ApiService {
   }
 
   delete(url, body) {
-    return fetch(Config.apiUrl + url, {
+    this.runHooksBefore();
+    return fetch(this.config.apiUrl + url, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })

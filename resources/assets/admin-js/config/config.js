@@ -1,13 +1,13 @@
 export class Config {
-  static adminToken;
-
-  static get adminPrefix() {
-    return "/admin";
+  constructor() {
+    this.config = require(`./env/config.json`);
+    this.config = {
+      ...this.config,
+      ...require(`./env/config.${process.env.NODE_ENV}.json`)
+    };
+    return new Proxy(this, this);
   }
-  static get apiUrl() {
-    return "http://localhost:5050/api";
-  }
-  static get apiAdminUrl() {
-    return "localhost:5050/api/admin";
+  get(target, prop) {
+    return this.config[prop];
   }
 }

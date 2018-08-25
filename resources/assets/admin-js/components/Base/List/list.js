@@ -22,7 +22,7 @@ class BaseList extends React.Component {
     this.state = { objects: [] };
   }
   componentDidMount() {
-    ApiService.get(`/${this.entity}`).then(res => {
+    this.props.context.api.get(`/${this.entity}`).then(res => {
       this.setState({ objects: res.data, modalIsOpen: false });
     });
     Modal.setAppElement("#root");
@@ -34,12 +34,14 @@ class BaseList extends React.Component {
     });
   }
   delete() {
-    ApiService.delete(`/${this.entity}/` + this.state.deleteId).then(res => {
-      ToastStore.success("Deleted");
-      ApiService.get(`/${this.entity}`).then(res => {
-        this.setState({ objects: res.data });
+    this.props.context.api
+      .delete(`/${this.entity}/` + this.state.deleteId)
+      .then(res => {
+        ToastStore.success("Deleted");
+        this.props.context.api.get(`/${this.entity}`).then(res => {
+          this.setState({ objects: res.data });
+        });
       });
-    });
     this.setState({ modalIsOpen: false });
   }
   closeModal() {

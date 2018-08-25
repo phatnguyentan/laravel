@@ -1,23 +1,16 @@
 import React, { Component } from "react";
-import Header from "../../components/Header/index";
-import MenuBasic from "../../components/Menu/MenuBasic";
 import { Route, Switch } from "react-router-dom";
 import PostList from "../../components/Post";
 import PostDetail from "../../components/Post/detail";
 import NotFound from "../NotFound";
-import { Config } from "../../config/config";
 import PostCreate from "../../components/Post/create";
 import PostCategory from "../../components/Post/category";
 import Login from "../../components/Login/Login";
-import { instanceOf } from "prop-types";
-import { withCookies, Cookies } from "react-cookie";
 import ProductList from "../../components/Product";
 import ProductTypes from "../../components/ProductTypes";
-import ProductDetail from "../../components/Product/detail";
-import ProductCreate from "../../components/Product/create";
 import ProductCategory from "../../components/Product/category";
-import Media from "../Media";
-import { AdminContext } from "./contexts";
+import MediaContainer from "../Media/MediaContainer";
+import ProductCreateContainer from "../Product/ProductCreateContainer";
 
 class RoutersComponent extends Component {
   render() {
@@ -25,60 +18,69 @@ class RoutersComponent extends Component {
       <Switch>
         <Route
           exact
-          path={Config.adminPrefix}
-          render={() => (
-            <PostList apiContext={this.props.apiContext}> </PostList>
-          )}
+          path={this.props.config.adminPrefix}
+          render={props => <PostList {...props} context={this.props} />}
         />
 
-        {/* <Route exact path={Config.adminPrefix} component={PostList} /> */}
-        <Route exact path={Config.adminPrefix + "/login"} component={Login} />
         <Route
           exact
-          path={Config.adminPrefix + "/posts"}
-          component={PostList}
+          path={this.props.config.adminPrefix + "/login"}
+          render={props => <Login {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/posts/create"}
-          component={PostCreate}
+          path={this.props.config.adminPrefix + "/posts"}
+          render={props => <PostList {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/posts/:id"}
-          component={PostDetail}
+          path={this.props.config.adminPrefix + "/posts/create"}
+          render={props => <PostCreate {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/post_categories"}
-          component={PostCategory}
+          path={this.props.config.adminPrefix + "/posts/:id"}
+          render={props => <PostDetail {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/products"}
-          component={ProductList}
+          path={this.props.config.adminPrefix + "/post_categories"}
+          render={props => <PostCategory {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/products/create"}
-          component={ProductCreate}
+          path={this.props.config.adminPrefix + "/products"}
+          render={props => <ProductList {...props} context={this.props} />}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/products/:id"}
-          component={ProductDetail}
+          path={this.props.config.adminPrefix + "/products/create"}
+          render={props => (
+            <ProductCreateContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/product_categories"}
-          component={ProductCategory}
+          path={this.props.config.adminPrefix + "/products/:id"}
+          render={props => (
+            <ProductDetailContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
-          path={Config.adminPrefix + "/product_types"}
-          component={ProductTypes}
+          path={this.props.config.adminPrefix + "/products_category"}
+          render={props => <ProductCategory {...props} context={this.props} />}
         />
-        <Route exact path={Config.adminPrefix + "/media"} component={Media} />
+        <Route
+          exact
+          path={this.props.config.adminPrefix + "/products_type"}
+          render={props => <ProductTypes {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={this.props.config.adminPrefix + "/media"}
+          render={props => <MediaContainer {...props} context={this.props} />}
+        />
         <Route component={NotFound} />
       </Switch>
     );

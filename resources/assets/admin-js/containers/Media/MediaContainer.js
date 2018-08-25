@@ -5,13 +5,14 @@ import { FileUploadReader } from "../../../my-libs/js/file/FileUploadReader";
 import ApiService from "../../services/api-service";
 import Modal from "react-modal";
 
-class Media extends Component {
+class MediaContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { objects: [], modalIsOpen: false, deleteObjects: [] };
   }
   componentDidMount() {
-    ApiService.get("/media").then(res => {
+    if (this.props.onRef) this.props.onRef(this);
+    this.props.context.api.get("/media").then(res => {
       this.setState({
         objects: res.data
       });
@@ -19,10 +20,14 @@ class Media extends Component {
     Modal.setAppElement("#root");
   }
 
+  componentWillUnmount() {
+    if (this.props.onRef) this.props.onRef(undefined);
+  }
+
   delete() {
     this.state.deleteObjects.forEach(ob => {
-      ApiService.delete("/media/" + ob.id).then(res => {
-        ApiService.get("/media").then(res => {
+      this.props.context.api.delete("/media/" + ob.id).then(res => {
+        this.props.context.api.get("/media").then(res => {
           this.setState({ objects: res.data });
         });
       });
@@ -53,14 +58,18 @@ class Media extends Component {
                     const fs = event.target.files;
                     FileUploadReader.uploadHandler(event).then(files => {
                       files.forEach((f, i) => {
-                        ApiService.post("/media", {
-                          photo: f.target.result,
-                          name: fs[i].name
-                        }).then(res => {
-                          ApiService.get("/media").then(res => {
-                            this.setState({ objects: res.data });
+                        this.props.context.api
+                          .post("/media", {
+                            photo: f.target.result,
+                            name: fs[i].name
+                          })
+                          .then(res => {
+                            this.props.context.api.get("/media").then(res => {
+                              this.setState({
+                                objects: res.data
+                              });
+                            });
                           });
-                        });
                       });
                     });
                   }}
@@ -134,4 +143,4 @@ class Media extends Component {
   }
 }
 
-export default Media;
+export default MediaContainer;

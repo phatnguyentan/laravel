@@ -3,7 +3,7 @@ import React from "react";
 import ApiService from "../../services/api-service";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
-import { Config } from "../../config/config";
+// import { Config } from "../../config/config";
 import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
@@ -13,16 +13,17 @@ class Login extends React.Component {
   }
   handleSubmit(event) {
     const data = new FormData(event.target);
-    ApiService.post("/users/login", {
-      email: data.get("username"),
-      password: data.get("password")
-    }).then(res => {
-      this.props.cookies.set("jwt_admin", res.access_token, {
-        path: "/"
+    this.props.context.api
+      .post("/users/login", {
+        email: data.get("username"),
+        password: data.get("password")
+      })
+      .then(res => {
+        this.props.cookies.set("jwt_admin", res.access_token, {
+          path: "/"
+        });
+        this.setState({ logined: true });
       });
-      Config.adminToken = this.props.cookies.get("jwt_admin");
-      this.setState({ logined: true });
-    });
     event.preventDefault();
   }
   render() {

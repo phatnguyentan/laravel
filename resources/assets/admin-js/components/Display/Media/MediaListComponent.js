@@ -33,7 +33,7 @@ class MediaListComponent extends React.Component {
               <i className="fa fa-check" />
               <img
                 className="mr-3"
-                style={{ maxHeight: "100px" }}
+                style={{ maxHeight: "50px" }}
                 src={object.url}
                 alt="Generic placeholder image"
               />

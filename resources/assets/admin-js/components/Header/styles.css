@@ -1,26 +1,9 @@
-.header-bcolor {
-  background-color: orange;
-}
-.font-size {
-  font-size: 12px;
-}
-.flex-row {
-  flex-direction: row;
-}
-.bg-dark-1 {
-  background-color: #363636;
+.main-header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 
-.bg-dark-2 {
-  background-color: #1d1d1d;
-}
-
-.navbar-nav > ul > li > a {
-  color: #fafafa;
-  padding: 10px;
-  display: block;
-}
-
-a {
-  font-size: 12px;
+.main-header > .progress {
+  height: 5px;
 }
