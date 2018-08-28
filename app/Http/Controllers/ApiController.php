@@ -30,8 +30,11 @@ class ApiController extends BaseController
 
     public function store(Request $request)
     {
-        // return $this->list($request);
-        // DB::table($this->table);
+
+    }
+    public function upadte(Request $request)
+    {
+
     }
 
     public function show(Request $request)

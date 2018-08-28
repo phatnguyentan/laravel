@@ -61,21 +61,27 @@ class MenuBasic extends React.Component {
       },
       {
         id: 20,
+        name: "Media",
+        link: `${this.props.context.config.adminPrefix}/media`,
+        icon: "fa fa-photo m-2"
+      },
+      {
+        id: 21,
+        name: "All Media",
+        link: `${this.props.context.config.adminPrefix}/media`,
+        parent_id: 20
+      },
+      {
+        id: 30,
         name: "Product Type",
         link: `${this.props.context.config.adminPrefix}/product_types`,
         icon: "fa fa-sitemap m-2"
       },
       {
-        id: 21,
+        id: 31,
         name: "All Product Types",
-        parent_id: 20,
+        parent_id: 30,
         link: `${this.props.context.config.adminPrefix}/product_types`
-      },
-      {
-        id: 30,
-        name: "Media",
-        link: `${this.props.context.config.adminPrefix}/media`,
-        icon: "fa fa-photo m-2"
       }
     ];
     const treeMenu = new TreeMenu(array);

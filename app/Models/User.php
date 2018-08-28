@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post', 'core_app_id', 'core_app_id');
     }
 
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product', 'core_app_id', 'core_app_id');
+    }
+
     public function categories()
     {
         return $this->hasMany('App\Models\Category', 'core_app_id', 'core_app_id');

@@ -1,23 +1,31 @@
 import React, { Component } from "react";
 import MediaListComponent from "../../components/Display/Media/MediaListComponent";
-import { Promise } from "core-js";
 import { FileUploadReader } from "../../../my-libs/js/file/FileUploadReader";
-import ApiService from "../../services/api-service";
 import Modal from "react-modal";
+import PageNavigation from "../../components/Navigation/PageNavigation";
 
 class MediaContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { objects: [], modalIsOpen: false, deleteObjects: [] };
+    this.state = {
+      objects: [],
+      modalIsOpen: false,
+      deleteObjects: [],
+      pagination: {}
+    };
   }
   componentDidMount() {
     if (this.props.onRef) this.props.onRef(this);
     this.props.context.api.get("/media").then(res => {
-      this.setState({
-        objects: res.data
-      });
+      this.setState({ objects: res.data, pagination: res });
     });
     Modal.setAppElement("#root");
+  }
+
+  navigatePage(page) {
+    this.props.context.api.get("/media?page=" + page).then(res => {
+      this.setState({ objects: res.data });
+    });
   }
 
   componentWillUnmount() {
@@ -94,6 +102,12 @@ class MediaContainer extends Component {
               >
                 <i className="fa fa-trash" />
               </button>
+            </li>
+            <li className="list-inline-item">
+              <PageNavigation
+                pagination={this.state.pagination}
+                navigatePage={this.navigatePage.bind(this)}
+              />
             </li>
             {/* <li className="list-inline-item">
               <button>gird</button>

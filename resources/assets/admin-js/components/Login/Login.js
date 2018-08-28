@@ -22,6 +22,7 @@ class Login extends React.Component {
         this.props.cookies.set("jwt_admin", res.access_token, {
           path: "/"
         });
+        this.props.context.api.setToken(this.props.cookies.get("jwt_admin"));
         this.setState({ logined: true });
       });
     event.preventDefault();
@@ -32,30 +33,35 @@ class Login extends React.Component {
     }
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className="imgcontainer">
-          <img src="img_avatar2.png" alt="Avatar" className="avatar" />
-        </div>
         <div className="container">
-          <label>
-            <b>Username</b>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="username"
-            required
-          />
+          <div className="form-group col-sm-12">
+            <label>
+              <b>Username</b>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Username"
+              name="username"
+              required
+            />
+          </div>
+          <div className="form-group col-sm-12">
+            <label>
+              <b>Password</b>
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter Password"
+              name="password"
+              required
+            />
+          </div>
 
-          <label>
-            <b>Password</b>
-          </label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="password"
-            required
-          />
-          <button type="submit">Login</button>
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
         </div>
       </form>
     );

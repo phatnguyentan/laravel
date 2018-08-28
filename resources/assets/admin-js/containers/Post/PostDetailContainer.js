@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import ApiService from "../../services/api-service";
 import ReactQuill from "react-quill";
 import debounce from "debounce";
 import { ToastContainer, ToastStore } from "react-toasts";
+import MediaUploadModalContainer from "../Media/MediaUploadModalContainer";
 
 class PostDetailContainer extends React.Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class PostDetailContainer extends React.Component {
       object: {},
       title: "",
       body: "",
+      published: false,
       categories: [],
       category_id: 0
     };
@@ -22,37 +23,22 @@ class PostDetailContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    if (this.props.location.state) {
-      ToastStore.success("You just created");
-      const { object } = this.props.location.state;
-      this.setState({
-        object: object
-      });
-      this.setState({
-        body: object.body
-      });
-      this.setState({
-        title: object.title
-      });
-    } else {
-      ApiService.get(`/posts/${this.props.match.params.id}`).then(res => {
+    this.props.context.api
+      .get(`/posts/${this.props.match.params.id}`)
+      .then(res => {
         this.setState({
           object: res.data
         });
-        this.setState({
-          body: res.data.body
-        });
-        this.setState({
-          title: res.data.title
-        });
+        this.setState({ ...this.state, ...res.data });
+        this.props.context.api
+          .get(`/categories?filter[where][type]=post`)
+          .then(res => {
+            this.setState({
+              categories: res.data,
+              category_id: this.state.object.category_id || 0
+            });
+          });
       });
-    }
-    ApiService.get(`/categories`).then(res => {
-      this.setState({
-        categories: res.data,
-        category_id: this.state.object.category_id || 0
-      });
-    });
   }
 
   handleChange(value) {
@@ -67,18 +53,32 @@ class PostDetailContainer extends React.Component {
     this.setState({ category_id: event.target.value });
   }
 
+  openMedia() {
+    this.setState({ mediaIsOpen: true });
+  }
+
+  onInsert(objects) {
+    let strImage = "";
+    objects.forEach(ob => {
+      strImage += '<img src="' + ob.url + '">';
+    });
+    this.setState({ body: this.state.body + strImage, mediaIsOpen: false });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    ApiService.put(`/posts/` + this.state.object.id, this.state).then(res => {
-      this.setState({ object: res.data });
-      ToastStore.success("You just update");
-    });
+    this.props.context.api
+      .put(`/posts/` + this.state.object.id, this.state)
+      .then(res => {
+        this.setState({ object: res.data });
+        ToastStore.success("You just update");
+      });
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label className="col-sm-2 control-label">Title</label>
+        <label className="col-sm-10 control-label">Title</label>
         <div className="col-sm-10">
           <input
             name="title"
@@ -90,7 +90,15 @@ class PostDetailContainer extends React.Component {
           />
         </div>
         <div className="mt-3 mb-3">
-          <label className="col-sm-2 control-label">Content</label>
+          <button
+            type="button"
+            className="btn btn-primary m-1"
+            onClick={this.openMedia.bind(this)}
+          >
+            <i className="fa fa-plus-circle m-1" />
+            Media
+          </button>
+          <label className="col-sm-10 control-label">Content</label>
           <div className="col-sm-10">
             <ReactQuill
               theme="snow"
@@ -99,8 +107,8 @@ class PostDetailContainer extends React.Component {
             />
           </div>
         </div>
-        <label className="col-sm-2 control-label">Category</label>
-        <div className="col-sm-2">
+        <label className="col-sm-10 control-label">Category</label>
+        <div className="col-sm-10">
           <select
             className="form-control"
             name="category_id"
@@ -117,12 +125,31 @@ class PostDetailContainer extends React.Component {
             })}
           </select>
         </div>
+        <div className="form-group">
+          <input
+            id="published"
+            className="checkbox-input m-3"
+            type="checkbox"
+            checked={this.state.published}
+            onChange={e => {
+              this.setState({ published: !this.state.published });
+            }}
+          />
+          <label htmlFor="published" className="clickable form-check-label">
+            Published
+          </label>
+        </div>
         <button type="submit" className="btn btn-default m-3">
           Save
         </button>
         <ToastContainer
           position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
+        />
+        <MediaUploadModalContainer
+          {...this.props}
+          mediaIsOpen={this.state.mediaIsOpen}
+          onInsert={this.onInsert.bind(this)}
         />
       </form>
     );

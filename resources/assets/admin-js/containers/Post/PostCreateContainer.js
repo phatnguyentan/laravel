@@ -1,5 +1,4 @@
 import "react-quill/dist/quill.snow.css";
-import PostDetail from "./detail";
 import PostDetailContainer from "./PostDetailContainer";
 
 class PostCreateContainer extends PostDetailContainer {

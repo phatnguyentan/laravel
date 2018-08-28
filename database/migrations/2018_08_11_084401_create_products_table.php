@@ -24,8 +24,9 @@ class CreateProductsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('excerpt')->nullable();
             $table->text('description')->nullable();
-            $table->string('media')->nullable();
-            $table->boolean('active')->default(false);
+            $table->text('media')->nullable();
+            $table->boolean('published')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

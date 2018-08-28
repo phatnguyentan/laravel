@@ -33,6 +33,7 @@ body a {
 
 .app .main-container .left {
   width: 100%;
+  min-width: 280px;
 }
 
 .app .main-container .right {
@@ -41,7 +42,7 @@ body a {
           flex: 1;
   position: relative;
   overflow-y: scroll;
-  top: 50px;
+  padding-top: 50px !important;
 }
 
 .app .child {
@@ -56,6 +57,11 @@ body a {
 
 .app .clickable {
   cursor: pointer;
+}
+
+.app .checkbox-input {
+  -webkit-transform: scale(2);
+          transform: scale(2);
 }
 
 .s-modal {

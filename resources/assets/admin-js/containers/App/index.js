@@ -5,7 +5,7 @@ import { withCookies, Cookies } from "react-cookie";
 import Layout from "./layout";
 import { ConfigContext, ApiContext } from "./contexts";
 import ApiService from "../../services/v1/api-service";
-import { LoadingHook } from "../../core/hooks/api/LoadingHook";
+import { LoadingHook } from "../../core/hooks/api/loading-hook";
 
 class App extends Component {
   constructor(props) {

@@ -45,6 +45,9 @@
   color: #fff;
   background: #0073aa;
 } */
+.sub-menu-item {
+  padding-left: 30px;
+}
 #sidebar ul li.sub-menu-item > a.active {
   color: #fff;
   background: #6d7fcc;

@@ -37,9 +37,17 @@ class ApiService {
     });
   }
 
+  isAbsoluteUrl(url) {
+    if (url.match(/^http/g)) {
+      return true;
+    }
+    return false;
+  }
+
   get(url) {
     this.runHooksBefore();
-    return fetch(this.config.apiUrl + url, {
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -59,7 +67,8 @@ class ApiService {
 
   post(url, body) {
     this.runHooksBefore();
-    return fetch(this.config.apiUrl + url, {
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
@@ -81,7 +90,8 @@ class ApiService {
 
   put(url, body) {
     this.runHooksBefore();
-    return fetch(this.config.apiUrl + url, {
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "put",
       body: JSON.stringify(body),
       headers: {
@@ -103,7 +113,8 @@ class ApiService {
 
   delete(url, body) {
     this.runHooksBefore();
-    return fetch(this.config.apiUrl + url, {
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

@@ -26,13 +26,14 @@ body {
     align-content: stretch;
     .left {
       width: 100%;
+      min-width: 280px;
     }
     .right {
       -webkit-flex: 1;
       flex: 1;
       position: relative;
       overflow-y: scroll;
-      top: 50px;
+      padding-top: 50px !important;
     }
   }
 
@@ -48,6 +49,9 @@ body {
 
   .clickable {
     cursor: pointer;
+  }
+  .checkbox-input {
+    transform: scale(2);
   }
 }
 .s-modal {

@@ -28,6 +28,7 @@ class CategoryController extends ApiController
             'uuid' => Uuid::generate()->string,
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
+            'published' => $request['published'],
             'type' => $request['type'],
             'slug' => $request['name'],
         ]);
@@ -40,6 +41,7 @@ class CategoryController extends ApiController
         $category->update([
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
+            'published' => $request['published'],
             'type' => $request['type'],
             'slug' => $request['title']
         ]);

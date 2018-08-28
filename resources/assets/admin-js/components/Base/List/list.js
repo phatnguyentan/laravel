@@ -68,21 +68,22 @@ class BaseList extends React.Component {
                   {this.template.map(k => {
                     return (
                       <td key={d.id + k}>
-                        <Link to={`/admin/posts/${this.entity}/` + d.id}>
-                          {d[k]}
-                        </Link>
+                        <Link to={`/admin/${this.entity}/` + d.id}>{d[k]}</Link>
                       </td>
                     );
                   })}
                   <td>
                     <button
-                      className="btn btn-default"
+                      className="btn btn-default m-1"
                       onClick={this.openDelete.bind(this, d.id)}
                     >
                       <i className="fa fa-trash" />
                     </button>
-                    <button className="btn btn-default">
+                    <button className="btn btn-default m-1">
                       <i className="fa fa-eye" />
+                    </button>
+                    <button className="btn btn-default m-1">
+                      <i className="fa fa-copy" />
                     </button>
                   </td>
                 </tr>

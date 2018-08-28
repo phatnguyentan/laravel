@@ -19,11 +19,12 @@ class CreateCategoryTable extends Migration
             $table->string('name');
             $table->string('icon')->nullable();
             $table->string('slug');
-            $table->string('type')->default('product');
-            $table->integer('parent_id')->nullable();
-            $table->boolean('active')->default(false);
             $table->integer('core_app_id');
             $table->integer('child_count')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->string('type')->default('product');
+            $table->boolean('published')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

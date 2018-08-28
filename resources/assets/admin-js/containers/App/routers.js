@@ -6,11 +6,16 @@ import NotFound from "../NotFound";
 import PostCreate from "../../components/Post/create";
 import PostCategory from "../../components/Post/category";
 import Login from "../../components/Login/Login";
-import ProductList from "../../components/Product";
 import ProductTypes from "../../components/ProductTypes";
 import ProductCategory from "../../components/Product/category";
 import MediaContainer from "../Media/MediaContainer";
 import ProductCreateContainer from "../Product/ProductCreateContainer";
+import ProductListContainer from "../Product/ProductListContainer";
+import ProductDetailContainer from "../Product/ProductDetailContainer";
+import ProductCategoryContainer from "../Product/ProductCategoryContainer";
+import PostCategoryContainer from "../Post/PostCategoryContainer";
+import PostCreateContainer from "../Post/PostCreateContainer";
+import PostDetailContainer from "../Post/PostDetailContainer";
 
 class RoutersComponent extends Component {
   render() {
@@ -35,22 +40,30 @@ class RoutersComponent extends Component {
         <Route
           exact
           path={this.props.config.adminPrefix + "/posts/create"}
-          render={props => <PostCreate {...props} context={this.props} />}
+          render={props => (
+            <PostCreateContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
           path={this.props.config.adminPrefix + "/posts/:id"}
-          render={props => <PostDetail {...props} context={this.props} />}
+          render={props => (
+            <PostDetailContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
           path={this.props.config.adminPrefix + "/post_categories"}
-          render={props => <PostCategory {...props} context={this.props} />}
+          render={props => (
+            <PostCategoryContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
           path={this.props.config.adminPrefix + "/products"}
-          render={props => <ProductList {...props} context={this.props} />}
+          render={props => (
+            <ProductListContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
@@ -68,8 +81,10 @@ class RoutersComponent extends Component {
         />
         <Route
           exact
-          path={this.props.config.adminPrefix + "/products_category"}
-          render={props => <ProductCategory {...props} context={this.props} />}
+          path={this.props.config.adminPrefix + "/product_categories"}
+          render={props => (
+            <ProductCategoryContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact

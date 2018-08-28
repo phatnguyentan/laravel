@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../../../../../../../.cache/typescript/2.9/node_modules/@types/react-router-dom";
 import "./styles.css";
-import Modal from "react-modal";
+import Modal from "../../../../../../../.cache/typescript/2.9/node_modules/@types/react-modal";
 import { ToastContainer, ToastStore } from "react-toasts";
 
 const customStyles = {
@@ -14,7 +14,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)"
   }
 };
-class PostList extends React.Component {
+export default class PostListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { objects: [] };
@@ -118,5 +118,3 @@ class PostList extends React.Component {
     );
   }
 }
-
-export default PostList;

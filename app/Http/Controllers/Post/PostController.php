@@ -14,7 +14,6 @@ class PostController extends ApiController
 {
     public function index(Request $request)
     {
-        // return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
         return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
     }
 
@@ -30,6 +29,7 @@ class PostController extends ApiController
             'title' => $request['title'],
             'body' => $request['body'],
             'category_id' => $request['category_id'],
+            'published' => $request['published'],
             'user_id' => $request->user()->id,
             'slug' => $request['title']
         ]);
@@ -43,6 +43,7 @@ class PostController extends ApiController
             'title' => $request['title'],
             'body' => $request['body'],
             'category_id' => $request['category_id'],
+            'published' => $request['published'],
             'user_id' => $request->user()->id,
             'slug' => $request['title']
         ]);
