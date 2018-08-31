@@ -15,7 +15,10 @@ export default class ProductDetailContainer extends ProductCreateContainer {
         this.setState({
           object: res.data
         });
-        this.setState({ ...this.state, ...res.data });
+        this.setState({
+          ...this.state,
+          ...res.data
+        });
         this.props.context.api
           .get(`/categories?filter[where][type]=product`)
           .then(res => {

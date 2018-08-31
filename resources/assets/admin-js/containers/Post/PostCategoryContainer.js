@@ -46,6 +46,18 @@ export default class PostCategoryContainer extends React.Component {
       deleteId: id
     });
   }
+
+  load() {
+    this.props.context.api
+      .get("/categories?filter[where][type]=post")
+      .then(res => {
+        this.setState({
+          objects: res.data,
+          modalIsOpen: false
+        });
+      });
+  }
+
   delete() {
     this.props.context.api
       .delete("/categories/" + this.state.deleteId)
@@ -71,23 +83,34 @@ export default class PostCategoryContainer extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    this.props.context.api
-      .post("/categories", {
-        name: data.get("name"),
-        description: data.get("description"),
-        published: this.state.published,
-        type: "post",
-        parent_id: data.get("parent_id")
-      })
-      .then(res => {
-        ToastStore.success("Create");
-        this.props.context.api
-          .get("/categories?filter[where][type]=post")
-          .then(res => {
-            this.setState({ objects: res.data });
-          });
-      });
+    if (this.state.isEdit) {
+      this.props.context.api
+        .put("/categories/" + this.state.id, {
+          name: data.get("name"),
+          description: data.get("description"),
+          published: this.state.published,
+          parent_id: data.get("parent_id")
+        })
+        .then(res => {
+          ToastStore.success("Update");
+          this.load();
+        });
+    } else {
+      this.props.context.api
+        .post("/categories", {
+          name: data.get("name"),
+          description: data.get("description"),
+          published: this.state.published,
+          type: "post",
+          parent_id: data.get("parent_id")
+        })
+        .then(res => {
+          ToastStore.success("Create");
+          this.load();
+        });
+    }
   }
+
   render() {
     const template = ["id", "name", "parent_id", "published", "updated_at"];
     let buttonSummit = !this.state.isEdit ? (
@@ -102,7 +125,19 @@ export default class PostCategoryContainer extends React.Component {
     ) : (
       <div className="form-group">
         <div className="col-sm-10">
-          <button type="submit" className="btn btn-default m-1">
+          <button
+            type="button"
+            className="btn btn-default m-1"
+            onClick={e => {
+              e.preventDefault();
+              this.setState({
+                isEdit: false,
+                name: "",
+                description: "",
+                published: false
+              });
+            }}
+          >
             <i className="m-1" />
             Cancle
           </button>
@@ -136,10 +171,10 @@ export default class PostCategoryContainer extends React.Component {
                 <select
                   name="parent_id"
                   className="form-control"
-                  value={this.state.parent_id}
+                  value={this.state.parent_id || 0}
                   onChange={this.handleInputChange}
                 >
-                  <option>Select Category</option>
+                  <option value="0">Select Category</option>
                   {this.state.objects.map(ob => {
                     return (
                       <option key={ob.id} value={ob.id}>
@@ -194,21 +229,26 @@ export default class PostCategoryContainer extends React.Component {
                     return <td key={d.id + k}>{d[k]}</td>;
                   })}
                   <td>
-                    {/* <button className="btn btn-default m-1">
-                      <i className="fa fa-eye" />
-                    </button> */}
                     <button
                       className="btn btn-default m-1"
                       onClick={e => {
-                        console.log(d);
-
                         this.setState({ ...this.state, ...d });
                         this.setState({ isEdit: true });
                       }}
                     >
                       <i className="fa fa-pencil" />
                     </button>
-                    <button className="btn btn-default m-1">
+                    <button
+                      className="btn btn-default m-1"
+                      onClick={e => {
+                        this.props.context.api
+                          .post(`/categories/${d.id}/duplicate`)
+                          .then(e => {
+                            ToastStore.success("Copied");
+                            this.load();
+                          });
+                      }}
+                    >
                       <i className="fa fa-copy" />
                     </button>
                     <button

@@ -1,5 +1,4 @@
 {
-  "apiUrl": "http://localhost:5050/api",
-  "adminPrefix": "/admin",
-  "apiAdminUrl": "localhost:5050/api/admin"
+  "apiUrl": "http://localhost:5050/api/admin",
+  "adminPrefix": "/admin"
 }

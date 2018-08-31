@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(true);
             $table->integer('core_app_id')->unsigned();
+            $table->integer('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

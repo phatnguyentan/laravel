@@ -46,7 +46,5 @@ class Logging
         Log::debug($request->method());
         Log::debug($request->path());
         Log::debug($request->all());
-        // Log::debug('RESPONSE =>');
-        // Log::debug($response);
     }
 }

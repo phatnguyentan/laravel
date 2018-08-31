@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Media;
+namespace App\Http\Controllers\Frontend\Media;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\ApiController;

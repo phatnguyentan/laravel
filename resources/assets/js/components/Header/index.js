@@ -9,10 +9,11 @@ const Header = () => (
         <div className="container">
           <div className="row">
             <div className="col-md-2">
-              <a href="/home">
+              <a href="/">
                 <img
-                  src="https://res.yame.vn/Content/images/logo-white.png"
-                  alt="Yame.vn"
+                  src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/39080687_276196499827542_5762063699804160_n.jpg"
+                  alt="Morikohouse.com"
+                  style={{ maxWidth: "100%" }}
                 />
               </a>
             </div>
@@ -82,11 +83,11 @@ const Header = () => (
             aria-haspopup="true"
             aria-expanded="false"
           >
-            ÁO THUN
+            THÚ BÔNG
           </a>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a className="dropdown-item" href="#">
-              ÁO THUN MABƯ
+              THÚ BÔNG
             </a>
           </div>
         </li>

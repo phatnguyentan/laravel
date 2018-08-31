@@ -5,8 +5,9 @@ const Footer = () => (
     <div className="container text-white p-4">
       <div className="col-sm-12 text-center">
         <img
-          src="http://res.yame.vn/Content/images/yame-f-logo-white.png"
+          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/39080687_276196499827542_5762063699804160_n.jpg"
           alt=""
+          style={{ width: "134px" }}
         />
         <h3>"ĐẢM BẢO HÀI LÒNG"</h3>
       </div>

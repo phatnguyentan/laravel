@@ -31,11 +31,26 @@ Route::prefix('users')->group(function () {
         Route::get('user', 'User\AuthController@user');
     });
 });
+Route::prefix('admin')->group(function () {
+    Route::resource('posts', 'Admin\Post\PostController')->middleware('auth.admin:api');
+    Route::post('posts/{post}/duplicate', 'Admin\Post\PostController@duplicate')->middleware('auth.admin:api');
 
+    Route::resource('products', 'Admin\Product\ProductController')->middleware('auth.admin:api');
+    Route::post('products/{product}/duplicate', 'Admin\Product\ProductController@duplicate')->middleware('auth.admin:api');
 
-Route::resource('posts', 'Post\PostController')->middleware('auth:api');
-Route::resource('products', 'Product\ProductController')->middleware('auth:api');
-Route::resource('product_types', 'Product\ProductTypeController')->middleware('auth:api');
-Route::resource('categories', 'Category\CategoryController')->middleware('auth:api');
-Route::resource('users', 'User\UserController')->middleware('auth:api');
-Route::resource('media', 'Media\MediaController')->middleware('auth:api');
+    Route::resource('product_types', 'Admin\Product\ProductTypeController')->middleware('auth.admin:api');
+    Route::resource('categories', 'Admin\Category\CategoryController')->middleware('auth.admin:api');
+    Route::post('categories/{category}/duplicate', 'Admin\Category\CategoryController@duplicate')->middleware('auth.admin:api');
+
+    Route::resource('users', 'Admin\User\UserController')->middleware('auth.admin:api');
+    Route::resource('media', 'Admin\Media\MediaController')->middleware('auth.admin:api');
+    Route::post('users/login', 'User\AuthController@login')->name('user');
+});
+
+Route::prefix('frontend')->group(function () {
+    Route::resource('posts', 'Frontend\Post\PostController')->middleware('auth:api');
+    Route::resource('products', 'Frontend\Product\ProductController')->middleware('auth:api');
+    Route::resource('product_types', 'Frontend\Product\ProductTypeController')->middleware('auth:api');
+    Route::resource('categories', 'Frontend\Category\CategoryController')->middleware('auth:api');
+    Route::resource('media', 'Frontend\Media\MediaController')->middleware('auth:api');
+});

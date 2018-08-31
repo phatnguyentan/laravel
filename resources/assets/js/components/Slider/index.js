@@ -19,25 +19,35 @@ const Slider = () => (
     <div className="carousel-inner">
       <div className="carousel-item active">
         <img
-          className="d-block w-100"
-          src="http://via.placeholder.com/341.1x1140"
+          className="d-block"
+          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
           alt="First slide"
+          style={{ height: "341px", width: "1140px" }}
         />
       </div>
       <div className="carousel-item">
         <img
-          className="d-block w-100"
-          src="http://via.placeholder.com/341.1x1140"
+          className="d-block"
+          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
           alt="Second slide"
+          style={{ height: "341px", width: "1140px" }}
         />
       </div>
       <div className="carousel-item">
+        <img
+          className="d-block"
+          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
+          alt="Second slide"
+          style={{ height: "341px", width: "1140px" }}
+        />
+      </div>
+      {/* <div className="carousel-item">
         <img
           className="d-block w-100"
           src="http://via.placeholder.com/341.1x1140"
           alt="Third slide"
         />
-      </div>
+      </div> */}
     </div>
     <a
       className="carousel-control-prev"

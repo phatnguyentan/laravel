@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Admin\Post;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\ApiController;
@@ -12,6 +12,9 @@ use Webpatser\Uuid\Uuid;
 
 class PostController extends ApiController
 {
+    protected $entity = 'post';
+    protected $table = 'posts';
+
     public function index(Request $request)
     {
         return $request->user()->posts()->orderBy('id', 'desc')->paginate(15);
@@ -34,6 +37,21 @@ class PostController extends ApiController
             'slug' => $request['title']
         ]);
         return response()->json(array('data' => $post));
+    }
+
+    public function duplicate(Request $request)
+    {
+        $item = $request->user()->posts()->find($request[$this->entity]);
+        $post = $request->user()->posts()->create([
+            'uuid' => Uuid::generate()->string,
+            'title' => $item['title'],
+            'body' => $item['body'],
+            'category_id' => $item['category_id'],
+            'published' => false,
+            'user_id' => $request->user()->id,
+            'slug' => $request['title']
+        ]);
+        return response()->json(['data' => $post]);
     }
 
     public function update(Request $request)

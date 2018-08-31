@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'moriko_admin@gmail.com',
                 'password' => bcrypt('12345678'),
                 'core_app_id' => 1,
+                'admin' => 1,
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime
             ],
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'moriko_guest@gmail.com',
                 'password' => bcrypt('12345678'),
                 'core_app_id' => 1,
+                'admin' => 0,
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime
             ],

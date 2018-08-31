@@ -22,7 +22,7 @@ class CreateMediaTable extends Migration
             $table->string('thumb_url');
             $table->string('mime_type');
             $table->integer('core_app_id');
-            $table->string('size')->nullable();
+            $table->integer('size')->nullable();
             $table->string('domain')->nullable();
             $table->string('folder')->nullable();
             $table->timestamps();

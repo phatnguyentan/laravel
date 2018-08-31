@@ -49,6 +49,22 @@ class BaseList extends React.Component {
       modalIsOpen: false
     });
   }
+  load() {
+    this.props.context.api.get(`/${this.entity}`).then(res => {
+      this.setState({ objects: res.data });
+    });
+  }
+  copy(item) {
+    this.props.context.api
+      .post(`/${this.entity}/${item.id}/duplicate`)
+      .then(res => {
+        ToastStore.success("Copied");
+        this.load();
+      });
+  }
+  view(item) {
+    this.props.history.push(`/admin/${this.entity}/${item.id}`);
+  }
   render() {
     return (
       <div>
@@ -79,10 +95,16 @@ class BaseList extends React.Component {
                     >
                       <i className="fa fa-trash" />
                     </button>
-                    <button className="btn btn-default m-1">
+                    <button
+                      className="btn btn-default m-1"
+                      onClick={this.view.bind(this, d)}
+                    >
                       <i className="fa fa-eye" />
                     </button>
-                    <button className="btn btn-default m-1">
+                    <button
+                      className="btn btn-default m-1"
+                      onClick={this.copy.bind(this, d)}
+                    >
                       <i className="fa fa-copy" />
                     </button>
                   </td>
@@ -114,7 +136,7 @@ class BaseList extends React.Component {
           </form>
         </Modal>
         <ToastContainer
-          position={ToastContainer.POSITION.TOP_RIGHT}
+          position={ToastContainer.POSITION.TOP_CENTER}
           store={ToastStore}
         />
       </div>

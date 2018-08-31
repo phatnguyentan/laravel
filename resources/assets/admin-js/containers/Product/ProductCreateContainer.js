@@ -107,7 +107,7 @@ class ProductCreateContainer extends React.Component {
         <div className="form-group mt-3 mb-3">
           <button
             type="button"
-            className="btn btn-primary m-1"
+            className="btn btn-default m-1"
             onClick={this.openMediaMedia.bind(this)}
           >
             <i className="fa fa-plus-circle m-1" />
@@ -128,7 +128,7 @@ class ProductCreateContainer extends React.Component {
         <div className="form-group mt-3 mb-3">
           <button
             type="button"
-            className="btn btn-primary m-1"
+            className="btn btn-default m-1"
             onClick={this.openPostMedia.bind(this)}
           >
             <i className="fa fa-plus-circle m-1" />
@@ -150,7 +150,7 @@ class ProductCreateContainer extends React.Component {
             <select
               className="form-control"
               name="category_id"
-              value={this.state.category_id}
+              value={this.state.category_id || 0}
               onChange={this.handleSelectChange}
             >
               <option value="0">Select Category</option>

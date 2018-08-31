@@ -14,8 +14,9 @@ class ProductList extends Component {
             <div className="bg-light p-3 rounded">
               <img
                 className="w-100"
-                src="http://via.placeholder.com/200x300"
+                src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/9029600796_1670322891.400x400.jpg"
                 alt=""
+                style={{ width: "200px", height: "300px" }}
               />
               <div className="row">
                 <p className="col-sm-8">Áo Thun Nam / 0015488</p>
