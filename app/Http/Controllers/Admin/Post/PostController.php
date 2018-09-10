@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Webpatser\Uuid\Uuid;
+use App\MyLibs\Utils\CommonUtil;
 
 class PostController extends ApiController
 {
@@ -30,6 +31,7 @@ class PostController extends ApiController
         $post = $request->user()->posts()->create([
             'uuid' => Uuid::generate()->string,
             'title' => $request['title'],
+            'excerpt' => CommonUtil::get_excerpt($request['description']),
             'body' => $request['body'],
             'category_id' => $request['category_id'],
             'published' => $request['published'],
@@ -47,6 +49,7 @@ class PostController extends ApiController
             'title' => $item['title'],
             'body' => $item['body'],
             'category_id' => $item['category_id'],
+            'excerpt' => CommonUtil::get_excerpt($item['description']),
             'published' => false,
             'user_id' => $request->user()->id,
             'slug' => $request['title']
@@ -62,6 +65,7 @@ class PostController extends ApiController
             'body' => $request['body'],
             'category_id' => $request['category_id'],
             'published' => $request['published'],
+            'excerpt' => CommonUtil::get_excerpt($request['description']),
             'user_id' => $request->user()->id,
             'slug' => $request['title']
         ]);

@@ -5,13 +5,13 @@ import "./styles.css";
 const Header = () => (
   <div>
     <div id="font-size">
-      <nav className="navbar-fixed-top">
+      <nav className="navbar-fixed-top bg-1">
         <div className="container">
           <div className="row">
             <div className="col-md-2">
               <a href="/">
                 <img
-                  src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/39080687_276196499827542_5762063699804160_n.jpg"
+                  src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/moriko_amban.png"
                   alt="Morikohouse.com"
                   style={{ maxWidth: "100%" }}
                 />
@@ -63,7 +63,7 @@ const Header = () => (
         </div>
       </nav>
     </div>
-    <div className="navbar-nav bg-dark-2">
+    <div className="navbar-nav bg-2 text-dark">
       <ul className="container list-inline">
         <li className="list-inline-item">
           <Link to="/products">Mới Về</Link>

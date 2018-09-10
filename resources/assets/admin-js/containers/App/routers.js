@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import PostList from "../../components/Post";
-import PostDetail from "../../components/Post/detail";
 import NotFound from "../NotFound";
-import PostCreate from "../../components/Post/create";
-import PostCategory from "../../components/Post/category";
 import Login from "../../components/Login/Login";
 import ProductTypes from "../../components/ProductTypes";
-import ProductCategory from "../../components/Product/category";
 import MediaContainer from "../Media/MediaContainer";
 import ProductCreateContainer from "../Product/ProductCreateContainer";
 import ProductListContainer from "../Product/ProductListContainer";
@@ -16,6 +11,8 @@ import ProductCategoryContainer from "../Product/ProductCategoryContainer";
 import PostCategoryContainer from "../Post/PostCategoryContainer";
 import PostCreateContainer from "../Post/PostCreateContainer";
 import PostDetailContainer from "../Post/PostDetailContainer";
+import PostListContainer from "../Post/PostListContainer";
+import BannerContainer from "../Home/BannerContainer";
 
 class RoutersComponent extends Component {
   render() {
@@ -24,7 +21,9 @@ class RoutersComponent extends Component {
         <Route
           exact
           path={this.props.config.adminPrefix}
-          render={props => <PostList {...props} context={this.props} />}
+          render={props => (
+            <PostListContainer {...props} context={this.props} />
+          )}
         />
 
         <Route
@@ -35,7 +34,9 @@ class RoutersComponent extends Component {
         <Route
           exact
           path={this.props.config.adminPrefix + "/posts"}
-          render={props => <PostList {...props} context={this.props} />}
+          render={props => (
+            <PostListContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact
@@ -95,6 +96,11 @@ class RoutersComponent extends Component {
           exact
           path={this.props.config.adminPrefix + "/media"}
           render={props => <MediaContainer {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={this.props.config.adminPrefix + "/home/banners"}
+          render={props => <BannerContainer {...props} context={this.props} />}
         />
         <Route component={NotFound} />
       </Switch>

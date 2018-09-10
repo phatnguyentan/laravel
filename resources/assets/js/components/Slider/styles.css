@@ -24,3 +24,34 @@
 a {
   font-size: 12px;
 }
+
+.carousel-control-next {
+  right: -100px;
+}
+
+.carousel-control-prev {
+  left: -100px;
+}
+
+/* .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-size: 100%, 100%;
+  background-image: none;
+  font-weight: bold;
+  font-size: 70px;
+}
+
+.carousel-control-next-icon:after {
+  content: ">";
+  color: #404040;
+}
+
+.carousel-control-prev-icon:after {
+  content: "<";
+  color: #404040;
+}
+.carousel.vertical .active {
+  top: 0;
+} */

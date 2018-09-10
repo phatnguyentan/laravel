@@ -52,15 +52,16 @@ class ApiController extends BaseController
     protected function list(Request $request)
     {
         $query = DB::table($this->table);
-        $where = $request->query('filter')['where'] ? $request->query('filter')['where'] : [];
+        $where = !empty($request->query('filter')['where']) ? $request->query('filter')['where'] : [];
         $where = array_merge($where, $this->filter['where']);
         $order = $this->filter['order'];
+        $limit = !empty($request->query('filter')['limit']) ? $request->query('filter')['limit'] : $this->filter['limit'];
         if ($where) {
             $query = $query->where($where);
         }
         if ($order) {
             $query = $query->orderBy(array_keys($order)[0], $order[array_keys($order)[0]]);
         }
-        return $query->paginate($this->filter['limit']);
+        return $query->paginate($limit);
     }
 }

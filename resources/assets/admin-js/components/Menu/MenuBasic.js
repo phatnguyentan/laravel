@@ -1,9 +1,9 @@
 // import React from "react";
 import React from "react";
-import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
 // import { Config } from "../../config/config";
 import "./styles.css";
+import { TreeMenu } from "../../../my-libs/DataStructure/Tree/tree-menu";
 
 class MenuBasic extends React.Component {
   constructor(props) {
@@ -73,17 +73,29 @@ class MenuBasic extends React.Component {
       },
       {
         id: 30,
-        name: "Product Type",
-        link: `${this.props.context.config.adminPrefix}/product_types`,
-        icon: "fa fa-sitemap m-2"
+        name: "Home",
+        link: `${this.props.context.config.adminPrefix}/home/banners`,
+        icon: "fa fa-home m-2"
       },
       {
         id: 31,
-        name: "All Product Types",
+        name: "Banners",
         parent_id: 30,
-        link: `${this.props.context.config.adminPrefix}/product_types`
+        link: `${this.props.context.config.adminPrefix}/home/banners`
       }
     ];
+    // {
+    //   id: 30,
+    //   name: "Product Type",
+    //   link: `${this.props.context.config.adminPrefix}/product_types`,
+    //   icon: "fa fa-sitemap m-2"
+    // },
+    // {
+    //   id: 31,
+    //   name: "All Product Types",
+    //   parent_id: 30,
+    //   link: `${this.props.context.config.adminPrefix}/product_types`
+    // }
     const treeMenu = new TreeMenu(array);
     const render = nodes => {
       if (Array.isArray(nodes)) {

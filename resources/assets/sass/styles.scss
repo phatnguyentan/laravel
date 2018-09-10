@@ -2,10 +2,35 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: roboto;
+}
+* {
+  font-family: sans-serif;
 }
 .text-light {
   a {
     color: white;
   }
+}
+.text-dark {
+  a {
+    color: #373c42 !important;
+  }
+}
+.bg-1 {
+  background-color: $cl1;
+}
+.bg-2 {
+  background-color: $cl2;
+}
+.bg-3 {
+  background-color: $cl3;
+}
+.bg-dark-1 {
+  background-color: $cl1;
+}
+.title-box {
+  width: 100%;
+  margin: auto;
+  height: 55px;
+  background-color: $cl1;
 }

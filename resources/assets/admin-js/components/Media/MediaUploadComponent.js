@@ -46,25 +46,7 @@ class MediaUploadComponent extends React.Component {
                   name="files[]"
                   multiple="multiple"
                   style={{ width: "100px", height: "40px" }}
-                  onChange={event => {
-                    // const fs = event.target.files;
-                    // FileUploadReader.uploadHandler(event).then(files => {
-                    //   files.forEach((f, i) => {
-                    //     this.props.context.api
-                    //       .post("/media", {
-                    //         photo: f.target.result,
-                    //         name: fs[i].name
-                    //       })
-                    //       .then(res => {
-                    //         this.props.context.api.get("/media").then(res => {
-                    //           this.setState({
-                    //             objects: res.data
-                    //           });
-                    //         });
-                    //       });
-                    //   });
-                    // });
-                  }}
+                  onChange={event => {}}
                 />
               </span>
             </li>

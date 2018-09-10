@@ -16,5 +16,8 @@ php artisan cache:clear
 
 # Make Model
 php artisan make:model ProductType -m
-php artisan make:model ProductTypeAttr -m
+php artisan make:model Layout -m
 
+#Log
+tail -f storage/logs/laravel.log
+tail -f /var/log/mysql/mysql.log

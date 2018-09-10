@@ -11,3 +11,6 @@
 .main-header > #loading-progress {
   display: none;
 }
+.avatar > img {
+  width: 30px;
+}

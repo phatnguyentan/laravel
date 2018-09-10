@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/header";
 import MenuBasic from "../../components/Menu/MenuBasic";
 import RoutersComponent from "./routers";
 import { ConfigContext, ApiContext } from "./contexts";
@@ -12,14 +12,20 @@ class Layout extends Component {
           <ApiContext.Consumer>
             {api => (
               <div className="app w-100">
-                <Header />
+                <Header
+                  {...this.props}
+                  context={{ api: api, config: config }}
+                />
                 <div className="main-body main-container">
                   <div className="row w-100">
                     <div
                       className="col-sm-2 bg-dark text-light left"
                       style={{ paddingLeft: "25px" }}
                     >
-                      <MenuBasic context={{ api: api, config: config }} />
+                      <MenuBasic
+                        {...this.props}
+                        context={{ api: api, config: config }}
+                      />
                     </div>
                     <div className="col-sm-10 right p-3">
                       <RoutersComponent api={api} config={config} />

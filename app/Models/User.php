@@ -24,11 +24,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public function apps()
-    // {
-    //     return $this->belongsToMany('App\Models\CoreApp', 'core_app_users');
-    // }
-
     public function app()
     {
         return $this->hasOne('App\Models\CoreApp', 'id', 'core_app_id');
@@ -42,6 +37,11 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany('App\Models\Post', 'core_app_id', 'core_app_id');
+    }
+
+    public function banners()
+    {
+        return $this->hasMany('App\Models\Layout', 'core_app_id', 'core_app_id')->where('type', "banners");
     }
 
     public function products()

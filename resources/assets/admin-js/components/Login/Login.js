@@ -1,9 +1,6 @@
-// import React from "react";
 import React from "react";
-import ApiService from "../../services/api-service";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
-// import { Config } from "../../config/config";
 import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {

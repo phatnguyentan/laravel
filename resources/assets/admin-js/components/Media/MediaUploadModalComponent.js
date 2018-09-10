@@ -1,7 +1,6 @@
 // import React from "react";
 import React from "react";
 import Modal from "react-modal";
-import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
 import "./styles.css";
 import MediaListComponent from "../Display/Media/MediaListComponent";

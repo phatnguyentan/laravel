@@ -1,0 +1,7 @@
+.bg-dark-1 {
+  background-color: #363636;
+}
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+}

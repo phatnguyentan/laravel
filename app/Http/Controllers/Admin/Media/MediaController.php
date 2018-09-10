@@ -22,6 +22,7 @@ class MediaController extends ApiController
     public function index(Request $request)
     {
         $this->filter['where'] = array_merge(['core_app_id' => $request->user()->core_app_id], $this->filter['where']);
+        $this->filter['limit'] = 15;
         return parent::index($request);
     }
 

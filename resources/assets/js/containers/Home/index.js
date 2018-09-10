@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Slider } from "../../components";
+import Slider from "../../components/Slider/slider";
 
 class Home extends Component {
   componentWillMount() {
@@ -8,12 +8,14 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home-page">
         <Slider />
-        <div className="flex row">
+        <Slider />
+        <Slider />
+        {/* <div className="flex row">
           {[1, 2, 3, 4].map(e => {
             return (
-              <div className="col-sm-6 pb-4">
+              <div key={e} className="col-sm-6 pb-4">
                 <div className="bg-light p-3 rounded">
                   <h4>Title Title Title Title Title</h4>
                   <img
@@ -31,7 +33,7 @@ class Home extends Component {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     );
   }

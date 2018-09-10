@@ -5,6 +5,10 @@ body {
   overflow: hidden;
 }
 
+* {
+  font-family: roboto;
+}
+
 body {
   font-size: 13px;
 }

@@ -1,10 +1,10 @@
 // import React from "react";
 import React from "react";
 import Modal from "react-modal";
-import { TreeMenu } from "my-libs";
 import { Link, NavLink } from "react-router-dom";
 // import { Config } from "../../config/config";
 import "./styles.css";
+import { TreeMenu } from "../../../my-libs/DataStructure/Tree/tree-menu";
 
 class MediaUpload extends React.Component {
   constructor(props) {
