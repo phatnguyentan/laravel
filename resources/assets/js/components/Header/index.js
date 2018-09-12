@@ -7,11 +7,11 @@ const Header = () => (
     <div id="font-size">
       <nav className="navbar-fixed-top bg-1">
         <div className="container">
-          <div className="row">
+          <div className="row top-header">
             <div className="col-md-2">
               <a href="/">
                 <img
-                  src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/moriko_amban.png"
+                  src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/moriko_text_trang.png"
                   alt="Morikohouse.com"
                   style={{ maxWidth: "100%" }}
                 />
@@ -39,7 +39,7 @@ const Header = () => (
               <ul className="navbar-nav row pt-2 flex-row">
                 <li className="col-md-3 nav-item">
                   <a className="nav-link" href="/home">
-                    GÓP Ý <br /> THAN PHIỀN
+                    GÓP Ý <br /> PHẢN ÁNH
                   </a>
                 </li>
                 <li className="col-md-3 nav-item">
@@ -49,12 +49,12 @@ const Header = () => (
                 </li>
                 <li className="col-md-3 nav-item">
                   <p className="nav-link text-white" href="#">
-                    ĐẶT HÀNG <br /> (028) 7307 1441
+                    ĐẶT HÀNG <br /> 0945663543
                   </p>
                 </li>
                 <li className="col-md-3 nav-item">
                   <p className="nav-link text-white" href="#">
-                    BẢO HÀNH <br /> 365 NGÀY
+                    LIÊN HỆ <br />
                   </p>
                 </li>
               </ul>
@@ -64,9 +64,9 @@ const Header = () => (
       </nav>
     </div>
     <div className="navbar-nav bg-2 text-dark">
-      <ul className="container list-inline">
+      <ul className="container list-inline m-0-auto">
         <li className="list-inline-item">
-          <Link to="/products">Mới Về</Link>
+          <Link to="/products">MỚI VỀ</Link>
         </li>
         <li className="list-inline-item">
           <a href="#" className="list-group-item-action">

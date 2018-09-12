@@ -12,17 +12,11 @@ class App extends Component {
     return (
       <div className="app bg-2">
         <Header />
-        <div className="bg-3">
-          <Slider2 />
-        </div>
-        <div className="container mt-4 bg-light">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/products" component={ProductList} />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-        {/* footer */}
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/products" component={ProductList} />
+          <Route component={NotFound} />
+        </Switch>
         <Footer />
       </div>
     );

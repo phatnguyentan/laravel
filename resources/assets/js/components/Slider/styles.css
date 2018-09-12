@@ -33,25 +33,17 @@ a {
   left: -100px;
 }
 
-/* .carousel-control-prev-icon,
+.carousel-control-prev-icon,
 .carousel-control-next-icon {
-  height: 100px;
-  width: 100px;
+  height: 30px;
+  width: 30px;
   background-size: 100%, 100%;
-  background-image: none;
-  font-weight: bold;
-  font-size: 70px;
+  background-image: url("http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/muiten_1.png");
+}
+.carousel-control-next-icon {
+  transform: rotate(180deg);
 }
 
-.carousel-control-next-icon:after {
-  content: ">";
-  color: #404040;
-}
-
-.carousel-control-prev-icon:after {
-  content: "<";
-  color: #404040;
-}
 .carousel.vertical .active {
   top: 0;
-} */
+}

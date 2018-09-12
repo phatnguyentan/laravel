@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 166);
+/******/ 	return __webpack_require__(__webpack_require__.s = 168);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -491,7 +491,7 @@ module.exports = invariant;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(12);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(9);
 /* unused harmony reexport parsePath */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__PathUtils__["b"]; });
 
@@ -639,77 +639,6 @@ module.exports = warning;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addLeadingSlash; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return stripLeadingSlash; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hasBasename; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return stripBasename; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return stripTrailingSlash; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return parsePath; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createPath; });
-var addLeadingSlash = function addLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path : '/' + path;
-};
-
-var stripLeadingSlash = function stripLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path.substr(1) : path;
-};
-
-var hasBasename = function hasBasename(path, prefix) {
-  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
-};
-
-var stripBasename = function stripBasename(path, prefix) {
-  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
-};
-
-var stripTrailingSlash = function stripTrailingSlash(path) {
-  return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
-};
-
-var parsePath = function parsePath(path) {
-  var pathname = path || '/';
-  var search = '';
-  var hash = '';
-
-  var hashIndex = pathname.indexOf('#');
-  if (hashIndex !== -1) {
-    hash = pathname.substr(hashIndex);
-    pathname = pathname.substr(0, hashIndex);
-  }
-
-  var searchIndex = pathname.indexOf('?');
-  if (searchIndex !== -1) {
-    search = pathname.substr(searchIndex);
-    pathname = pathname.substr(0, searchIndex);
-  }
-
-  return {
-    pathname: pathname,
-    search: search === '?' ? '' : search,
-    hash: hash === '#' ? '' : hash
-  };
-};
-
-var createPath = function createPath(location) {
-  var pathname = location.pathname,
-      search = location.search,
-      hash = location.hash;
-
-
-  var path = pathname || '/';
-
-  if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
-
-  if (hash && hash !== '#') path += hash.charAt(0) === '#' ? hash : '#' + hash;
-
-  return path;
-};
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -791,7 +720,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1150,6 +1079,77 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addLeadingSlash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return stripLeadingSlash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hasBasename; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return stripBasename; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return stripTrailingSlash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return parsePath; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createPath; });
+var addLeadingSlash = function addLeadingSlash(path) {
+  return path.charAt(0) === '/' ? path : '/' + path;
+};
+
+var stripLeadingSlash = function stripLeadingSlash(path) {
+  return path.charAt(0) === '/' ? path.substr(1) : path;
+};
+
+var hasBasename = function hasBasename(path, prefix) {
+  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
+};
+
+var stripBasename = function stripBasename(path, prefix) {
+  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
+};
+
+var stripTrailingSlash = function stripTrailingSlash(path) {
+  return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
+};
+
+var parsePath = function parsePath(path) {
+  var pathname = path || '/';
+  var search = '';
+  var hash = '';
+
+  var hashIndex = pathname.indexOf('#');
+  if (hashIndex !== -1) {
+    hash = pathname.substr(hashIndex);
+    pathname = pathname.substr(0, hashIndex);
+  }
+
+  var searchIndex = pathname.indexOf('?');
+  if (searchIndex !== -1) {
+    search = pathname.substr(searchIndex);
+    pathname = pathname.substr(0, searchIndex);
+  }
+
+  return {
+    pathname: pathname,
+    search: search === '?' ? '' : search,
+    hash: hash === '#' ? '' : hash
+  };
+};
+
+var createPath = function createPath(location) {
+  var pathname = location.pathname,
+      search = location.search,
+      hash = location.hash;
+
+
+  var path = pathname || '/';
+
+  if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
+
+  if (hash && hash !== '#') path += hash.charAt(0) === '#' ? hash : '#' + hash;
+
+  return path;
+};
+
+/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1322,7 +1322,7 @@ module.exports = warning;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(9);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -58472,7 +58472,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(40);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -58896,7 +58896,7 @@ function valueEqual(a, b) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(40);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -59214,7 +59214,7 @@ var createHashHistory = function createHashHistory() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(22);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -60333,11 +60333,11 @@ module.exports = function (css) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header_index__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Slider_slider__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Slider_slider2__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header_index__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Slider_slider__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Slider_slider2__ = __webpack_require__(183);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60372,20 +60372,11 @@ var App = function (_Component) {
         { className: "app bg-2" },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header_index__["a" /* default */], null),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "bg-3" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Slider_slider2__["a" /* default */], null)
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "container mt-4 bg-light" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["f" /* Switch */],
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_2____["a" /* Home */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { exact: true, path: "/products", component: __WEBPACK_IMPORTED_MODULE_2____["c" /* ProductList */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { component: __WEBPACK_IMPORTED_MODULE_2____["b" /* NotFound */] })
-          )
+          __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["f" /* Switch */],
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_2____["a" /* Home */] }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { exact: true, path: "/products", component: __WEBPACK_IMPORTED_MODULE_2____["c" /* ProductList */] }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* Route */], { component: __WEBPACK_IMPORTED_MODULE_2____["b" /* NotFound */] })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Footer__["a" /* default */], null)
       );
@@ -60398,8 +60389,238 @@ var App = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (App);
 
 /***/ }),
-/* 136 */,
-/* 137 */,
+/* 136 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_css__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Slider = function (_React$Component) {
+  _inherits(Slider, _React$Component);
+
+  function Slider() {
+    _classCallCheck(this, Slider);
+
+    return _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).apply(this, arguments));
+  }
+
+  _createClass(Slider, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      // this.props.actions.getProducts();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "div",
+        {
+          id: "carouselExampleIndicators",
+          className: "carousel slide container p-3",
+          "data-ride": "carousel"
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "ol",
+          { className: "carousel-indicators" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+            "data-target": "#carouselExampleIndicators",
+            "data-slide-to": "0",
+            className: "active"
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "1" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "2" })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "title-box mb-3" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h4",
+            { className: "text-light p-3" },
+            "H\xC0NG M\u1EDAI"
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "carousel-inner" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "carousel-item active" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "table",
+              { className: "d-block table" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "tbody",
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "tr",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "td",
+                    { className: "border-top-0" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                      className: "w-100",
+                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                      alt: "First slide",
+                      style: { height: "341px", width: "1140px" }
+                    })
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "td",
+                    { className: "border-top-0" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                      className: "w-100",
+                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                      alt: "First slide",
+                      style: { height: "341px", width: "1140px" }
+                    })
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "td",
+                    { className: "border-top-0" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                      className: "w-100",
+                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                      alt: "First slide",
+                      style: { height: "341px", width: "1140px" }
+                    })
+                  )
+                )
+              )
+            )
+          ),
+          [1, 2].map(function (e) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { key: e, className: "carousel-item" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "table",
+                { className: "d-block table" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "tbody",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "tr",
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      "td",
+                      { className: "border-top-0" },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                        className: "w-100",
+                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                        alt: "First slide",
+                        style: { height: "341px", width: "1140px" }
+                      })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      "td",
+                      { className: "border-top-0" },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                        className: "w-100",
+                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                        alt: "First slide",
+                        style: { height: "341px", width: "1140px" }
+                      })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      "td",
+                      { className: "border-top-0" },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                        className: "w-100",
+                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                        alt: "First slide",
+                        style: { height: "341px", width: "1140px" }
+                      })
+                    )
+                  )
+                )
+              )
+            );
+          })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "a",
+          {
+            className: "carousel-control-prev",
+            href: "#carouselExampleIndicators",
+            role: "button",
+            "data-slide": "prev"
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-prev-icon", "aria-hidden": "true" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "span",
+            { className: "sr-only" },
+            "Previous"
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "a",
+          {
+            className: "carousel-control-next",
+            href: "#carouselExampleIndicators",
+            role: "button",
+            "data-slide": "next"
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-next-icon", "aria-hidden": "true" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "span",
+            { className: "sr-only" },
+            "Next"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Slider;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["a"] = (Slider);
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(174);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(8)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../../node_modules/css-loader/index.js!./styles.css", function() {
+			var newContent = require("!!../../../../../node_modules/css-loader/index.js!./styles.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
 /* 138 */,
 /* 139 */,
 /* 140 */,
@@ -60428,16 +60649,18 @@ var App = function (_Component) {
 /* 163 */,
 /* 164 */,
 /* 165 */,
-/* 166 */
+/* 166 */,
+/* 167 */,
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(167);
-__webpack_require__(183);
-module.exports = __webpack_require__(184);
+__webpack_require__(169);
+__webpack_require__(185);
+module.exports = __webpack_require__(186);
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -60446,7 +60669,7 @@ module.exports = __webpack_require__(184);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(168);
+__webpack_require__(170);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -60454,10 +60677,10 @@ __webpack_require__(168);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(169);
+__webpack_require__(171);
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -60518,7 +60741,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60529,7 +60752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__containers_App__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__ = __webpack_require__(184);
 
 
 
@@ -60549,14 +60772,14 @@ document.getElementById("root"));
 Object(__WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__["a" /* default */])();
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Home__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NotFound__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProductList__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Home__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NotFound__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProductList__ = __webpack_require__(178);
 /* unused harmony reexport App */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__Home__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__NotFound__["a"]; });
@@ -60569,13 +60792,16 @@ Object(__WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__["a" /* default */])(
 
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__styles_css__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__styles_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Slider_slider2__ = __webpack_require__(183);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60583,6 +60809,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -60606,10 +60834,23 @@ var Home = function (_Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        { className: "home-page" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null)
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "bg-3" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Slider_slider2__["a" /* default */], null)
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "container bg-light" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "home-page" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Slider_slider__["a" /* default */], null)
+          )
+        )
       );
     }
   }]);
@@ -60620,15 +60861,27 @@ var Home = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Home);
 
 /***/ }),
-/* 172 */,
-/* 173 */,
 /* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".header-bcolor {\n  background-color: orange;\n}\n.font-size {\n  font-size: 12px;\n}\n.flex-row {\n  flex-direction: row;\n}\n.bg-dark-1 {\n  background-color: #363636;\n}\n\n.bg-dark-2 {\n  background-color: #1d1d1d;\n}\n\n.navbar-nav > ul > li > a {\n  color: #fafafa;\n  padding: 10px;\n  display: block;\n}\n\na {\n  font-size: 12px;\n}\n\n.carousel-control-next {\n  right: -100px;\n}\n\n.carousel-control-prev {\n  left: -100px;\n}\n\n.carousel-control-prev-icon,\n.carousel-control-next-icon {\n  height: 30px;\n  width: 30px;\n  background-size: 100%, 100%;\n  background-image: url(\"http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/muiten_1.png\");\n}\n.carousel-control-next-icon {\n  transform: rotate(180deg);\n}\n\n.carousel.vertical .active {\n  top: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(175);
+var content = __webpack_require__(176);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -60636,7 +60889,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(9)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -60653,21 +60906,21 @@ if(false) {
 }
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(8)(false);
+exports = module.exports = __webpack_require__(7)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".header-bcolor {\n  background-color: orange;\n}\n.font-size {\n  font-size: 12px;\n}\n.flex-row {\n  flex-direction: row;\n}\n.bg-dark-1 {\n  background-color: #363636;\n}\n\n.bg-dark-2 {\n  background-color: #1d1d1d;\n}\n\n.navbar-nav > ul > li > a {\n  color: #fafafa;\n  padding: 10px;\n  display: block;\n}\n\na {\n  font-size: 12px;\n}\n\n.carousel-control-next {\n  right: -100px;\n}\n\n.carousel-control-prev {\n  left: -100px;\n}\n\n/* .carousel-control-prev-icon,\n.carousel-control-next-icon {\n  height: 100px;\n  width: 100px;\n  background-size: 100%, 100%;\n  background-image: none;\n  font-weight: bold;\n  font-size: 70px;\n}\n\n.carousel-control-next-icon:after {\n  content: \">\";\n  color: #404040;\n}\n\n.carousel-control-prev-icon:after {\n  content: \"<\";\n  color: #404040;\n}\n.carousel.vertical .active {\n  top: 0;\n} */\n", ""]);
+exports.push([module.i, ".home-page {\n  position: relative;\n  top: -40px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60718,7 +60971,7 @@ var NotFound = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (NotFound);
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60795,14 +61048,14 @@ var ProductList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (ProductList);
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__styles_css__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__styles_css__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__styles_css__);
 
 
@@ -60823,7 +61076,7 @@ var Header = function Header() {
           { className: "container" },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { className: "row" },
+            { className: "row top-header" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               "div",
               { className: "col-md-2" },
@@ -60831,7 +61084,7 @@ var Header = function Header() {
                 "a",
                 { href: "/" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                  src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/moriko_amban.png",
+                  src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/moriko_text_trang.png",
                   alt: "Morikohouse.com",
                   style: { maxWidth: "100%" }
                 })
@@ -60879,7 +61132,7 @@ var Header = function Header() {
                     { className: "nav-link", href: "/home" },
                     "G\xD3P \xDD ",
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-                    " THAN PHI\u1EC0N"
+                    " PH\u1EA2N \xC1NH"
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -60901,7 +61154,7 @@ var Header = function Header() {
                     { className: "nav-link text-white", href: "#" },
                     "\u0110\u1EB6T H\xC0NG ",
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-                    " (028) 7307 1441"
+                    " 0945663543"
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -60910,9 +61163,8 @@ var Header = function Header() {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "p",
                     { className: "nav-link text-white", href: "#" },
-                    "B\u1EA2O H\xC0NH ",
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-                    " 365 NG\xC0Y"
+                    "LI\xCAN H\u1EC6 ",
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null)
                   )
                 )
               )
@@ -60926,14 +61178,14 @@ var Header = function Header() {
       { className: "navbar-nav bg-2 text-dark" },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "ul",
-        { className: "container list-inline" },
+        { className: "container list-inline m-0-auto" },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "li",
           { className: "list-inline-item" },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
             { to: "/products" },
-            "M\u1EDBi V\u1EC1"
+            "M\u1EDAI V\u1EC0"
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -60978,13 +61230,13 @@ var Header = function Header() {
 /* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(180);
+var content = __webpack_require__(181);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -60992,7 +61244,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(9)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -61009,21 +61261,21 @@ if(false) {
 }
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(8)(false);
+exports = module.exports = __webpack_require__(7)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".header-bcolor {\n  background-color: orange;\n}\n.font-size {\n  font-size: 12px;\n}\n.flex-row {\n  flex-direction: row;\n}\n.bg-dark-1 {\n  background-color: #363636;\n}\n\n.bg-dark-2 {\n  background-color: #1d1d1d;\n}\n\n.navbar-nav > ul > li > a {\n  color: #fafafa;\n  padding: 10px;\n  display: block;\n}\n\na {\n  font-size: 12px;\n}\n", ""]);
+exports.push([module.i, ".font-size {\n  font-size: 12px;\n}\n.flex-row {\n  flex-direction: row;\n}\n\n.navbar-nav > ul > li > a {\n  color: #fafafa;\n  padding: 10px;\n  display: block;\n}\n\n.top-header {\n  height: 70px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61298,7 +61550,128 @@ var Footer = function Footer() {
 /* harmony default export */ __webpack_exports__["a"] = (Footer);
 
 /***/ }),
-/* 182 */
+/* 183 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_css__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Slider2 = function (_React$Component) {
+  _inherits(Slider2, _React$Component);
+
+  function Slider2() {
+    _classCallCheck(this, Slider2);
+
+    return _possibleConstructorReturn(this, (Slider2.__proto__ || Object.getPrototypeOf(Slider2)).apply(this, arguments));
+  }
+
+  _createClass(Slider2, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      // this.props.actions.getProducts();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "div",
+        {
+          id: "carouselExampleIndicators1",
+          className: "carousel container slide p-0",
+          "data-ride": "carousel"
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "ol",
+          { className: "carousel-indicators" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+            "data-target": "#carouselExampleIndicators1",
+            "data-slide-to": "0",
+            className: "active"
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators1", "data-slide-to": "1" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators1", "data-slide-to": "2" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators1", "data-slide-to": "3" })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "carousel-inner" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "carousel-item active" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+              className: "w-100",
+              src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+              alt: "First slide",
+              style: { height: "341px", width: "1140px" }
+            })
+          ),
+          [1, 2, 3].map(function (e) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { key: e, className: "carousel-item" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                className: "w-100",
+                src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
+                alt: "First slide",
+                style: { height: "341px", width: "1140px" }
+              })
+            );
+          })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "a",
+          {
+            className: "carousel-control-prev",
+            href: "#carouselExampleIndicators1",
+            role: "button",
+            "data-slide": "prev"
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-prev-icon", "aria-hidden": "true" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "span",
+            { className: "sr-only" },
+            "Previous"
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "a",
+          {
+            className: "carousel-control-next",
+            href: "#carouselExampleIndicators1",
+            role: "button",
+            "data-slide": "next"
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-next-icon", "aria-hidden": "true" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "span",
+            { className: "sr-only" },
+            "Next"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Slider2;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["a"] = (Slider2);
+
+/***/ }),
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61406,512 +61779,16 @@ function unregister() {
 }
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */,
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */,
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_css__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var Slider = function (_React$Component) {
-  _inherits(Slider, _React$Component);
-
-  function Slider() {
-    _classCallCheck(this, Slider);
-
-    return _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).apply(this, arguments));
-  }
-
-  _createClass(Slider, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      // this.props.actions.getProducts();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        {
-          id: "carouselExampleIndicators",
-          className: "carousel slide container p-3",
-          "data-ride": "carousel"
-        },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "ol",
-          { className: "carousel-indicators" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
-            "data-target": "#carouselExampleIndicators",
-            "data-slide-to": "0",
-            className: "active"
-          }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "1" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "2" })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "title-box mb-3" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "h4",
-            { className: "text-light p-3" },
-            "H\xC0NG M\u1EDAI"
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "carousel-inner" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "carousel-item active" },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "table",
-              { className: "d-block table" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "tbody",
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "tr",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "td",
-                    { className: "border-top-0" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                      className: "w-100",
-                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                      alt: "First slide",
-                      style: { height: "341px", width: "1140px" }
-                    })
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "td",
-                    { className: "border-top-0" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                      className: "w-100",
-                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                      alt: "First slide",
-                      style: { height: "341px", width: "1140px" }
-                    })
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "td",
-                    { className: "border-top-0" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                      className: "w-100",
-                      src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                      alt: "First slide",
-                      style: { height: "341px", width: "1140px" }
-                    })
-                  )
-                )
-              )
-            )
-          ),
-          [1, 2].map(function (e) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "div",
-              { key: e, className: "carousel-item" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "table",
-                { className: "d-block table" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "tbody",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "tr",
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      "td",
-                      { className: "border-top-0" },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                        className: "w-100",
-                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                        alt: "First slide",
-                        style: { height: "341px", width: "1140px" }
-                      })
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      "td",
-                      { className: "border-top-0" },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                        className: "w-100",
-                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                        alt: "First slide",
-                        style: { height: "341px", width: "1140px" }
-                      })
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      "td",
-                      { className: "border-top-0" },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                        className: "w-100",
-                        src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                        alt: "First slide",
-                        style: { height: "341px", width: "1140px" }
-                      })
-                    )
-                  )
-                )
-              )
-            );
-          })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "a",
-          {
-            className: "carousel-control-prev",
-            href: "#carouselExampleIndicators",
-            role: "button",
-            "data-slide": "prev"
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-prev-icon", "aria-hidden": "true" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "span",
-            { className: "sr-only" },
-            "Previous"
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "a",
-          {
-            className: "carousel-control-next",
-            href: "#carouselExampleIndicators",
-            role: "button",
-            "data-slide": "next"
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-next-icon", "aria-hidden": "true" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "span",
-            { className: "sr-only" },
-            "Next"
-          )
-        )
-      );
-    }
-  }]);
-
-  return Slider;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["a"] = (Slider);
-
-/***/ }),
-/* 361 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_css__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var Slider2 = function (_React$Component) {
-  _inherits(Slider2, _React$Component);
-
-  function Slider2() {
-    _classCallCheck(this, Slider2);
-
-    return _possibleConstructorReturn(this, (Slider2.__proto__ || Object.getPrototypeOf(Slider2)).apply(this, arguments));
-  }
-
-  _createClass(Slider2, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      // this.props.actions.getProducts();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        {
-          id: "carouselExampleIndicators",
-          className: "carousel container slide p-3",
-          "data-ride": "carousel"
-        },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "ol",
-          { className: "carousel-indicators" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
-            "data-target": "#carouselExampleIndicators",
-            "data-slide-to": "0",
-            className: "active"
-          }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "1" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", { "data-target": "#carouselExampleIndicators", "data-slide-to": "2" })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "carousel-inner" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "carousel-item active" },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-              className: "w-100",
-              src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-              alt: "First slide",
-              style: { height: "341px", width: "1140px" }
-            })
-          ),
-          [1, 2].map(function (e) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "div",
-              { key: e, className: "carousel-item" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                className: "w-100",
-                src: "http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg",
-                alt: "First slide",
-                style: { height: "341px", width: "1140px" }
-              })
-            );
-          })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "a",
-          {
-            className: "carousel-control-prev",
-            href: "#carouselExampleIndicators",
-            role: "button",
-            "data-slide": "prev"
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-prev-icon", "aria-hidden": "true" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "span",
-            { className: "sr-only" },
-            "Previous"
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "a",
-          {
-            className: "carousel-control-next",
-            href: "#carouselExampleIndicators",
-            role: "button",
-            "data-slide": "next"
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "carousel-control-next-icon", "aria-hidden": "true" }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "span",
-            { className: "sr-only" },
-            "Next"
-          )
-        )
-      );
-    }
-  }]);
-
-  return Slider2;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["a"] = (Slider2);
 
 /***/ })
 /******/ ]);

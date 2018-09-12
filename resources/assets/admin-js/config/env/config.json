@@ -3,5 +3,5 @@
   "adminPrefix": "/admin",
   "storageUrl": "/storage",
   "imageUrl": "/storage/images",
-  "imageDefaultUrl": "/storage/images/default"
+  "imageDefaultUrl": "/storage/images/moriko"
 }

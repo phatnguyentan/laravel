@@ -9,18 +9,19 @@ export default class Slider2 extends React.Component {
   render() {
     return (
       <div
-        id="carouselExampleIndicators"
-        className="carousel container slide p-3"
+        id="carouselExampleIndicators1"
+        className="carousel container slide p-0"
         data-ride="carousel"
       >
         <ol className="carousel-indicators">
           <li
-            data-target="#carouselExampleIndicators"
+            data-target="#carouselExampleIndicators1"
             data-slide-to="0"
             className="active"
           />
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-          <li data-target="#carouselExampleIndicators" data-slide-to="2" />
+          <li data-target="#carouselExampleIndicators1" data-slide-to="1" />
+          <li data-target="#carouselExampleIndicators1" data-slide-to="2" />
+          <li data-target="#carouselExampleIndicators1" data-slide-to="3" />
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -31,7 +32,7 @@ export default class Slider2 extends React.Component {
               style={{ height: "341px", width: "1140px" }}
             />
           </div>
-          {[1, 2].map(e => {
+          {[1, 2, 3].map(e => {
             return (
               <div key={e} className="carousel-item">
                 <img
@@ -46,7 +47,7 @@ export default class Slider2 extends React.Component {
         </div>
         <a
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
+          href="#carouselExampleIndicators1"
           role="button"
           data-slide="prev"
         >
@@ -55,7 +56,7 @@ export default class Slider2 extends React.Component {
         </a>
         <a
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
+          href="#carouselExampleIndicators1"
           role="button"
           data-slide="next"
         >

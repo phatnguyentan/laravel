@@ -1,8 +1,4 @@
-.flex {
-  display: flex;
-  flex-flow: row wrap;
-}
 .home-page {
   position: relative;
-  top: 50px;
+  top: -40px;
 }

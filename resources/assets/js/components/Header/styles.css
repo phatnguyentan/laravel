@@ -1,18 +1,8 @@
-.header-bcolor {
-  background-color: orange;
-}
 .font-size {
   font-size: 12px;
 }
 .flex-row {
   flex-direction: row;
-}
-.bg-dark-1 {
-  background-color: #363636;
-}
-
-.bg-dark-2 {
-  background-color: #1d1d1d;
 }
 
 .navbar-nav > ul > li > a {
@@ -21,6 +11,6 @@
   display: block;
 }
 
-a {
-  font-size: 12px;
+.top-header {
+  height: 70px;
 }
