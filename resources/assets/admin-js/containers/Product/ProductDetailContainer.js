@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import ApiService from "../../services/api-service";
 import ReactQuill from "react-quill";
 import "./styles.css";
 import { ToastContainer, ToastStore } from "react-toasts";

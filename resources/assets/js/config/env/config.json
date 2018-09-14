@@ -1,0 +1,7 @@
+{
+  "apiUrl": "http://localhost:5050/api/frontend",
+  "adminPrefix": "/admin",
+  "storageUrl": "/storage",
+  "imageUrl": "/storage/images",
+  "imageDefaultUrl": "/storage/images/moriko"
+}

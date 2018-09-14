@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Layout;
+namespace App\Http\Controllers\Frontend\Layout;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\ApiController;
@@ -19,13 +19,21 @@ class BannerController extends ApiController
     {
         $this->filter['where'] = array_merge(['core_app_id' => $request->user()->core_app_id, 'type' => 'home_banners'], $this->filter['where']);
         $items = parent::index($request)->items();
-        return response()->json(['data' => array_pop($items)]);
+        $doc = new \DOMDocument();
+        @$doc->loadHTML(array_pop($items)->content);
+
+        $tags = $doc->getElementsByTagName('img');
+        $srcs = [];
+        foreach ($tags as $tag) {
+            array_push($srcs, $tag->getAttribute('src'));
+        }
+        return response()->json(['data' => $srcs]);
     }
 
     public function update(Request $request)
     {
-        // $banners = $request->user()->banners();
-        Layout::updateOrCreate(
+        $layouts = $request->user()->layouts();
+        $layouts->updateOrCreate(
             [
                 'type' => $request[$this->entity]
             ],
@@ -34,6 +42,6 @@ class BannerController extends ApiController
                 'core_app_id' => $request->user()->core_app_id
             ]
         );
-        return response()->json(['data' => $banners]);
+        return response()->json(['data' => $layouts]);
     }
 }

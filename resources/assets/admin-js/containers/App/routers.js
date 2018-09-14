@@ -12,7 +12,7 @@ import PostCategoryContainer from "../Post/PostCategoryContainer";
 import PostCreateContainer from "../Post/PostCreateContainer";
 import PostDetailContainer from "../Post/PostDetailContainer";
 import PostListContainer from "../Post/PostListContainer";
-import BannerContainer from "../Home/BannerContainer";
+import BannerContainer from "../Layout/BannerContainer";
 
 class RoutersComponent extends Component {
   render() {

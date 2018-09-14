@@ -39,9 +39,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post', 'core_app_id', 'core_app_id');
     }
 
-    public function banners()
+    public function layouts()
     {
-        return $this->hasMany('App\Models\Layout', 'core_app_id', 'core_app_id')->where('type', "banners");
+        return $this->hasMany('App\Models\Layout', 'core_app_id', 'core_app_id');
     }
 
     public function products()

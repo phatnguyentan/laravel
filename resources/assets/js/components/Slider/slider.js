@@ -2,102 +2,51 @@ import React from "react";
 import "./styles.css";
 
 export default class Slider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.uuid = "slider" + Date.now();
+  }
   componentWillMount() {
-    // this.props.actions.getProducts();
+    console.log(this.uuid);
   }
 
   render() {
     return (
       <div
-        id="carouselExampleIndicators"
-        className="carousel slide container p-3"
+        id={this.uuid}
+        className="carousel container slide p-0"
         data-ride="carousel"
       >
         <ol className="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            className="active"
-          />
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-          <li data-target="#carouselExampleIndicators" data-slide-to="2" />
-        </ol>
-        <div className="title-box mb-3">
-          <h4 className="text-light p-3">HÀNG MỚI</h4>
-        </div>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <table className="d-block table">
-              <tbody>
-                <tr>
-                  <td className="border-top-0">
-                    <img
-                      className="w-100"
-                      src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                      alt="First slide"
-                      style={{ height: "341px", width: "1140px" }}
-                    />
-                  </td>
-                  <td className="border-top-0">
-                    <img
-                      className="w-100"
-                      src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                      alt="First slide"
-                      style={{ height: "341px", width: "1140px" }}
-                    />
-                  </td>
-                  <td className="border-top-0">
-                    <img
-                      className="w-100"
-                      src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                      alt="First slide"
-                      style={{ height: "341px", width: "1140px" }}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {[1, 2].map(e => {
+          {this.props.objects.map((o, i) => {
             return (
-              <div key={e} className="carousel-item">
-                <table className="d-block table">
-                  <tbody>
-                    <tr>
-                      <td className="border-top-0">
-                        <img
-                          className="w-100"
-                          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                          alt="First slide"
-                          style={{ height: "341px", width: "1140px" }}
-                        />
-                      </td>
-                      <td className="border-top-0">
-                        <img
-                          className="w-100"
-                          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                          alt="First slide"
-                          style={{ height: "341px", width: "1140px" }}
-                        />
-                      </td>
-                      <td className="border-top-0">
-                        <img
-                          className="w-100"
-                          src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8991786664_1670322891.400x400.jpg"
-                          alt="First slide"
-                          style={{ height: "341px", width: "1140px" }}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <li
+                key={i}
+                data-target={"#" + this.uuid}
+                data-slide-to={i}
+                className="active"
+              />
+            );
+          })}
+        </ol>
+        <div className="carousel-inner">
+          {this.props.objects.map((o, i) => {
+            let active = i == 0 ? "active" : "";
+            return (
+              <div key={i} className={"carousel-item " + active}>
+                <img
+                  className={"w-100 "}
+                  src={o}
+                  alt="First slide"
+                  style={{ height: "341px", width: "1140px" }}
+                />
               </div>
             );
           })}
         </div>
         <a
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
+          href={"#" + this.uuid}
           role="button"
           data-slide="prev"
         >
@@ -106,7 +55,7 @@ export default class Slider extends React.Component {
         </a>
         <a
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
+          href={"#" + this.uuid}
           role="button"
           data-slide="next"
         >

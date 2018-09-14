@@ -30,7 +30,7 @@ export default class BannerContainer extends React.Component {
   }
 
   handleChange(value) {
-    // this.setState({ content: value });
+    this.setState({ content: value });
   }
 
   handleSubmit(event) {
@@ -38,8 +38,6 @@ export default class BannerContainer extends React.Component {
     this.props.context.api
       .put(`/layout/banners/home_banners`, this.state)
       .then(res => {
-        console.log(res);
-
         // this.props.history.push("/admin/products/" + res.data.id);
       });
   }

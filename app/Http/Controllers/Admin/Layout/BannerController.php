@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
+use App\Models\Layout;
 
 class BannerController extends ApiController
 {
@@ -24,8 +25,8 @@ class BannerController extends ApiController
 
     public function update(Request $request)
     {
-        // $banners = $request->user()->banners();
-        Layout::updateOrCreate(
+        $layouts = $request->user()->layouts();
+        $layouts->updateOrCreate(
             [
                 'type' => $request[$this->entity]
             ],
@@ -34,6 +35,6 @@ class BannerController extends ApiController
                 'core_app_id' => $request->user()->core_app_id
             ]
         );
-        return response()->json(['data' => $banners]);
+        return response()->json(['data' => $layouts]);
     }
 }

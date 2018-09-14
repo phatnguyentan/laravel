@@ -56,4 +56,7 @@ Route::prefix('frontend')->group(function () {
     Route::resource('product_types', 'Frontend\Product\ProductTypeController')->middleware('auth:api');
     Route::resource('categories', 'Frontend\Category\CategoryController')->middleware('auth:api');
     Route::resource('media', 'Frontend\Media\MediaController')->middleware('auth:api');
+    Route::prefix('layout')->group(function () {
+        Route::resource('banners', 'Frontend\Layout\BannerController')->middleware('auth.admin:api');
+    });
 });

@@ -1,20 +1,61 @@
-import { Config } from "../config/config";
-
 class ApiService {
-  static auth(res) {
+  constructor() {
+    this.hooks = [];
+  }
+
+  setToken(token) {
+    this.token = token;
+  }
+
+  setConfig(config) {
+    this.config = config;
+  }
+
+  addHooks(hook) {
+    this.hooks.push(hook);
+  }
+
+  auth(res) {
     if (!res.ok && res.status == 401) {
       throw new Error("Unauthorized");
     }
   }
-  static get(url) {
-    return fetch(Config.apiUrl + url, {
+
+  getBearer() {
+    return "Bearer " + this.token;
+  }
+
+  runHooksBefore() {
+    this.hooks.forEach(h => {
+      h.before();
+    });
+  }
+
+  runHooksAfter() {
+    this.hooks.forEach(h => {
+      h.after();
+    });
+  }
+
+  isAbsoluteUrl(url) {
+    if (url.match(/^http/g)) {
+      return true;
+    }
+    return false;
+  }
+
+  get(url) {
+    this.runHooksBefore();
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -24,17 +65,20 @@ class ApiService {
       });
   }
 
-  static post(url, body) {
-    return fetch(Config.apiUrl + url, {
+  post(url, body) {
+    this.runHooksBefore();
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -44,17 +88,20 @@ class ApiService {
       });
   }
 
-  static put(url, body) {
-    return fetch(Config.apiUrl + url, {
+  put(url, body) {
+    this.runHooksBefore();
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "put",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -64,16 +111,19 @@ class ApiService {
       });
   }
 
-  static delete(url, body) {
-    return fetch(Config.apiUrl + url, {
+  delete(url, body) {
+    this.runHooksBefore();
+    url = this.isAbsoluteUrl(url) ? url : this.config.apiUrl + url;
+    return fetch(url, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: this.token
+        Authorization: this.getBearer()
       }
     })
       .then(res => {
+        this.runHooksAfter();
         this.auth(res);
         return res.json();
       })
@@ -81,10 +131,6 @@ class ApiService {
         if (err.message == "Unauthorized")
           window.location.replace("/admin/login");
       });
-  }
-
-  static get token() {
-    return "Bearer " + Config.adminToken;
   }
 }
 
