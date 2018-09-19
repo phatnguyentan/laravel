@@ -13,6 +13,6 @@ require("./bootstrap");
  */
 require("./config/config");
 
-require("font-awesome/css/font-awesome.min.css");
+// require("font-awesome/css/font-awesome.min.css");
 
 require("./react");

@@ -5,9 +5,12 @@
 @import "variables";
 
 @import "styles";
+@import "mixins";
+@import "media-display";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/css/font-awesome.min.css";
 
 .navbar-laravel {
   background-color: #fff;

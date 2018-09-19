@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::view('/welcome', 'welcome');
 Route::view('/products', 'welcome');
+Route::view('/products/{route?}', 'welcome')->where('route', '.+');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
