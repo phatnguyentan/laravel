@@ -4,6 +4,8 @@ import NotFound from "../NotFound";
 import ProductList from "../ProductList/product-list";
 import ProductDetail from "../ProductDetail/product-detail";
 import Home from "../Home/home";
+import ProductListNew from "../ProductList/product-list-new";
+import ProductListHot from "../ProductList/product-list-hot";
 
 class RoutersComponent extends Component {
   render() {
@@ -13,6 +15,16 @@ class RoutersComponent extends Component {
           exact
           path={"/"}
           render={props => <Home {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={"/hang-moi"}
+          render={props => <ProductListNew {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={"/ban-chay"}
+          render={props => <ProductListHot {...props} context={this.props} />}
         />
         <Route exact path="/products" component={ProductList} />
         <Route exact path="/products/:id" component={ProductDetail} />

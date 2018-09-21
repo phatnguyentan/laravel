@@ -12,7 +12,7 @@ class Layout extends Component {
           <ApiContext.Consumer>
             {api => (
               <div className="app bg-2">
-                <Header />
+                <Header context={{ api: api, config: config }} />
                 <RoutersComponent api={api} config={config} />
                 <Footer />
               </div>

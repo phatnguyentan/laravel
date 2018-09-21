@@ -16,6 +16,7 @@ class ApiController extends BaseController
 
     protected $entity;
     protected $table;
+    protected $request;
     protected $createFields = array();
     protected $filter = array(
         'limit' => 20,
@@ -49,9 +50,11 @@ class ApiController extends BaseController
     }
 
     // ==========================================
-    protected function list(Request $request)
+    protected function list(Request $request, $query = null)
     {
-        $query = DB::table($this->table);
+        if (!$query) {
+            $query = DB::table($this->table);
+        }
         $where = !empty($request->query('filter')['where']) ? $request->query('filter')['where'] : [];
         $where = array_merge($where, $this->filter['where']);
         $order = $this->filter['order'];
@@ -63,5 +66,21 @@ class ApiController extends BaseController
             $query = $query->orderBy(array_keys($order)[0], $order[array_keys($order)[0]]);
         }
         return $query->paginate($limit);
+    }
+    protected function getWhere(Request $request)
+    {
+        $where = !empty($request->query('filter')['where']) ? $request->query('filter')['where'] : [];
+        $where = array_merge($where, $this->filter['where']);
+        return $where;
+    }
+    protected function getLimit(Request $request)
+    {
+        $limit = !empty($request->query('filter')['limit']) ? $request->query('filter')['limit'] : $this->filter['limit'];
+        return $limit;
+    }
+    protected function getOrder(Request $request)
+    {
+        $order = !empty($request->query('filter')['order']) ? $request->query('filter')['order'] : $this->filter['order'];
+        return $order;
     }
 }

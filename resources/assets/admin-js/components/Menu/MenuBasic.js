@@ -11,30 +11,30 @@ class MenuBasic extends React.Component {
   }
   render() {
     const array = [
-      {
-        id: 1,
-        name: "Post",
-        link: `${this.props.context.config.adminPrefix}/posts`,
-        icon: "fa fa-newspaper-o m-2"
-      },
-      {
-        id: 2,
-        name: "All Posts",
-        parent_id: 1,
-        link: `${this.props.context.config.adminPrefix}/posts`
-      },
-      {
-        id: 3,
-        name: "Create Post",
-        parent_id: 1,
-        link: `${this.props.context.config.adminPrefix}/posts/create`
-      },
-      {
-        id: 4,
-        name: "Category",
-        parent_id: 1,
-        link: `${this.props.context.config.adminPrefix}/post_categories`
-      },
+      // {
+      //   id: 1,
+      //   name: "Post",
+      //   link: `${this.props.context.config.adminPrefix}/posts`,
+      //   icon: "fa fa-newspaper-o m-2"
+      // },
+      // {
+      //   id: 2,
+      //   name: "All Posts",
+      //   parent_id: 1,
+      //   link: `${this.props.context.config.adminPrefix}/posts`
+      // },
+      // {
+      //   id: 3,
+      //   name: "Create Post",
+      //   parent_id: 1,
+      //   link: `${this.props.context.config.adminPrefix}/posts/create`
+      // },
+      // {
+      //   id: 4,
+      //   name: "Category",
+      //   parent_id: 1,
+      //   link: `${this.props.context.config.adminPrefix}/post_categories`
+      // },
       {
         id: 10,
         name: "Product",

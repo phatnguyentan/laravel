@@ -37,10 +37,10 @@ class MediaController extends ApiController
         $image = base64_decode($image);
         $im = new Imagick();
         $im->readimageblob($image);
-        $im->thumbnailImage(800, 600, true);
+        $im->thumbnailImage(1024, 800, true);
         // ==============
         Storage::disk('public')->put($path, $im->getimageblob());
-        $url = config('filesystems.disks.public.url') . "/" . $path;
+        $url = config('filesystems.disks.public.relative.url') . "/" . $path;
 
         $media = $request->user()->media()->create([
             'uuid' => Uuid::generate()->string,

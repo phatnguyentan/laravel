@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::view('/welcome', 'welcome');
 Route::view('/products', 'welcome');
+Route::view('/hang-moi', 'welcome');
+Route::view('/ban-chay', 'welcome');
 Route::view('/products/{route?}', 'welcome')->where('route', '.+');
 Auth::routes();
 

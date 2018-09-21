@@ -20,7 +20,9 @@ class ProductController extends ApiController
 
     public function index(Request $request)
     {
-        return Product::orderBy('id', 'desc')->paginate(15);
+        $this->filter['where'] = array_merge(['published' => true], $this->filter['where']);
+        $order = $this->getOrder($request);
+        return Product::orderBy(array_keys($order)[0], $order[array_keys($order)[0]])->where($this->getWhere($request))->paginate($this->getLimit($request));
     }
 
     public function store(Request $request)

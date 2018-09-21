@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class ProductList extends Component {
-  componentWillMount() {
-    // this.props.actions.getProducts();
+export default class ProductList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { objects: [] };
   }
 
   render() {
-    const array = [1, 2, 3, 4, 5, 6, 7, 8];
     return (
       <div className="container bg-light">
         <div className="flex row">
-          {array.map((it, i) => (
+          {this.state.objects.map((ob, i) => (
             <div key={i.toString()} className="col-sm-3 pb-4">
               <div className="bg-light p-3 rounded text-dark">
-                <Link to="products/id">
+                <Link to={"products/" + ob.id}>
                   <img
                     className="w-100"
-                    src="http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/9029600796_1670322891.400x400.jpg"
+                    src={ob.image}
                     alt=""
                     style={{ width: "200px", height: "300px" }}
                   />
                   <div className="row">
-                    <p className="col-sm-8">Áo Thun Nam / 0015488</p>
+                    <p className="col-sm-8">{ob.name}</p>
                     <p className="col-sm-4">100k</p>
                   </div>
                 </Link>
@@ -34,5 +34,3 @@ class ProductList extends Component {
     );
   }
 }
-
-export default ProductList;

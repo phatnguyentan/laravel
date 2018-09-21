@@ -38,7 +38,7 @@ a {
   height: 30px;
   width: 30px;
   background-size: 100%, 100%;
-  background-image: url("http://localhost:5050/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/muiten_1.png");
+  background-image: url("/storage/images/moriko/muiten_1.png");
 }
 .carousel-control-next-icon {
   transform: rotate(180deg);

@@ -59,7 +59,7 @@ class CategoryController extends ApiController
             'name' => $request['name'],
             'parent_id' => $request['parent_id'],
             'published' => $request['published'],
-            'slug' => $slugify->slugify($request['title'])
+            'slug' => $slugify->slugify($request['name'])
         ]);
         return response()->json(['data' => $category]);
     }
