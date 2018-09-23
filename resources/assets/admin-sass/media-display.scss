@@ -22,6 +22,22 @@
     }
   }
 
+  .removeable {
+    .fa-close {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      display: block;
+      background-color: red;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: white;
+      text-align: center;
+      line-height: 20px;
+    }
+  }
+
   .media-selected {
     border: #509ae3 1px solid;
     .fa-check {

@@ -38,3 +38,10 @@ body {
 .m-0-auto {
   margin: 0 auto;
 }
+
+.btn-upload {
+  @extend .btn;
+  @extend .btn-light;
+  @extend .border;
+  @extend .border-secondary;
+}

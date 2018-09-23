@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import NotFound from "../NotFound";
 import Login from "../../components/Login/Login";
-import ProductTypes from "../../components/ProductTypes";
 import MediaContainer from "../Media/MediaContainer";
 import ProductCreateContainer from "../Product/ProductCreateContainer";
 import ProductListContainer from "../Product/ProductListContainer";
@@ -22,7 +21,7 @@ class RoutersComponent extends Component {
           exact
           path={this.props.config.adminPrefix}
           render={props => (
-            <PostListContainer {...props} context={this.props} />
+            <ProductListContainer {...props} context={this.props} />
           )}
         />
 
@@ -86,11 +85,6 @@ class RoutersComponent extends Component {
           render={props => (
             <ProductCategoryContainer {...props} context={this.props} />
           )}
-        />
-        <Route
-          exact
-          path={this.props.config.adminPrefix + "/products_type"}
-          render={props => <ProductTypes {...props} context={this.props} />}
         />
         <Route
           exact

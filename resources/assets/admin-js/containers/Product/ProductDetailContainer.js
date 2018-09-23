@@ -14,6 +14,9 @@ export default class ProductDetailContainer extends ProductCreateContainer {
         this.setState({
           object: res.data
         });
+        if (res.data.product_types && res.data.product_types.length == 0) {
+          res.data.product_types = this.state.product_types;
+        }
         this.setState({
           ...this.state,
           ...res.data

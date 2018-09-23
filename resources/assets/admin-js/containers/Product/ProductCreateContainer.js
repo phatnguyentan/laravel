@@ -5,29 +5,44 @@ import "./styles.css";
 import { ToastContainer, ToastStore } from "react-toasts";
 import MediaUploadModalContainer from "../Media/MediaUploadModalContainer";
 import ImageResize from "quill-image-resize-module";
+import { ButtonUploadFill } from "../../components/Buttons/Upload/button-upload-fill.";
+import ProductTypesCreate from "../../components/ProductTypes/create";
 Quill.register("modules/imageResize", ImageResize);
-const quillModules = {
-  imageResize: {}
-};
 class ProductCreateContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.quillModules = {
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["formula", "link", "image"],
+          ["clean"]
+        ],
+        handlers: { image: this.openProductMedia.bind(this) }
+      },
+      imageResize: {}
+    };
     this.state = {
       object: {},
       name: "",
       description: "",
-      media: "",
+      media: [],
       categories: [],
       category_id: 0,
       published: false,
       new: true,
       hot: 3,
+      product_types: [{ description: "1 - Sản phẩm" }],
+      product_type: {},
+      modalTypeIsOpen: false,
       mediaIsOpen: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  openPostMedia() {
+
+  openProductMedia() {
     this.setState({ mediaIsOpen: true, insertMedia: false });
   }
   openMediaMedia() {
@@ -67,18 +82,16 @@ class ProductCreateContainer extends React.Component {
   }
 
   onInsert(objects) {
-    let strImage = "";
-    objects.forEach(ob => {
-      strImage += '<img src="' + ob.url + '">';
-    });
+    let media = this.state.media || [];
+    media = [...objects, ...media];
     if (this.state.insertMedia) {
       this.setState({
-        media: this.state.media + strImage,
+        media: media,
         mediaIsOpen: false
       });
     } else {
       this.setState({
-        description: this.state.description + strImage,
+        // description: media,
         mediaIsOpen: false
       });
     }
@@ -96,103 +109,114 @@ class ProductCreateContainer extends React.Component {
               <div className="wrapper row">
                 <div className="preview col-md-6">
                   <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1">
-                      <img src="http://placekitten.com/400/252" />
-                    </div>
-                    <div className="tab-pane" id="pic-2">
-                      <img src="http://placekitten.com/400/252" />
-                    </div>
-                    <div className="tab-pane" id="pic-3">
-                      <img src="http://placekitten.com/400/252" />
-                    </div>
-                    <div className="tab-pane" id="pic-4">
-                      <img src="http://placekitten.com/400/252" />
-                    </div>
-                    <div className="tab-pane" id="pic-5">
-                      <img src="http://placekitten.com/400/252" />
-                    </div>
+                    <button
+                      type="button"
+                      className="btn-upload w-100 h-100 mh-20"
+                      onClick={this.openMediaMedia.bind(this)}
+                    >
+                      <i className="fa fa-plus-circle m-1" />
+                      Image
+                    </button>
                   </div>
-                  <ul className="preview-thumbnail nav nav-tabs">
-                    <li className="active">
-                      <a data-target="#pic-1" data-toggle="tab">
-                        <img src="http://placekitten.com/200/126" />
-                      </a>
-                    </li>
-                    <li>
-                      <a data-target="#pic-2" data-toggle="tab">
-                        <img src="http://placekitten.com/200/126" />
-                      </a>
-                    </li>
-                    <li>
-                      <a data-target="#pic-3" data-toggle="tab">
-                        <img src="http://placekitten.com/200/126" />
-                      </a>
-                    </li>
-                    <li>
-                      <a data-target="#pic-4" data-toggle="tab">
-                        <img src="http://placekitten.com/200/126" />
-                      </a>
-                    </li>
-                    <li>
-                      <a data-target="#pic-5" data-toggle="tab">
-                        <img src="http://placekitten.com/200/126" />
-                      </a>
-                    </li>
+                  <ul className="preview-thumbnail nav nav-tabs no-gutters media-display">
+                    {this.state.media.map((e, i) => {
+                      return (
+                        <li key={i} className="col-3 removeable">
+                          <i
+                            className="fa fa-close clickable"
+                            onClick={e => {
+                              this.setState({
+                                media: this.state.media.filter(
+                                  (m, j) => i !== j
+                                )
+                              });
+                            }}
+                          />
+                          <img className="w-100" src={e.url} />
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className="details col-md-6">
-                  <h3 className="product-title">men's shoes fashion</h3>
+                  <div className="form-group">
+                    <div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={this.state.name}
+                        onChange={this.handleInputChange.bind(this)}
+                        className="form-control"
+                        placeholder="Product Name"
+                      />
+                    </div>
+                  </div>
                   <div className="rating">
                     <div className="stars">
-                      <span className="fa fa-star checked" />
-                      <span className="fa fa-star checked" />
-                      <span className="fa fa-star checked" />
                       <span className="fa fa-star" />
                       <span className="fa fa-star" />
+                      <span className="fa fa-star" />
+                      <span className="fa fa-star" />
+                      <span className="fa fa-star-o" />
                     </div>
-                    <span className="review-no">41 reviews</span>
                   </div>
-                  <p className="product-description">
-                    Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
-                    cubilia sem sem! Repudiandae et! Massa senectus enim minim
-                    sociosqu delectus posuere.
-                  </p>
-                  <h4 className="price">
-                    current price: <span>$180</span>
-                  </h4>
+                  <div className="form-group">
+                    <label className="control-label m-1">Description</label>
+                    <div className="">
+                      <ReactQuill
+                        modules={this.quillModules}
+                        theme="snow"
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                  <label className="control-label m-1">Product Types</label>
+                  <div className="form-group">
+                    <ProductTypesCreate
+                      product_type={this.state.product_type}
+                      modalIsOpen={this.state.modalTypeIsOpen}
+                      closeModal={e => {
+                        this.setState({ modalTypeIsOpen: false });
+                      }}
+                      afterOpen={e => {
+                        // this.setState({ modalTypeIsOpen: false });
+                      }}
+                    />
+                    <button
+                      className="btn btn-default m-1"
+                      type="button"
+                      onClick={e => {
+                        this.setState({
+                          modalTypeIsOpen: true,
+                          product_type: {}
+                        });
+                      }}
+                    >
+                      <i className="fa fa-plus" />
+                    </button>
+                    {this.state.product_types.map((e, i) => {
+                      return (
+                        <button
+                          key={i}
+                          className="btn btn-default"
+                          type="button"
+                          onClick={e => {
+                            this.setState({
+                              modalTypeIsOpen: true,
+                              product_type: this.state.product_types[i]
+                            });
+                          }}
+                        >
+                          {e.description}
+                        </button>
+                      );
+                    })}
+                  </div>
                   <p className="vote">
                     <strong>91%</strong> of buyers enjoyed this product!{" "}
                     <strong>(87 votes)</strong>
                   </p>
-                  <h5 className="sizes">
-                    sizes:
-                    <span className="size" data-toggle="tooltip" title="small">
-                      s
-                    </span>
-                    <span className="size" data-toggle="tooltip" title="medium">
-                      m
-                    </span>
-                    <span className="size" data-toggle="tooltip" title="large">
-                      l
-                    </span>
-                    <span
-                      className="size"
-                      data-toggle="tooltip"
-                      title="xtra large"
-                    >
-                      xl
-                    </span>
-                  </h5>
-                  <h5 className="colors">
-                    colors:
-                    <span
-                      className="color orange not-available"
-                      data-toggle="tooltip"
-                      title="Not In store"
-                    />
-                    <span className="color green" />
-                    <span className="color blue" />
-                  </h5>
                   <div className="action">
                     <button
                       className="add-to-cart btn btn-default"
@@ -214,7 +238,7 @@ class ProductCreateContainer extends React.Component {
           <button
             type="button"
             className="btn btn-default m-1"
-            onClick={this.openPostMedia.bind(this)}
+            onClick={this.openProductMedia.bind(this)}
           >
             <i className="fa fa-plus-circle m-1" />
             Media
@@ -222,7 +246,7 @@ class ProductCreateContainer extends React.Component {
           <label className="col-sm-2 control-label">Description</label>
           <div className="col-sm-12">
             <ReactQuill
-              modules={quillModules}
+              modules={this.quillModules}
               theme="snow"
               value={this.state.description}
               onChange={this.handleChange}

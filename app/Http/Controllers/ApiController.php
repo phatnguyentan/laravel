@@ -29,13 +29,34 @@ class ApiController extends BaseController
         return $this->list($request);
     }
 
-    public function store(Request $request)
+    public function storeList(Request $request)
     {
-
+        $items = [];
+        foreach ($request->data as $data) {
+            $request = new Request();
+            $request->replace($data);
+            array_push($items, $this->updateOrCreate($request));
+        }
+        $func = function ($value) {
+            return $value->id;
+        };
+        $data = DB::table($this->table)->whereIn("id", array_map($func, $items));
+        return $data->paginate($this->getLimit($request));
     }
-    public function upadte(Request $request)
-    {
 
+    public function updateList(Request $request)
+    {
+        $items = [];
+        foreach ($request->data as $data) {
+            $request = new Request();
+            $request->replace($data);
+            array_push($items, $this->updateOrCreate($request));
+        }
+        $func = function ($value) {
+            return $value->id;
+        };
+        $data = DB::table($this->table)->whereIn("id", array_map($func, $items));
+        return $data->paginate($this->getLimit($request));
     }
 
     public function show(Request $request)
@@ -67,12 +88,14 @@ class ApiController extends BaseController
         }
         return $query->paginate($limit);
     }
+
     protected function getWhere(Request $request)
     {
         $where = !empty($request->query('filter')['where']) ? $request->query('filter')['where'] : [];
         $where = array_merge($where, $this->filter['where']);
         return $where;
     }
+
     protected function getLimit(Request $request)
     {
         $limit = !empty($request->query('filter')['limit']) ? $request->query('filter')['limit'] : $this->filter['limit'];

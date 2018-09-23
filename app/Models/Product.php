@@ -9,19 +9,31 @@ class Product extends Model
     //
     protected $guarded = ['id'];
 
-    protected $appends = array('image');
+    // protected $appends = array('image');
 
-    public function getImageAttribute()
+    // public function getImageAttribute()
+    // {
+    //     $doc = new \DOMDocument();
+    //     @$doc->loadHTML($this->media);
+
+    //     $tags = $doc->getElementsByTagName('img');
+    //     $srcs = [];
+    //     foreach ($tags as $tag) {
+    //         array_push($srcs, $tag->getAttribute('src'));
+    //     }
+    //     return array_pop($srcs);
+    // }
+    public function getMediaAttribute($value)
     {
-        $doc = new \DOMDocument();
-        @$doc->loadHTML($this->media);
-
-        $tags = $doc->getElementsByTagName('img');
-        $srcs = [];
-        foreach ($tags as $tag) {
-            array_push($srcs, $tag->getAttribute('src'));
+        if (empty($value)) {
+            $value = "[]";
         }
-        return array_pop($srcs);
+        return json_decode($value);
+    }
+
+    public function product_types()
+    {
+        return $this->hasMany('App\Models\ProductType', 'product_id');
     }
 }
  

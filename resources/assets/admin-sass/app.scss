@@ -4,14 +4,14 @@
 // Variables
 @import "variables";
 
-@import "styles";
-@import "media-display";
-
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 // require("font-awesome/css/font-awesome.min.css");
 @import "~font-awesome/css/font-awesome.min.css";
 
+@import "mixins";
+@import "styles";
+@import "media-display";
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

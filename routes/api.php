@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::post('products/{product}/duplicate', 'Admin\Product\ProductController@duplicate')->middleware('auth.admin:api');
 
     Route::resource('product_types', 'Admin\Product\ProductTypeController')->middleware('auth.admin:api');
+    Route::post('product_types/list', 'Admin\Product\ProductTypeController@storeList')->middleware('auth.admin:api');
+
     Route::resource('categories', 'Admin\Category\CategoryController')->middleware('auth.admin:api');
     Route::post('categories/{category}/duplicate', 'Admin\Category\CategoryController@duplicate')->middleware('auth.admin:api');
 

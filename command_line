@@ -9,6 +9,7 @@ php artisan migrate:fresh --seed
 # Migrate
 php artisan migrate
 php artisan migrate:refresh --step=2 #back 2 steps
+php artisan migrate:rollback
 
 # XDebug not working
 php artisan clear-compiled

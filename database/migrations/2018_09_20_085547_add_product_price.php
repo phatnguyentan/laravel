@@ -15,10 +15,10 @@ class AddProductPrice extends Migration
     {
         //
         Schema::table('products', function ($table) {
-            $table->integer('price');
-            $table->integer('real_price');
-            $table->integer('discount');
-            $table->string('price_unit');
+            $table->integer('price')->nullable();
+            $table->integer('real_price')->nullable();
+            $table->integer('discount')->nullable();
+            $table->string('price_unit')->nullable();
         });
     }
 
