@@ -85,55 +85,51 @@ export default class ProductTypesCreate extends React.Component {
               placeholder="Quality"
             />
           </div>
-          <div className="form-group row">
-            <div className="col-4">
-              <label className="pull-left">Price</label>
-              <input
-                name="price"
-                type="number"
-                value={this.state.price}
-                onChange={this.handleInputChange.bind(this)}
-                className="form-control"
-                placeholder="Price"
-              />
-            </div>
-            <div className="col-4">
-              <label className="pull-left">Real Price</label>
-              <input
-                name="real_price"
-                type="number"
-                value={this.state.real_price}
-                onChange={this.handleInputChange.bind(this)}
-                className="form-control"
-                placeholder="Real Price"
-              />
-            </div>
-            <div className="col-4">
-              <label className="pull-left">Discount</label>
-              <input
-                name="discount"
-                type="number"
-                value={this.state.discount}
-                onChange={this.handleInputChange.bind(this)}
-                className="form-control"
-                placeholder="Discount"
-              />
-              %
-            </div>
+          <div className="form-group">
+            <label>Price</label>
+            <input
+              name="price"
+              type="number"
+              value={this.state.price}
+              onChange={this.handleInputChange.bind(this)}
+              className="form-control"
+              placeholder="Price"
+            />
           </div>
-          <div className="form-group row">
-            <div className="col-4">
-              <label className="pull-left">Price Unit</label>
-              <select
-                name="price_unit"
-                className="form-control"
-                name="price_unit"
-                value={this.state.price_unit}
-                onChange={this.handleInputChange.bind(this)}
-              >
-                <option value="vnd">VND</option>
-              </select>
-            </div>
+          <div className="form-group">
+            <label>Discount</label>
+            <input
+              name="discount"
+              type="number"
+              value={this.state.discount}
+              onChange={this.handleInputChange.bind(this)}
+              className="form-control"
+              placeholder="Discount"
+            />
+            %
+          </div>
+          <div className="form-group">
+            <label>Real Price</label>
+            <input
+              name="real_price"
+              type="number"
+              value={this.state.real_price}
+              onChange={this.handleInputChange.bind(this)}
+              className="form-control"
+              placeholder="Real Price"
+            />
+          </div>
+          <div className="form-group">
+            <label>Price Unit</label>
+            <select
+              name="price_unit"
+              className="form-control"
+              name="price_unit"
+              value={this.state.price_unit}
+              onChange={this.handleInputChange.bind(this)}
+            >
+              <option value="vnd">VND</option>
+            </select>
           </div>
           <button
             className="btn m-2"

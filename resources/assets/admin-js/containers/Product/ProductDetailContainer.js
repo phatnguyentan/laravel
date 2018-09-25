@@ -8,6 +8,10 @@ import ProductCreateContainer from "./ProductCreateContainer";
 
 export default class ProductDetailContainer extends ProductCreateContainer {
   componentDidMount() {
+    this.load();
+  }
+
+  load() {
     this.props.context.api
       .get(`/products/${this.props.match.params.id}`)
       .then(res => {

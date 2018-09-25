@@ -18,27 +18,31 @@ const Footer = () => (
               <span>Chất lượng</span>
             </p>
             <p>
-              YaMe cam kết chất lượng cho tất cả sản phẩm bán tại cửa hàng YaMe
-              bằng chính sách bảo hành 365 ngày và chăm sóc trọn đời sau khi hết
-              bảo hành.
+              Moriko House cam kết chất lượng cho tất cả sản phẩm bán tại cửa
+              hàng Moriko House
             </p>
             <p>
               <span>Phục vụ</span>
               <br />
             </p>
             <p>
-              YaMe cam kết chất lượng phục vụ tốt nhất, chuyên nghiệp nhất cho
-              mọi khách hàng bằng chính sách hoàn tiền và tặng quà nếu nhân viên
-              phục vụ quí khách không chu đáo.
+              Moriko House cam kết chất lượng phục vụ tốt nhất, chuyên nghiệp
+              nhất cho mọi khách hàng bằng chính sách hoàn tiền và tặng quà nếu
+              nhân viên phục vụ quí khách không chu đáo.
             </p>
 
             <p>
               <span>Hỗ trợ</span>
             </p>
             <p>
-              Nếu bạn gặp rắc rối về sản phẩm hay chất lượng dịch vụ của YaMe,
-              hãy gọi ngay đến số 090909.1441 hoặc inbox ở fanpage
-              <a href="//facebook.com/www.yame.vn">facebook.com/www.yame.vn</a>
+              Nếu bạn gặp rắc rối về sản phẩm hay chất lượng dịch vụ của Moriko
+              House, hãy gọi ngay đến số 0945663543 hoặc inbox ở fanpage
+              <a
+                className="m-1"
+                href="https://www.facebook.com/Moriko-251386235641902/"
+              >
+                https://www.facebook.com/Moriko-251386235641902
+              </a>
             </p>
           </div>
         </div>
@@ -48,16 +52,15 @@ const Footer = () => (
               <p>&nbsp;</p>
               <div className="left-aligned">
                 <p>Đặt hàng và thu tiền tận nơi toàn quốc</p>
-                <h5 className="boxed-content-title">(028) 7307 1441</h5>
+                {/* <h5 className="boxed-content-title">(028) 7307 1441</h5> */}
               </div>
               <br />
               <h4>Thông tin</h4>
               <ul>
                 <li>
-                  <a href="/page/gioi-thieu-ve-yame">Giới thiệu về YaMe.vn</a>
-                </li>
-                <li>
-                  <a href="/page/tuyen-dung">Tuyển dụng</a>
+                  <a href="/page/gioi-thieu-ve-yame">
+                    Giới thiệu về Moriko House
+                  </a>
                 </li>
                 <li>
                   <a

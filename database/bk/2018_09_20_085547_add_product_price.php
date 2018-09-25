@@ -13,12 +13,12 @@ class AddProductPrice extends Migration
      */
     public function up()
     {
-        //
         Schema::table('products', function ($table) {
-            $table->integer('price')->nullable();
-            $table->integer('real_price')->nullable();
-            $table->integer('discount')->nullable();
-            $table->string('price_unit')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('real_price')->default(0);
+            $table->integer('discount')->default(0);
+            $table->integer('quality')->default(0);
+            $table->string('price_unit')->default('VND');
         });
     }
 

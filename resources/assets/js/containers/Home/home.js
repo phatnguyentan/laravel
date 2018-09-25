@@ -17,13 +17,13 @@ class Home extends Component {
     });
     this.props.context.api.get(`/products?filter[where][new]=1`).then(res => {
       this.setState({
-        new_products: res.data.map(d => d.image)
+        new_products: res.data.map(d => d.media[0].url)
       });
     });
     this.props.context.api
       .get(`/products?filter[order][hot]=desc`)
       .then(res => {
-        this.setState({ hot_products: res.data.map(d => d.image) });
+        this.setState({ hot_products: res.data.map(d => d.media[0].url) });
       });
   }
 

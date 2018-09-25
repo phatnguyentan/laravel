@@ -31,6 +31,7 @@ class ProductTypeController extends ApiController
             'real_price' => $request['real_price'],
             'price' => $request['price'],
             'discount' => $request['discount'],
+            'quality' => $request['quality'],
             'price_unit' => $request['price_unit']
         ]);
         return $item;

@@ -206,7 +206,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +215,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_09_12_102033_create_core_applications_table',1),(2,'2014_10_12_000000_create_users_table',1),(3,'2014_10_12_100000_create_password_resets_table',1),(4,'2016_06_01_000001_create_oauth_auth_codes_table',1),(5,'2016_06_01_000002_create_oauth_access_tokens_table',1),(6,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(7,'2016_06_01_000004_create_oauth_clients_table',1),(8,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(9,'2018_08_11_084401_create_products_table',1),(10,'2018_08_11_085044_create_orders_table',1),(11,'2018_08_11_085055_create_order_products_table',1),(12,'2018_08_13_073200_create_posts_table',1),(13,'2018_08_13_073219_create_category_table',1),(14,'2018_08_13_073933_create_roles_table',1),(15,'2018_08_13_074010_create_permissions_table',1),(16,'2018_08_13_074101_create_user_roles_table',1),(17,'2018_08_13_074117_create_role_permissions_table',1),(18,'2018_08_13_102150_create_oauth_application_tokens_table',1),(19,'2018_08_13_102355_create_core_application_users_table',1),(20,'2018_08_17_090203_create_product_types_table',1),(21,'2018_08_17_090215_create_product_type_attrs_table',1),(22,'2018_08_17_093559_create_attributes_table',1),(23,'2018_08_20_134640_create_media_table',1),(24,'2018_09_07_075216_create_layouts_table',2),(25,'2018_09_19_141210_add_more_product',3);
+INSERT INTO `migrations` VALUES (1,'2014_09_12_102033_create_core_applications_table',1),(2,'2014_10_12_000000_create_users_table',1),(3,'2014_10_12_100000_create_password_resets_table',1),(4,'2016_06_01_000001_create_oauth_auth_codes_table',1),(5,'2016_06_01_000002_create_oauth_access_tokens_table',1),(6,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(7,'2016_06_01_000004_create_oauth_clients_table',1),(8,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(9,'2018_08_11_084401_create_products_table',1),(10,'2018_08_11_085044_create_orders_table',1),(11,'2018_08_11_085055_create_order_products_table',1),(12,'2018_08_13_073200_create_posts_table',1),(13,'2018_08_13_073219_create_category_table',1),(14,'2018_08_13_073933_create_roles_table',1),(15,'2018_08_13_074010_create_permissions_table',1),(16,'2018_08_13_074101_create_user_roles_table',1),(17,'2018_08_13_074117_create_role_permissions_table',1),(18,'2018_08_13_102150_create_oauth_application_tokens_table',1),(19,'2018_08_13_102355_create_core_application_users_table',1),(20,'2018_08_17_090203_create_product_types_table',1),(21,'2018_08_17_090215_create_product_type_attrs_table',1),(22,'2018_08_17_093559_create_attributes_table',1),(23,'2018_08_20_134640_create_media_table',1),(24,'2018_09_07_075216_create_layouts_table',2),(25,'2018_09_19_141210_add_more_product',3),(26,'2018_09_20_085547_add_product_price',4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,18 +535,6 @@ LOCK TABLES `posts` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `product_type_attrs`
---
-
-DROP TABLE IF EXISTS `product_type_attrs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_type_attrs`
---
---
 -- Table structure for table `product_types`
 --
 
@@ -556,12 +544,12 @@ DROP TABLE IF EXISTS `product_types`;
 CREATE TABLE `product_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `real_price` int(11) DEFAULT 0,
-  `price` int(11) DEFAULT 0,
-  `discount` int(11) DEFAULT 0,
-  `quality` int(11) DEFAULT 0,
-  `price_unit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT "VND",
+  `description` text COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
+  `real_price` int(11) NULL DEFAULT '0',
+  `price` int(11) NULL DEFAULT '0',
+  `discount` int(11) NULL DEFAULT '0',
+  `quality` int(11) NULL DEFAULT '0',
+  `price_unit` varchar(255) COLLATE utf8mb4_unicode_ci NULL DEFAULT 'vnd',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -602,6 +590,11 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `hot` int(11) NOT NULL DEFAULT '3',
   `new` tinyint(1) NOT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `real_price` int(11) NOT NULL DEFAULT '0',
+  `discount` int(11) NOT NULL DEFAULT '0',
+  `quality` int(11) NOT NULL DEFAULT '0',
+  `price_unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vnd',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -612,7 +605,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (6,'3a18c7c0-bbfa-11e8-a42a-8b3b982b93d6','Váy Lolita',1,1,0,NULL,'vay-lolita','+ Chất liệu : Vải cát trắng+ Màu sắc : Trắng+ Thích hợp cho các bạn thích style Nhật Bản đáng yêu. Màu sắc t...','<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Chất liệu : Vải cát trắng</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Màu sắc : Trắng</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Thích hợp cho các bạn thích style Nhật Bản đáng yêu. Màu sắc tươi tắn, kín đáo nên vô tư mặc đi học nhe các bạn. From áo rộng, to, có dây buộc điều chỉnh. Các bạn 60kg cũng mặc vừa luôn ạ.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Giá : 300 K</span></p><p><br></p><p><br></p>','<p><br></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/TB2u538s4WYBuNjy1zkXXXGGpXa_!!408034679.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/TB208wns1uSBuNjSsziXXbq8pXa_!!408034679.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/TB26MDRs7KWBuNjy1zjXXcOypXa_!!408034679.jpg\"></p>',0,1,'2018-09-19 03:53:22','2018-09-19 03:56:49',3,1),(7,'c9a40810-bc13-11e8-84ba-85ce9a9844c4','Chó Corgi',1,1,14,NULL,'cho-corgi','Chó Corgi 35cm - 190KChó Corgi 50cm - 270KChó Corgi 65cm - 320KChất liệu : Bông mềm&nbsp;Màu : Nâu','<p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 35cm - 190K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 50cm - 270K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 65cm - 320K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chất liệu : Bông mềm&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Màu : Nâu</span></p>','<p><br></p><p><br></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/TB2NYBygJbJ8KJjy1zjXXaqapXa_!!2398596044.jpg\"></p><p><br></p><p><br></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/7432485099_887932983.400x400.jpg\"></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/TB2Ajz4fz3z9KJjy0FmXXXiwXXa_!!2398596044.jpg\"></p>',1,1,'2018-09-19 06:56:20','2018-09-20 00:39:21',5,1),(8,'cb6347d0-bc13-11e8-bc1e-8b899d864535','Gấu Panda',1,1,14,NULL,'gau-panda','Gấu Panda 25cm - 100KGấu Panda 35cm - 180KGấu Panda 45cm - 220KGấu Panda 55cm - 280KChất liệu : Bông mềmMàu : Trắng đenHiện shop có 2 mẫu cười t...','<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 25cm - 100K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 35cm - 180K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 45cm - 220K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 55cm - 280K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Chất liệu : Bông mềm</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Màu : Trắng đen</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Hiện shop có 2 mẫu cười tít mắt và cười hở miệng</span></p>','<p><br></p><p><br></p><p><br></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/4226982503_478221028.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/4226964978_478221028.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/1847397090_478221028.400x400.jpg\"></p>',1,1,'2018-09-19 06:56:23','2018-09-20 00:44:14',3,1),(9,'d68e2f70-bc13-11e8-83b1-5d5efa505cbf','Hamster Cute',1,1,14,NULL,'hamster-cute','Hamster Cute 30cm - 230KHamster Cute 40cm - 260KChất liệu : Bông mềm&nbsp;Màu sắc : Xám, Nâu','<p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Hamster Cute 30cm - 230K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Hamster Cute 40cm - 260K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chất liệu : Bông mềm&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Màu sắc : Xám, Nâu</span></p><p><br></p><p><br></p>','<p><br></p><p><br></p><p><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8727254353_2025844726.400x400.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8692044880_2025844726.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8711416286_2025844726.400x400.jpg\"><img src=\"/storage/images/40837a70-a5f0-11e8-b762-513c5b8cd70c/8727224479_2025844726.jpg\"></p>',1,1,'2018-09-19 06:56:42','2018-09-20 00:43:59',4,1);
+INSERT INTO `products` VALUES (6,'3a18c7c0-bbfa-11e8-a42a-8b3b982b93d6','Váy Lolita',1,1,0,NULL,'vay-lolita','+ Chất liệu : Vải cát trắng+ Màu sắc : Trắng+ Thích hợp cho các bạn thích style Nhật Bản đáng yêu. Màu sắc t...','<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Chất liệu : Vải cát trắng</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Màu sắc : Trắng</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Thích hợp cho các bạn thích style Nhật Bản đáng yêu. Màu sắc tươi tắn, kín đáo nên vô tư mặc đi học nhe các bạn. From áo rộng, to, có dây buộc điều chỉnh. Các bạn 60kg cũng mặc vừa luôn ạ.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">+ Giá : 300 K</span></p><p><br></p><p><br></p>','',0,1,'2018-09-19 03:53:22','2018-09-19 03:56:49',3,1,0,0,0,0,'vnd'),(7,'c9a40810-bc13-11e8-84ba-85ce9a9844c4','Chó Corgi',1,1,14,NULL,'cho-corgi','Chó Corgi 35cm - 190KChó Corgi 50cm - 270KChó Corgi 65cm - 320KChất liệu : Bông mềm&nbsp;Màu : Nâu','<p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 35cm - 190K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 50cm - 270K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chó Corgi 65cm - 320K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chất liệu : Bông mềm&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Màu : Nâu</span></p>','',1,1,'2018-09-19 06:56:20','2018-09-20 00:39:21',5,1,0,0,0,0,'vnd'),(8,'cb6347d0-bc13-11e8-bc1e-8b899d864535','Gấu Panda',1,1,14,NULL,'gau-panda','Gấu Panda 25cm - 100KGấu Panda 35cm - 180KGấu Panda 45cm - 220KGấu Panda 55cm - 280KChất liệu : Bông mềmMàu : Trắng đenHiện shop có 2 mẫu cười t...','<p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 25cm - 100K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 35cm - 180K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 45cm - 220K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Gấu Panda 55cm - 280K</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Chất liệu : Bông mềm</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Màu : Trắng đen</span></p><p><span style=\"background-color: rgb(255, 255, 255); color: rgb(29, 33, 41);\">Hiện shop có 2 mẫu cười tít mắt và cười hở miệng</span></p>','',1,1,'2018-09-19 06:56:23','2018-09-20 00:44:14',3,1,0,0,0,0,'vnd'),(9,'d68e2f70-bc13-11e8-83b1-5d5efa505cbf','Hamster Cute',1,1,14,NULL,'hamster-cute','Hamster Cute 30cm - 230KHamster Cute 40cm - 260KChất liệu : Bông mềm&nbsp;Màu sắc : Xám, Nâu','<p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Hamster Cute 30cm - 230K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Hamster Cute 40cm - 260K</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Chất liệu : Bông mềm&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41); background-color: rgb(255, 255, 255);\">Màu sắc : Xám, Nâu</span></p><p><br></p><p><br></p>','',1,1,'2018-09-19 06:56:42','2018-09-20 00:43:59',4,1,0,0,0,0,'vnd');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -735,4 +728,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-20 16:08:48
+-- Dump completed on 2018-09-25 16:22:28
