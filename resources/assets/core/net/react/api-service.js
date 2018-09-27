@@ -60,8 +60,8 @@ class ApiService {
         return res.json();
       })
       .catch(err => {
-        if (err.message == "Unauthorized")
-          window.location.replace("/admin/login");
+        // if (err.message == "Unauthorized")
+        //   window.location.replace("/admin/login");
       });
   }
 
@@ -83,8 +83,8 @@ class ApiService {
         return res.json();
       })
       .catch(err => {
-        if (err.message == "Unauthorized")
-          window.location.replace("/admin/login");
+        // if (err.message == "Unauthorized")
+        //   window.location.replace("/admin/login");
       });
   }
 
@@ -106,8 +106,8 @@ class ApiService {
         return res.json();
       })
       .catch(err => {
-        if (err.message == "Unauthorized")
-          window.location.replace("/admin/login");
+        // if (err.message == "Unauthorized")
+        //   window.location.replace("/admin/login");
       });
   }
 
@@ -128,8 +128,8 @@ class ApiService {
         return res.json();
       })
       .catch(err => {
-        if (err.message == "Unauthorized")
-          window.location.replace("/admin/login");
+        // if (err.message == "Unauthorized")
+        //   window.location.replace("/admin/login");
       });
   }
 }
