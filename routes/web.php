@@ -12,14 +12,14 @@
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('moriko/frontend');
 });
 
-Route::view('/welcome', 'welcome');
-Route::view('/products', 'welcome');
-Route::view('/hang-moi', 'welcome');
-Route::view('/ban-chay', 'welcome');
-Route::view('/products/{route?}', 'welcome')->where('route', '.+');
+Route::view('/welcome', 'moriko/frontend');
+Route::view('/products', 'moriko/frontend');
+Route::view('/hang-moi', 'moriko/frontend');
+Route::view('/ban-chay', 'moriko/frontend');
+Route::view('/products/{route?}', 'moriko/frontend')->where('route', '.+');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

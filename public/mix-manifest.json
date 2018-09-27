@@ -1,6 +1,6 @@
 {
-    "/admin-js/app.js": "/admin-js/app.js",
-    "/js/app.js": "/js/app.js",
-    "/admin-css/app.css": "/admin-css/app.css",
-    "/css/app.css": "/css/app.css"
+    "/js/moriko/admin.prod.js": "/js/moriko/admin.prod.js",
+    "/js/moriko/app.prod.js": "/js/moriko/app.prod.js",
+    "/css/moriko/admin.prod.css": "/css/moriko/admin.prod.css",
+    "/css/moriko/app.prod.css": "/css/moriko/app.prod.css"
 }

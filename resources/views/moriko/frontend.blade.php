@@ -11,8 +11,13 @@
     <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
     <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @if (config('app.env') == "local")
+        <script src="{{ asset('js/moriko/app.local.js') }}" defer></script>
+        <link href="{{ asset('css/moriko/app.local.css') }}" rel="stylesheet">
+    @else
+        <script src="{{ asset('js/moriko/app.prod.js') }}" defer></script>
+        <link href="{{ asset('css/moriko/app.prod.css') }}" rel="stylesheet">
+    @endif
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,6 +27,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <link rel="icon" href="/storage/images/moriko/moriko.ico" type="image/x-icon"/>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
   </head>
   <body>

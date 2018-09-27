@@ -10,15 +10,19 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('admin-js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="icon" href="/storage/images/moriko/moriko.ico" type="image/x-icon"/>
 
-    <!-- Styles -->
-    <link href="{{ asset('admin-css/app.css') }}" rel="stylesheet">
+    @if (config('app.env') == "local")
+        <script src="{{ asset('js/moriko/admin.local.js') }}" defer></script>
+        <link href="{{ asset('css/moriko/admin.local.css') }}" rel="stylesheet">
+    @else
+        <script src="{{ asset('js/moriko/admin.prod.js') }}" defer></script>
+        <link href="{{ asset('css/moriko/admin.prod.css') }}" rel="stylesheet">
+    @endif
 </head>
 <body>
     <noscript>
