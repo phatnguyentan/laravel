@@ -1,11 +1,9 @@
-import BaseList from "../../components/Base/List/list";
+import React from "react";
+import BaseGrid from "../../components/Base/Grid/gird";
 
-class ProductListContainer extends BaseList {
+export default class ProductListContainer extends BaseGrid {
   constructor(props) {
     super(props);
     this.entity = "products";
-    this.template = ["id", "name", "excerpt", "published"];
   }
 }
-
-export default ProductListContainer;
