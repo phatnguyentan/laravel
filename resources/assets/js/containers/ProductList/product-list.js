@@ -17,13 +17,12 @@ export default class ProductList extends Component {
                 <Link to={"products/" + ob.id}>
                   <img
                     className="w-100"
-                    src={ob.image}
+                    src={ob.media[0].url}
                     alt=""
                     style={{ width: "200px", height: "300px" }}
                   />
                   <div className="row">
                     <p className="col-sm-8">{ob.name}</p>
-                    <p className="col-sm-4">100k</p>
                   </div>
                 </Link>
               </div>

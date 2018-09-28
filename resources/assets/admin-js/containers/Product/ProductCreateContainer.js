@@ -1,6 +1,7 @@
 import "react-quill/dist/quill.snow.css";
 import React from "react";
 import ReactQuill, { Quill } from "react-quill";
+import { Link } from "react-router-dom";
 import "./styles.css";
 import { ToastContainer, ToastStore } from "react-toasts";
 import MediaUploadModalContainer from "../Media/MediaUploadModalContainer";
@@ -111,7 +112,11 @@ class ProductCreateContainer extends React.Component {
         <div className="container">
           <div className="card">
             <div className="container-fliud">
-              <button type="submit" className="btn btn-primary m-3">
+              <Link to={"/admin/products"} className="btn btn-secondary m-3">
+                <i className="fa fa-arrow-left m-1" />
+                Back
+              </Link>
+              <button type="submit" className="btn btn-primary">
                 Save
               </button>
               <div className="wrapper row">

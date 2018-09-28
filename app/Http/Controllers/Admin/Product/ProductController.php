@@ -43,7 +43,7 @@ class ProductController extends ApiController
             'uuid' => Uuid::generate()->string,
             'category_id' => $item['category_id'],
             'description' => $item['description'],
-            'media' => $item['media'],
+            'media' => json_encode($item['media']),
             'published' => false,
             'user_id' => $item['user_id'],
             'new' => $item['new'],

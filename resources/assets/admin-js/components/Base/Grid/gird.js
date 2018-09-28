@@ -111,6 +111,9 @@ export default class BaseGrid extends React.Component {
             );
           })}
         </div>
+        <div className="row col-12">
+          <PageNavigation {...this.props} pagination={this.state.pagination} />
+        </div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
