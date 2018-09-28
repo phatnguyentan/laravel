@@ -1,6 +1,6 @@
 {
-    "/js/moriko/admin.local.js": "/js/moriko/admin.local.js",
-    "/js/moriko/app.local.js": "/js/moriko/app.local.js",
-    "/css/moriko/admin.local.css": "/css/moriko/admin.local.css",
-    "/css/moriko/app.local.css": "/css/moriko/app.local.css"
+    "/js/moriko/admin.prod.js": "/js/moriko/admin.prod.js",
+    "/js/moriko/app.prod.js": "/js/moriko/app.prod.js",
+    "/css/moriko/admin.prod.css": "/css/moriko/admin.prod.css",
+    "/css/moriko/app.prod.css": "/css/moriko/app.prod.css"
 }
