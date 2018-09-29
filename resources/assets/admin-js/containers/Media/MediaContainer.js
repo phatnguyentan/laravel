@@ -4,27 +4,33 @@ import Modal from "react-modal";
 import PageNavigation from "../../components/Navigation/PageNavigation";
 import { FileUploadReader } from "../../../my-libs/File/FileUploadReader";
 import UrlParser from "../../../my-libs/String/Url/url-parser";
+import BaseGridSelection from "../../components/Base/Grid/gird-selection";
 
 class MediaContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       objects: [],
+      albums: [],
       modalIsOpen: false,
+      albumIsOpen: false,
       deleteObjects: [],
       pagination: {}
     };
   }
   componentDidMount() {
     this.urlParser = new UrlParser(window.location.href);
-    if (this.props.onRef) this.props.onRef(this);
+    // if (this.props.onRef) this.props.onRef(this);
     this.props.context.api
       .get("/media?" + this.urlParser.getQueryString())
       .then(res => {
         this.setState({ objects: res.data, pagination: res });
       });
+    this.props.context.api.get("/albums").then(res => {
+      this.setState({ albums: res.data });
+    });
     Modal.setAppElement("#root");
-    this.props.history.listen((location, action) => {
+    this.unsub = this.props.history.listen((location, action) => {
       this.props.context.api.get("/media" + location.search).then(res => {
         this.setState({ objects: res.data, pagination: res });
       });
@@ -32,7 +38,7 @@ class MediaContainer extends Component {
   }
 
   componentWillUnmount() {
-    if (this.props.onRef) this.props.onRef(undefined);
+    this.unsub();
   }
 
   delete() {
@@ -107,6 +113,17 @@ class MediaContainer extends Component {
                   <i className="fa fa-trash" />
                 </button>
               </li>
+              <li className="list-inline-item">
+                <button
+                  onClick={e => {
+                    this.setState({ albumIsOpen: true });
+                  }}
+                  className="btn btn-default"
+                >
+                  <i className="fa fa-plus" />
+                  Add Album
+                </button>
+              </li>
             </ul>
           </div>
           <div className="col-sm-4">
@@ -118,10 +135,18 @@ class MediaContainer extends Component {
         </nav>
         <div className="row">
           <div className="col-sm-2">menu</div>
-          <div className="col-sm-8">
-            <MediaListComponent objects={this.state.objects} />
+          <div className="col-sm-10">
+            <BaseGridSelection
+              objects={this.state.objects}
+              onSelect={e => {
+                e.selected = !e.selected;
+                this.state.objects = this.state.objects.map(ob => {
+                  return ob.id == e.id ? e : ob;
+                });
+                this.setState({ objects: this.state.objects });
+              }}
+            />
           </div>
-          <div className="col-sm-2">Actions</div>
         </div>
         <PageNavigation {...this.props} pagination={this.state.pagination} />
         <Modal
@@ -150,6 +175,42 @@ class MediaContainer extends Component {
               onClick={this.delete.bind(this)}
             >
               Yes
+            </button>
+          </form>
+        </Modal>
+        <Modal
+          isOpen={this.state.albumIsOpen}
+          className="s-modal"
+          onRequestClose={e => {
+            this.setState({ albumIsOpen: false });
+          }}
+          contentLabel="Modal"
+        >
+          <h2>Add to album</h2>
+          <form className="text-right m-3">
+            {this.state.albums.map(e => {
+              return (
+                <div key={e.id} className="row text-left">
+                  <div className="col-4">{e.name}</div>
+                  <div className="col-8">
+                    <input type="checkbox" className="checkbox-input" />
+                  </div>
+                </div>
+              );
+            })}
+            <button
+              className="btn m-2"
+              onClick={e => {
+                this.setState({ albumIsOpen: false });
+              }}
+            >
+              Close
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={this.delete.bind(this)}
+            >
+              Add
             </button>
           </form>
         </Modal>

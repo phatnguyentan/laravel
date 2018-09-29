@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import { ToastContainer, ToastStore } from "react-toasts";
 import PostCategoryContainer from "../Post/PostCategoryContainer";
 
-class ProductCategoryContainer extends PostCategoryContainer {
+export default class ProductCategoryContainer extends PostCategoryContainer {
   constructor(props) {
     super(props);
   }
@@ -63,5 +63,3 @@ class ProductCategoryContainer extends PostCategoryContainer {
     this.setState({ modalIsOpen: false });
   }
 }
-
-export default ProductCategoryContainer;

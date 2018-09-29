@@ -72,6 +72,12 @@ class MenuBasic extends React.Component {
         parent_id: 20
       },
       {
+        id: 22,
+        name: "Album",
+        link: `${this.props.context.config.adminPrefix}/albums`,
+        parent_id: 20
+      },
+      {
         id: 30,
         name: "Home",
         link: `${this.props.context.config.adminPrefix}/home/banners`,

@@ -14,10 +14,6 @@ export default class SliderTable extends React.Component {
     });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // this.setState({ objects: this.props.objects });
-  // }
-
   render() {
     if (this.props.objects.length > 0)
       return (
@@ -30,7 +26,6 @@ export default class SliderTable extends React.Component {
             {Array(Math.ceil(this.props.objects.length / this.rate))
               .fill()
               .map((o, i) => {
-                // {this.props.objects.map((o, i) => {
                 let active = i == 0 ? "active" : "";
                 return (
                   <li
@@ -65,11 +60,10 @@ export default class SliderTable extends React.Component {
                                       this.state.column * i + j
                                     ]
                                   }
-                                  alt="First slide"
-                                  style={{ height: "341px", width: "1140px" }}
+                                  style={{ height: "341px" }}
                                 />
                               ) : (
-                                <div />
+                                <div style={{ width: "320px" }} />
                               );
                               return (
                                 <td key={j + "tr"} className="border-top-0">

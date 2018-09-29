@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('users', 'Admin\User\UserController')->middleware('auth.admin:api');
     Route::resource('media', 'Admin\Media\MediaController')->middleware('auth.admin:api');
+    Route::resource('albums', 'Admin\Media\AlbumController')->middleware('auth.admin:api');
     Route::prefix('layout')->group(function () {
         Route::resource('banners', 'Admin\Layout\BannerController')->middleware('auth.admin:api');
     });

@@ -12,6 +12,7 @@ import PostCreateContainer from "../Post/PostCreateContainer";
 import PostDetailContainer from "../Post/PostDetailContainer";
 import PostListContainer from "../Post/PostListContainer";
 import BannerContainer from "../Layout/BannerContainer";
+import AlbumContainer from "../Media/AlbumContainer";
 
 class RoutersComponent extends Component {
   render() {
@@ -90,6 +91,11 @@ class RoutersComponent extends Component {
           exact
           path={this.props.config.adminPrefix + "/media"}
           render={props => <MediaContainer {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={this.props.config.adminPrefix + "/albums"}
+          render={props => <AlbumContainer {...props} context={this.props} />}
         />
         <Route
           exact

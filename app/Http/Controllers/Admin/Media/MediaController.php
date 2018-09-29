@@ -13,6 +13,7 @@ use Webpatser\Uuid\Uuid;
 use App\MyLibs\File\ImageUpload;
 use Illuminate\Support\Facades\Storage;
 use Imagick;
+use Illuminate\Support\Facades\DB;
 
 class MediaController extends ApiController
 {
@@ -22,7 +23,6 @@ class MediaController extends ApiController
     public function index(Request $request)
     {
         $this->filter['where'] = array_merge(['core_app_id' => $request->user()->core_app_id], $this->filter['where']);
-        $this->filter['limit'] = 15;
         return parent::index($request);
     }
 
@@ -53,6 +53,15 @@ class MediaController extends ApiController
         return response()->json(['data' => $media]);
     }
 
+    public function destroy(Request $request)
+    {
+        $item = DB::table($this->table)->where('id', $request[$this->entity]);
+        $path = "/images/{$request->user()->app()->get()->first()->uuid}/{$item->get()[0]->name}";
+        Storage::disk('public')->delete($path);
+        $item->delete();
+        return response()->json(['data' => $item]);
+    }
+
     public function getMime($base64)
     {
         preg_match('/data:(\w+\/\w+)/', $base64, $matches);
@@ -70,15 +79,4 @@ class MediaController extends ApiController
         return false;
     }
 
-    // public function update(Request $request)
-    // {
-    //     $category = $request->user()->category()->find($request['post']);
-    //     $category->update([
-    //         'name' => $request['name'],
-    //         'parent_id' => $request['parent_id'],
-    //         'type' => $request['type'],
-    //         'slug' => $request['title']
-    //     ]);
-    //     return response()->json(['data' => $category]);
-    // }
 }
