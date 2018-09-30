@@ -22,7 +22,7 @@ export default class Header extends React.Component {
           <nav className="navbar-fixed-top bg-1">
             <div className="container">
               <div className="row top-header">
-                <div className="col-md-2">
+                <div className="col-2">
                   <a href="/">
                     <img
                       src="/storage/images/moriko/moriko_text_trang.png"
@@ -31,7 +31,7 @@ export default class Header extends React.Component {
                     />
                   </a>
                 </div>
-                <div className="col-md-4">
+                <div className="col-4">
                   <div className="pt-3">
                     <form className="form-inline" method="GET" action="/search">
                       <div className="form-group pr-1">
@@ -49,9 +49,9 @@ export default class Header extends React.Component {
                     </form>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-6">
                   <ul className="navbar-nav row pt-2 flex-row">
-                    <li className="col-md-3 nav-item">
+                    <li className="col-3 nav-item">
                       <a className="nav-link" href="/home">
                         GÓP Ý <br /> PHẢN ÁNH
                       </a>
@@ -61,12 +61,12 @@ export default class Header extends React.Component {
                         GIAO HÀNG <br /> TOÀN QUỐC
                       </p>
                     </li>
-                    <li className="col-md-3 nav-item">
+                    <li className="col-3 nav-item">
                       <p className="nav-link text-white" href="#">
                         ĐẶT HÀNG <br /> 0945663543
                       </p>
                     </li>
-                    <li className="col-md-3 nav-item">
+                    <li className="col-3 nav-item">
                       <p className="nav-link text-white" href="#">
                         LIÊN HỆ <br />
                       </p>
@@ -80,7 +80,7 @@ export default class Header extends React.Component {
         <div className="navbar-nav bg-dark-1 text-light">
           <ul className="container list-inline m-0-auto">
             <li className="list-inline-item">
-              <Link to="/moi-ve">MỚI VỀ</Link>
+              <Link to="/hang-moi">HÀNG MỚI</Link>
             </li>
             <li className="list-inline-item">
               <Link to="/ban-chay">BÁN CHẠY</Link>
@@ -88,30 +88,10 @@ export default class Header extends React.Component {
             {this.state.categories.map(c => {
               return (
                 <li key={c.id} className="list-inline-item">
-                  <Link to={"/categories/" + c.slug}>
-                    {c.name.toUpperCase()}
-                  </Link>
+                  <Link to={"/categories/" + c.id}>{c.name.toUpperCase()}</Link>
                 </li>
               );
             })}
-            {/* <li className="list-inline-item">
-          <a
-            className="dropdown-toggle list-group-item-action"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            THÚ BÔNG
-          </a>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a className="dropdown-item" href="#">
-              THÚ BÔNG
-            </a>
-          </div>
-        </li> */}
           </ul>
         </div>
       </div>

@@ -6,6 +6,7 @@ import ProductDetail from "../ProductDetail/product-detail";
 import Home from "../Home/home";
 import ProductListNew from "../ProductList/product-list-new";
 import ProductListHot from "../ProductList/product-list-hot";
+import ProductListCategory from "../ProductList/product-list-category";
 
 class RoutersComponent extends Component {
   render() {
@@ -25,6 +26,13 @@ class RoutersComponent extends Component {
           exact
           path={"/ban-chay"}
           render={props => <ProductListHot {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={"/categories/:id"}
+          render={props => (
+            <ProductListCategory {...props} context={this.props} />
+          )}
         />
         <Route exact path="/products" component={ProductList} />
         <Route exact path="/products/:id" component={ProductDetail} />

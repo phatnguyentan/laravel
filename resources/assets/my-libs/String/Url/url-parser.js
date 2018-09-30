@@ -1,5 +1,5 @@
 export default class UrlParser {
-  constructor(url) {
+  constructor(url = window.location.href) {
     this.url = url;
     this.id = "";
     this.hostname = "";

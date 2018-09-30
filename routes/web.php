@@ -20,6 +20,7 @@ Route::view('/products', 'moriko/frontend');
 Route::view('/hang-moi', 'moriko/frontend');
 Route::view('/ban-chay', 'moriko/frontend');
 Route::view('/products/{route?}', 'moriko/frontend')->where('route', '.+');
+Route::view('/categories/{route?}', 'moriko/frontend')->where('route', '.+');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

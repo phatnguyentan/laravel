@@ -27,3 +27,10 @@ Route::prefix('admin-js')->group(function () {
         return view('moriko/admin');
     })->where('route', '.+');
 });
+
+// public resources
+Route::prefix('js')->group(function () {
+    Route::get('/{route?}', function () {
+        return view('moriko/admin');
+    })->where('route', '.+');
+});

@@ -29,13 +29,22 @@ class ApiController extends BaseController
         return $this->list($request);
     }
 
+    public function store(Request $request)
+    {
+        $item = $this->updateOrCreate($request);
+        return response()->json(['data' => $item]);
+    }
+
+    public function update(Request $request)
+    {
+        $item = $this->updateOrCreate($request);
+        return response()->json(['data' => $item]);
+    }
     public function storeList(Request $request)
     {
         $items = [];
         foreach ($request->data as $data) {
-            $request = new Request();
-            $request->replace($data);
-            array_push($items, $this->updateOrCreate($request));
+            array_push($items, $this->updateOrCreate($data, $request));
         }
         $func = function ($value) {
             return $value->id;
@@ -48,9 +57,7 @@ class ApiController extends BaseController
     {
         $items = [];
         foreach ($request->data as $data) {
-            $request = new Request();
-            $request->replace($data);
-            array_push($items, $this->updateOrCreate($request));
+            array_push($items, $this->updateOrCreate($data, $request));
         }
         $func = function ($value) {
             return $value->id;
@@ -105,5 +112,14 @@ class ApiController extends BaseController
     {
         $order = !empty($request->query('filter')['order']) ? $request->query('filter')['order'] : $this->filter['order'];
         return $order;
+    }
+    protected function getUser(Request $request)
+    {
+        return $request->user();
+    }
+
+    protected function getApp(Request $request)
+    {
+        return $request->user()->app()->get()->first();
     }
 }

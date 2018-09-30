@@ -14,7 +14,7 @@ export default class ProductList extends Component {
           {this.state.objects.map((ob, i) => (
             <div key={i.toString()} className="col-sm-3 pb-4">
               <div className="bg-light p-3 rounded text-dark">
-                <Link to={"products/" + ob.id}>
+                <Link to={"/products/" + ob.id}>
                   <img
                     className="w-100"
                     src={ob.media[0].url}

@@ -13,6 +13,7 @@ import PostDetailContainer from "../Post/PostDetailContainer";
 import PostListContainer from "../Post/PostListContainer";
 import BannerContainer from "../Layout/BannerContainer";
 import AlbumContainer from "../Media/AlbumContainer";
+import AlbumDetailContainer from "../Media/AlbumDetailContainer";
 
 class RoutersComponent extends Component {
   render() {
@@ -96,6 +97,13 @@ class RoutersComponent extends Component {
           exact
           path={this.props.config.adminPrefix + "/albums"}
           render={props => <AlbumContainer {...props} context={this.props} />}
+        />
+        <Route
+          exact
+          path={this.props.config.adminPrefix + "/albums/:id"}
+          render={props => (
+            <AlbumDetailContainer {...props} context={this.props} />
+          )}
         />
         <Route
           exact

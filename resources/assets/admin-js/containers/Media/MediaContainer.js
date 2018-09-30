@@ -5,8 +5,9 @@ import PageNavigation from "../../components/Navigation/PageNavigation";
 import { FileUploadReader } from "../../../my-libs/File/FileUploadReader";
 import UrlParser from "../../../my-libs/String/Url/url-parser";
 import BaseGridSelection from "../../components/Base/Grid/gird-selection";
+import { Link } from "react-router-dom";
 
-class MediaContainer extends Component {
+export default class MediaContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,7 +96,17 @@ class MediaContainer extends Component {
                 </span>
               </li>
               <li className="list-inline-item">
-                <button onClick={e => {}} className="btn btn-default">
+                <button
+                  onClick={e => {
+                    this.setState({
+                      objects: this.state.objects.map(ob => {
+                        ob.selected = false;
+                        return ob;
+                      })
+                    });
+                  }}
+                  className="btn btn-default"
+                >
                   <i className="fa fa-refresh" />
                 </button>
               </li>
@@ -134,7 +145,42 @@ class MediaContainer extends Component {
           </div>
         </nav>
         <div className="row">
-          <div className="col-sm-2">menu</div>
+          <div className="col-sm-2">
+            <ul className="menu list-unstyled font-size-20">
+              <li className="menu-item">
+                <Link
+                  className="font-size-20"
+                  to={this.props.context.config.adminPrefix + "/media"}
+                >
+                  Albums
+                </Link>
+              </li>
+              <li className="sub-menu-item">
+                <Link
+                  className="font-size-20"
+                  to={this.props.context.config.adminPrefix + "/media"}
+                >
+                  All
+                </Link>
+              </li>
+              {this.state.albums.map(a => {
+                return (
+                  <li key={a.id} className="sub-menu-item">
+                    <Link
+                      className="font-size-20"
+                      to={
+                        this.props.context.config.adminPrefix +
+                        "/albums/" +
+                        a.id
+                      }
+                    >
+                      {a.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
           <div className="col-sm-10">
             <BaseGridSelection
               objects={this.state.objects}
@@ -183,6 +229,12 @@ class MediaContainer extends Component {
           className="s-modal"
           onRequestClose={e => {
             this.setState({ albumIsOpen: false });
+            this.setState({
+              albums: this.state.albums.map(m => {
+                m.selected = false;
+                return m;
+              })
+            });
           }}
           contentLabel="Modal"
         >
@@ -190,15 +242,29 @@ class MediaContainer extends Component {
           <form className="text-right m-3">
             {this.state.albums.map(e => {
               return (
-                <div key={e.id} className="row text-left">
-                  <div className="col-4">{e.name}</div>
-                  <div className="col-8">
-                    <input type="checkbox" className="checkbox-input" />
-                  </div>
+                <div key={e.id} className="row">
+                  <input
+                    id={"album" + e.id}
+                    type="checkbox"
+                    className="checkbox-input m-1"
+                    onClick={event => {
+                      e.selected = !e.selected;
+                      this.state.albums = this.state.albums.map(al => {
+                        if (al.id == e.id) return e;
+                        return al;
+                      });
+                    }}
+                  />
+                  <h5>
+                    <label className="clickable" htmlFor={"album" + e.id}>
+                      {e.name}
+                    </label>
+                  </h5>
                 </div>
               );
             })}
             <button
+              type="button"
               className="btn m-2"
               onClick={e => {
                 this.setState({ albumIsOpen: false });
@@ -207,8 +273,17 @@ class MediaContainer extends Component {
               Close
             </button>
             <button
+              type="button"
               className="btn btn-primary"
-              onClick={this.delete.bind(this)}
+              onClick={e => {
+                this.state.albums.filter(e => e.selected).forEach(e => {
+                  this.props.context.api.post(`/album_media/list`, {
+                    data: this.state.objects.filter(m => m.selected).map(m => {
+                      return { album_id: e.id, media_id: m.id };
+                    })
+                  });
+                });
+              }}
             >
               Add
             </button>
@@ -218,5 +293,3 @@ class MediaContainer extends Component {
     );
   }
 }
-
-export default MediaContainer;
