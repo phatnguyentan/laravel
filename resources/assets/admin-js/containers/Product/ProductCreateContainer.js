@@ -96,7 +96,6 @@ class ProductCreateContainer extends React.Component {
       });
     } else {
       this.setState({
-        // description: media,
         mediaIsOpen: false
       });
     }
@@ -314,7 +313,6 @@ class ProductCreateContainer extends React.Component {
                     })}
                   </div>
                   <div className="form-group">
-                    {/* <label className="col-sm-6 control-label">Category</label> */}
                     <div>
                       <select
                         className="form-control col-10"
@@ -370,26 +368,6 @@ class ProductCreateContainer extends React.Component {
             </div>
           </div>
         </div>
-
-        {/* <div className="form-group mt-3 mb-3">
-          <button
-            type="button"
-            className="btn btn-default m-1"
-            onClick={this.openProductMedia.bind(this)}
-          >
-            <i className="fa fa-plus-circle m-1" />
-            Media
-          </button>
-          <label className="col-sm-2 control-label">Description</label>
-          <div className="col-sm-12">
-            <ReactQuill
-              modules={this.quillModules}
-              theme="snow"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </div>
-        </div> */}
 
         <ToastContainer
           position={ToastContainer.POSITION.TOP_CENTER}

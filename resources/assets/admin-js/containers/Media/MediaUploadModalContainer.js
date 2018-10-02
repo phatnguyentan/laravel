@@ -56,13 +56,7 @@ class MediaUploadModalContainer extends React.Component {
               Insert
             </button>
           </div>
-          <div
-          // style={{
-          //   position: "relative",
-          //   overflowY: "scroll",
-          //   height: "400px"
-          // }}
-          >
+          <div>
             <MediaContainer onRef={ref => (this.child = ref)} {...this.props} />
           </div>
         </form>

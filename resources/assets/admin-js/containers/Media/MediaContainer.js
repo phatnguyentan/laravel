@@ -13,6 +13,7 @@ export default class MediaContainer extends Component {
     this.state = {
       objects: [],
       albums: [],
+      album: null,
       modalIsOpen: false,
       albumIsOpen: false,
       deleteObjects: [],
@@ -21,21 +22,39 @@ export default class MediaContainer extends Component {
   }
   componentDidMount() {
     this.urlParser = new UrlParser(window.location.href);
-    // if (this.props.onRef) this.props.onRef(this);
-    this.props.context.api
-      .get("/media?" + this.urlParser.getQueryString())
-      .then(res => {
-        this.setState({ objects: res.data, pagination: res });
-      });
     this.props.context.api.get("/albums").then(res => {
       this.setState({ albums: res.data });
     });
-    Modal.setAppElement("#root");
+    if (this.state.album) {
+      this.loadAlbumDetail();
+    } else {
+      this.props.context.api
+        .get("/media?" + this.urlParser.getQueryString())
+        .then(res => {
+          this.setState({ objects: res.data, pagination: res });
+        });
+    }
     this.unsub = this.props.history.listen((location, action) => {
-      this.props.context.api.get("/media" + location.search).then(res => {
-        this.setState({ objects: res.data, pagination: res });
-      });
+      if (this.state.album) {
+        this.loadAlbumDetail();
+      } else {
+        this.props.context.api.get("/media" + location.search).then(res => {
+          this.setState({ objects: res.data, pagination: res });
+        });
+      }
     });
+    Modal.setAppElement("#root");
+  }
+
+  loadAlbumDetail() {
+    this.props.context.api
+      .get("/album_media?filter[where][album_id]=" + this.state.album)
+      .then(res => {
+        this.setState({
+          objects: res.data.map(d => d.media),
+          pagination: res
+        });
+      });
   }
 
   componentWillUnmount() {
@@ -43,15 +62,39 @@ export default class MediaContainer extends Component {
   }
 
   delete() {
-    this.state.deleteObjects.forEach(ob => {
-      this.props.context.api.delete("/media/" + ob.id).then(res => {
-        this.props.context.api.get("/media").then(res => {
-          this.setState({ objects: res.data });
+    if (this.state.album) {
+      this.state.deleteObjects.forEach(ob => {
+        this.props.context.api
+          .delete(
+            "/album_media/delete/?filter[where][media_id]=" +
+              ob.id +
+              "&filter[where][album_id]=" +
+              this.state.album
+          )
+          .then(res => {
+            this.props.context.api
+              .get("/album_media?filter[where][album_id]=" + this.state.album)
+              .then(res => {
+                this.setState({
+                  objects: res.data.map(d => d.media),
+                  pagination: res
+                });
+              });
+          });
+      });
+      this.setState({ modalIsOpen: false, deleteObjects: [] });
+    } else {
+      this.state.deleteObjects.forEach(ob => {
+        this.props.context.api.delete("/media/" + ob.id).then(res => {
+          this.props.context.api.get("/media").then(res => {
+            this.setState({ objects: res.data });
+          });
         });
       });
-    });
-    this.setState({ modalIsOpen: false, deleteObjects: [] });
+      this.setState({ modalIsOpen: false, deleteObjects: [] });
+    }
   }
+
   askDelete(objects) {
     if (objects && objects.length > 0) {
       this.setState({ modalIsOpen: true, deleteObjects: objects });
@@ -148,34 +191,43 @@ export default class MediaContainer extends Component {
           <div className="col-sm-2">
             <ul className="menu list-unstyled font-size-20">
               <li className="menu-item">
-                <Link
-                  className="font-size-20"
-                  to={this.props.context.config.adminPrefix + "/media"}
+                <div
+                  className="font-size-20 clickable"
+                  onClick={e => {
+                    this.props.context.api.get("/media").then(res => {
+                      this.setState({ objects: res.data, pagination: res });
+                    });
+                  }}
                 >
                   Albums
-                </Link>
+                </div>
               </li>
               <li className="sub-menu-item">
-                <Link
-                  className="font-size-20"
-                  to={this.props.context.config.adminPrefix + "/media"}
+                <div
+                  className="font-size-20 clickable"
+                  onClick={e => {
+                    this.props.context.api.get("/media").then(res => {
+                      this.setState({ objects: res.data, pagination: res });
+                    });
+                  }}
                 >
                   All
-                </Link>
+                </div>
               </li>
               {this.state.albums.map(a => {
                 return (
                   <li key={a.id} className="sub-menu-item">
-                    <Link
-                      className="font-size-20"
-                      to={
-                        this.props.context.config.adminPrefix +
-                        "/albums/" +
-                        a.id
-                      }
+                    <div
+                      className="font-size-20 clickable"
+                      onClick={e => {
+                        this.setState({ album: a.id });
+                        setTimeout(() => {
+                          this.loadAlbumDetail();
+                        }, 200);
+                      }}
                     >
                       {a.name}
-                    </Link>
+                    </div>
                   </li>
                 );
               })}
@@ -277,11 +329,17 @@ export default class MediaContainer extends Component {
               className="btn btn-primary"
               onClick={e => {
                 this.state.albums.filter(e => e.selected).forEach(e => {
-                  this.props.context.api.post(`/album_media/list`, {
-                    data: this.state.objects.filter(m => m.selected).map(m => {
-                      return { album_id: e.id, media_id: m.id };
+                  this.props.context.api
+                    .post(`/album_media/list`, {
+                      data: this.state.objects
+                        .filter(m => m.selected)
+                        .map(m => {
+                          return { album_id: e.id, media_id: m.id };
+                        })
                     })
-                  });
+                    .then(res => {
+                      this.setState({ albumIsOpen: false });
+                    });
                 });
               }}
             >
