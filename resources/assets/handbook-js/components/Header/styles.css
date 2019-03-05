@@ -1,0 +1,15 @@
+.main-header {
+  position: fixed;
+  width: 100%;
+}
+
+.main-header > .progress {
+  height: 5px;
+  background-color: blue;
+}
+.main-header > #loading-progress {
+  display: none;
+}
+.avatar > img {
+  width: 30px;
+}

@@ -1,0 +1,77 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+* {
+  font-family: roboto;
+}
+
+body {
+  font-size: 13px;
+  a {
+    font-size: 13px;
+  }
+}
+#root {
+  height: 100%;
+}
+.app {
+  height: 100%;
+  .text-light {
+    a {
+      color: white;
+    }
+  }
+  .main-body {
+    padding-top: 20px;
+  }
+  .main-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    .left {
+      min-width: 280px;
+    }
+    .right {
+      flex: 1;
+      position: relative;
+      overflow-y: scroll;
+    }
+  }
+
+  .child {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .scrollable {
+    overflow-y: auto;
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+  .checkbox-input {
+    transform: scale(2);
+  }
+}
+.s-modal {
+  width: 500px;
+  height: 250px;
+  margin: auto;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}

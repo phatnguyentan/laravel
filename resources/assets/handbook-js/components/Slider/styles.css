@@ -1,0 +1,49 @@
+.header-bcolor {
+  background-color: orange;
+}
+.font-size {
+  font-size: 12px;
+}
+.flex-row {
+  flex-direction: row;
+}
+.bg-dark-1 {
+  background-color: #363636;
+}
+
+.bg-dark-2 {
+  background-color: #1d1d1d;
+}
+
+.navbar-nav > ul > li > a {
+  color: #fafafa;
+  padding: 10px;
+  display: block;
+}
+
+a {
+  font-size: 12px;
+}
+
+.carousel-control-next {
+  right: -100px;
+}
+
+.carousel-control-prev {
+  left: -100px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 30px;
+  width: 30px;
+  background-size: 100%, 100%;
+  background-image: url("/storage/images/moriko/muiten_1.png");
+}
+.carousel-control-next-icon {
+  transform: rotate(180deg);
+}
+
+.carousel.vertical .active {
+  top: 0;
+}

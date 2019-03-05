@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
 
+        $this->mapHandbookRoutes();
         //
     }
 
@@ -85,5 +86,19 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+    /**
+     * Define the "handbook" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapHandbookRoutes()
+    {
+        Route::prefix('handbook')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/handbook.php'));
     }
 }
