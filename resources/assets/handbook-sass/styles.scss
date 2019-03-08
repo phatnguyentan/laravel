@@ -19,6 +19,7 @@ body {
 }
 .app {
   height: 100%;
+  overflow: auto;
   .text-light {
     a {
       color: white;
