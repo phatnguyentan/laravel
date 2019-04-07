@@ -1,0 +1,38 @@
+.menu-item {
+  font-size: 16px;
+}
+#sidebar {
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+}
+
+#sidebar ul.components {
+  
+}
+
+#sidebar ul p {
+  color: #fff;
+}
+
+#sidebar ul li a {
+  font-size: 1.1em;
+  display: block;
+}
+
+#sidebar ul li a:hover {
+  color: #7386d5;
+  background: #fff;
+}
+.sub-menu-item {
+  padding-left: 30px;
+}
+#sidebar ul li.sub-menu-item > a.active {
+  color: #fff;
+  background: #6d7fcc;
+}
+

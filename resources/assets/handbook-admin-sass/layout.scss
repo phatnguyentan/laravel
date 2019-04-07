@@ -1,0 +1,16 @@
+
+.app {
+  .app-header {
+
+  }
+  .app-body {
+    display: flex;
+    height: 100%;
+    .app-body-left {
+      flex: 1;
+    }
+    .app-body-right {
+    
+    }
+  }
+}

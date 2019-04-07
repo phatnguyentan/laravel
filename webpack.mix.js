@@ -39,9 +39,17 @@ if (process.env.NODE_ENV == "development") {
       "resources/assets/handbook-js/app.js",
       "public/js/handbook/app.local.js"
     )
+    .react(
+      "resources/assets/handbook-admin-js/app.js",
+      "public/js/handbook/admin.local.js"
+    )
     .sass(
       "resources/assets/handbook-sass/app.scss",
       "public/css/handbook/app.local.css"
+    )
+    .sass(
+      "resources/assets/handbook-admin-sass/app.scss",
+      "public/css/handbook/admin.local.css"
     );
 } else {
   mix

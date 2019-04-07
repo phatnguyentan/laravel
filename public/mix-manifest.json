@@ -1,4 +1,6 @@
 {
+    "/js/handbook/admin.local.js": "/js/handbook/admin.local.js",
     "/js/handbook/app.local.js": "/js/handbook/app.local.js",
-    "/css/handbook/app.local.css": "/css/handbook/app.local.css"
+    "/css/handbook/app.local.css": "/css/handbook/app.local.css",
+    "/css/handbook/admin.local.css": "/css/handbook/admin.local.css"
 }

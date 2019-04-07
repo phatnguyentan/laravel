@@ -14,23 +14,23 @@ use Illuminate\Http\Request;
  */
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
-        return view('moriko/admin');
+        return view('handbook/admin');
     });
     Route::get('/{route?}', function () {
-        return view('moriko/admin');
+        return view('handbook/admin');
     })->where('route', '.+');
 });
 
 // public resources
 Route::prefix('admin-js')->group(function () {
     Route::get('/{route?}', function () {
-        return view('moriko/admin');
+        return view('handbook/admin');
     })->where('route', '.+');
 });
 
 // public resources
 Route::prefix('js')->group(function () {
     Route::get('/{route?}', function () {
-        return view('moriko/admin');
+        return view('handbook/admin');
     })->where('route', '.+');
 });

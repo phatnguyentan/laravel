@@ -1,5 +1,9 @@
 
-# ini
+# ini port 5050
+php artisan serve
+yarn run watch
+
+# restart
 service php7.1-fpm restart
 
 # Seed
