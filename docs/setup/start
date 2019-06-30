@@ -1,0 +1,11 @@
+Start backend
+php artisan key:generate
+import database from db sql
+composer install
+change APP_URL=http://127.0.0.1:5050
+php artisan serve
+fix
+php artisan passport:install
+Start frontend
+yarn
+npm run watch
